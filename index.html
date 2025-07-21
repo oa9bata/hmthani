@@ -8,9 +8,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        @font-face {
+            font-family: 'IMXPLEX';
+            src: url('font/IMXPLEX-Regular.woff2') format('woff2'),
+                 url('font/IMXPLEX-Regular.woff') format('woff'),
+                 url('font/IMXPLEX-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'IMXPLEX';
+            src: url('font/IMXPLEX-Medium.woff2') format('woff2'),
+                 url('font/IMXPLEX-Medium.woff') format('woff'),
+                 url('font/IMXPLEX-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'IMXPLEX', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
             direction: rtl;
+        }
+        
+        /* Use medium weight for most UI elements */
+        .dropdown-content, nav, button, .font-medium {
+            font-weight: 500;
         }
         html {
             scroll-behavior: smooth;
@@ -44,12 +70,19 @@
         }
         
         .partner-scroll {
-            animation: partnerScroll-rtl 20s linear infinite;
+            animation: partnerScroll-rtl 15s linear infinite;
         }
         
         @keyframes partnerScroll-rtl {
             0% { transform: translateX(0); }
             100% { transform: translateX(50%); }
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .partner-scroll {
+                animation: partnerScroll-rtl 10s linear infinite;
+            }
         }
         
         .lightbox {
@@ -170,13 +203,13 @@
 </head>
 <body class="bg-gray-50">
     <div class="text-white py-2 text-sm " id="hdr">
-        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <div class="flex items-center space-x-4 space-x-reverse">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-0">
+            <div class="flex items-center space-x-6 space-x-reverse">
                 <a href="#" class="hover:text-blue-200"><i class="fab fa-facebook"></i></a>
                 <a href="#" class="hover:text-blue-200"><i class="fab fa-x"></i></a>
                 <a href="#" class="hover:text-blue-200"><i class="fab fa-instagram"></i></a>
             </div>
-            <div class="flex items-center space-x-6 space-x-reverse">
+            <div class="flex flex-col md:flex-row items-center space-y-1 md:space-y-0 md:space-x-6 md:space-x-reverse text-xs md:text-sm">
                 <span class="flex items-center"><i class="fas fa-phone ml-2"></i>546638312 (+966)</span>
                 <span class="flex items-center"><i class="fas fa-envelope ml-2"></i>Mathani@gmail.com</span>
             </div>
@@ -258,7 +291,7 @@
                 
                 <!-- Logo (Right side in RTL) -->
                 <div class="flex items-center space-x-3 space-x-reverse">
-                    <div class="w-21 h-16 flex items-center justify-center overflow-hidden">
+                    <div class="w-12 h-12 md:w-21 md:h-16 flex items-center justify-center overflow-hidden">
                         <img src="assets/logo.jpg" alt="" class="w-full h-full object-cover">
                     </div>
                 </div>
@@ -382,7 +415,7 @@
             <div class="max-w-7xl mx-auto px-4">
                 <div class="flex flex-col md:flex-row items-center gap-10">
                     <div class="w-full md:w-1/2 flex justify-center mb-8 md:mb-0">
-                        <img src="assets/guess3.jpg" alt="مثاني القرآنية" class="rounded-tr-[80px] rounded-bl-[80px] shadow-2xl object-cover w-full max-w-md h-80">
+                        <img src="assets/guess100.jpg" alt="مثاني القرآنية" class="rounded-tr-[80px] rounded-bl-[80px] shadow-2xl object-cover w-full max-w-md h-80">
                     </div>
                     <div class="w-full md:w-1/2 text-center md:text-right">
                         <h2 class="text-4xl font-bold text-[#432d17] mb-6">مثاني القرآنية</h2>
@@ -1138,6 +1171,12 @@ document.addEventListener('DOMContentLoaded', function() {
         const content = drop.querySelector('.mobile-dropdown-content');
         btn.addEventListener('click', function(e) {
             e.preventDefault();
+            // Close mobile menu
+            mobileMenu.classList.add('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+            
             // Close other dropdowns
             mobileDropdowns.forEach(other => {
                 if (other !== drop) {
@@ -1145,6 +1184,39 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             content.classList.toggle('hidden');
+            
+            // Show the dropdown content in a modal-like overlay
+            if (!content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                content.style.position = 'fixed';
+                content.style.top = '0';
+                content.style.left = '0';
+                content.style.width = '100%';
+                content.style.height = '100vh';
+                content.style.backgroundColor = 'white';
+                content.style.zIndex = '1000';
+                content.style.padding = '2rem';
+                content.style.overflowY = 'auto';
+                
+                // Add close button
+                const closeBtn = document.createElement('button');
+                closeBtn.innerHTML = '<i class="fas fa-times"></i> إغلاق';
+                closeBtn.className = 'fixed top-4 left-4 bg-[#432d17] text-white px-4 py-2 rounded-lg z-10';
+                closeBtn.onclick = () => {
+                    content.classList.add('hidden');
+                    content.style.position = '';
+                    content.style.top = '';
+                    content.style.left = '';
+                    content.style.width = '';
+                    content.style.height = '';
+                    content.style.backgroundColor = '';
+                    content.style.zIndex = '';
+                    content.style.padding = '';
+                    content.style.overflowY = '';
+                    closeBtn.remove();
+                };
+                content.appendChild(closeBtn);
+            }
         });
     });
 
