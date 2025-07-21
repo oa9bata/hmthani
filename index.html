@@ -20,9 +20,9 @@
         
         @font-face {
             font-family: 'IMXPLEX';
-            src: url('font/IMXPLEX-Medium.woff2') format('woff2'),
-                 url('font/IMXPLEX-Medium.woff') format('woff'),
-                 url('font/IMXPLEX-Medium.ttf') format('truetype');
+            src: url('font/IBXPLEX-Medium.woff2') format('woff2'),
+                 url('font/IBXPLEX-Medium.woff') format('woff'),
+                 url('font/IBXPLEX-Medium.ttf') format('truetype');
             font-weight: 500;
             font-style: normal;
             font-display: swap;
@@ -291,7 +291,7 @@
                 
                 <!-- Logo (Right side in RTL) -->
                 <div class="flex items-center space-x-3 space-x-reverse">
-                    <div class="w-12 h-12 md:w-21 md:h-16 flex items-center justify-center overflow-hidden">
+                    <div class="w-26 h-12 md:w-21 md:h-16 flex items-center justify-center overflow-hidden">
                         <img src="assets/logo.jpg" alt="" class="w-full h-full object-cover">
                     </div>
                 </div>
@@ -362,8 +362,8 @@
                         <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">إنضم معنا</a>
                     </div>
                 </div>
-                <a href="#media" class="block text-gray-700 hover:text-[#432d17]">الإعلام</a>
-                <a href="#contact" class="block text-gray-700 hover:text-[#432d17]">اتصل بنا</a>
+                <a href="#media" class="block text-gray-700 hover:text-[#432d17] mobile-menu-link">الإعلام</a>
+                <a href="#contact" class="block text-gray-700 hover:text-[#432d17] mobile-menu-link">اتصل بنا</a>
             </div>
         </div>
     </header>
@@ -804,6 +804,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const icon = mobileMenuBtn.querySelector('i');
             icon.classList.toggle('fa-bars');
             icon.classList.toggle('fa-times');
+            
+            // Reset all mobile dropdowns to hidden when opening menu
+            if (!mobileMenu.classList.contains('hidden')) {
+                const allMobileDropdowns = mobileMenu.querySelectorAll('.mobile-dropdown-content');
+                allMobileDropdowns.forEach(dropdown => {
+                    dropdown.classList.add('hidden');
+                });
+            }
         });
     }
 
@@ -1169,13 +1177,10 @@ document.addEventListener('DOMContentLoaded', function() {
     mobileDropdowns.forEach(drop => {
         const btn = drop.querySelector('button');
         const content = drop.querySelector('.mobile-dropdown-content');
+        
+        // Handle dropdown button click (show/hide dropdown within mobile menu)
         btn.addEventListener('click', function(e) {
             e.preventDefault();
-            // Close mobile menu
-            mobileMenu.classList.add('hidden');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.add('fa-bars');
-            icon.classList.remove('fa-times');
             
             // Close other dropdowns
             mobileDropdowns.forEach(other => {
@@ -1183,40 +1188,38 @@ document.addEventListener('DOMContentLoaded', function() {
                     other.querySelector('.mobile-dropdown-content').classList.add('hidden');
                 }
             });
-            content.classList.toggle('hidden');
             
-            // Show the dropdown content in a modal-like overlay
-            if (!content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                content.style.position = 'fixed';
-                content.style.top = '0';
-                content.style.left = '0';
-                content.style.width = '100%';
-                content.style.height = '100vh';
-                content.style.backgroundColor = 'white';
-                content.style.zIndex = '1000';
-                content.style.padding = '2rem';
-                content.style.overflowY = 'auto';
+            // Toggle current dropdown
+            content.classList.toggle('hidden');
+        });
+        
+        // Handle clicks on dropdown links (close mobile menu)
+        const dropdownLinks = content.querySelectorAll('a');
+        dropdownLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Close mobile menu when a dropdown link is clicked
+                mobileMenu.classList.add('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-times');
                 
-                // Add close button
-                const closeBtn = document.createElement('button');
-                closeBtn.innerHTML = '<i class="fas fa-times"></i> إغلاق';
-                closeBtn.className = 'fixed top-4 left-4 bg-[#432d17] text-white px-4 py-2 rounded-lg z-10';
-                closeBtn.onclick = () => {
-                    content.classList.add('hidden');
-                    content.style.position = '';
-                    content.style.top = '';
-                    content.style.left = '';
-                    content.style.width = '';
-                    content.style.height = '';
-                    content.style.backgroundColor = '';
-                    content.style.zIndex = '';
-                    content.style.padding = '';
-                    content.style.overflowY = '';
-                    closeBtn.remove();
-                };
-                content.appendChild(closeBtn);
-            }
+                // Hide all dropdowns
+                mobileDropdowns.forEach(dropdown => {
+                    dropdown.querySelector('.mobile-dropdown-content').classList.add('hidden');
+                });
+            });
+        });
+    });
+
+    // ========== MOBILE MENU REGULAR LINKS ==========
+    const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // Close mobile menu when regular link is clicked
+            mobileMenu.classList.add('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
         });
     });
 
