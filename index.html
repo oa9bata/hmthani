@@ -9,33 +9,33 @@
 
     <style>
         @font-face {
-            font-family: 'IMXPLEX';
-            src: url('font/IMXPLEX-Regular.woff2') format('woff2'),
-                 url('font/IMXPLEX-Regular.woff') format('woff'),
-                 url('font/IMXPLEX-Regular.ttf') format('truetype');
+            font-family: 'IBMPlexSansArabic';
+            src: url('font/IBMPlexSansArabic-Regular.woff2') format('woff2'),
+                 url('font/IBMPlexSansArabic-Regular.woff') format('woff'),
+                 url('font/IBMPlexSansArabic-Regular.ttf') format('truetype');
             font-weight: 400;
             font-style: normal;
             font-display: swap;
         }
         
         @font-face {
-            font-family: 'IMXPLEX';
-            src: url('font/IBXPLEX-Medium.woff2') format('woff2'),
-                 url('font/IBXPLEX-Medium.woff') format('woff'),
-                 url('font/IBXPLEX-Medium.ttf') format('truetype');
+            font-family: 'IBMPlexSansArabic';
+            src: url('font/IBMPlexSansArabic-Medium.woff2') format('woff2'),
+                 url('font/IBMPlexSansArabic-Medium.woff') format('woff'),
+                 url('font/IBMPlexSansArabic-Medium.ttf') format('truetype');
             font-weight: 500;
             font-style: normal;
             font-display: swap;
         }
         
         body {
-            font-family: 'IMXPLEX', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'IBMPlexSansArabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-weight: 500;
             direction: rtl;
         }
         
         /* Use medium weight for most UI elements */
-        .dropdown-content, nav, button, .font-medium {
+        .dropdown-content, nav, button, .font-medium, h1, h2, h3, h4, h5, h6 {
             font-weight: 500;
         }
         html {
@@ -82,6 +82,51 @@
         @media (max-width: 768px) {
             .partner-scroll {
                 animation: partnerScroll-rtl 10s linear infinite;
+            }
+            
+            /* Improve touch targets for mobile */
+            button, a, .mobile-dropdown button {
+                min-height: 44px;
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+            }
+            
+            /* Mobile menu improvements */
+            #mobile-menu-btn {
+                min-width: 48px;
+                min-height: 48px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                touch-action: manipulation;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            /* Mobile dropdown buttons */
+            .mobile-dropdown button {
+                padding: 1rem;
+                width: 100%;
+                text-align: right;
+                transition: all 0.2s ease;
+            }
+            
+            .mobile-dropdown button:active {
+                background-color: rgba(139, 69, 19, 0.1);
+                transform: scale(0.98);
+            }
+            
+            /* Mobile menu links */
+            .mobile-dropdown-content a, .mobile-menu-link {
+                padding: 0.75rem 1rem;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                transition: all 0.2s ease;
+            }
+            
+            .mobile-dropdown-content a:active, .mobile-menu-link:active {
+                background-color: rgba(139, 69, 19, 0.1);
+                transform: scale(0.98);
             }
         }
         
@@ -291,8 +336,8 @@
                 
                 <!-- Logo (Right side in RTL) -->
                 <div class="flex items-center space-x-3 space-x-reverse">
-                    <div class="w-26 h-12 md:w-21 md:h-16 flex items-center justify-center overflow-hidden">
-                        <img src="assets/logo.jpg" alt="" class="w-full h-full object-cover">
+                    <div class="w-16 h-12 md:w-20 md:h-15 flex items-center justify-center overflow-hidden">
+                        <img src="assets/logo.jpg" alt="" class="w-full h-full object-contain">
                     </div>
                 </div>
                 
@@ -305,65 +350,65 @@
         
         <!-- Mobile Menu -->
         <div class="md:hidden bg-white border-t hidden" id="mobile-menu">
-            <div class="px-4 py-4 space-y-3">
+            <div class="px-4 py-6 space-y-2">
                 <div class="mobile-dropdown">
                     <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#432d17] font-medium py-2">
                         عن الجمعية <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div class="mobile-dropdown-content hidden pl-4">
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">من نحن</a>
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">شهاده الترخيص</a>
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">السجل التجاري</a>
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">الخريطه الإستراتيجيه</a>
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">الجمعية العمومية</a>
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">مجلس الإداره</a>
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">الإدارة التنفيذية</a>
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">الهيكل التنظيمي</a>
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">فريق العمل</a>
+                    <div class="mobile-dropdown-content hidden pl-4 space-y-1">
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">من نحن</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">شهاده الترخيص</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">السجل التجاري</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">الخريطه الإستراتيجيه</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">الجمعية العمومية</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">مجلس الإداره</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">الإدارة التنفيذية</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">الهيكل التنظيمي</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">فريق العمل</a>
                     </div>
                 </div>
                 <div class="mobile-dropdown">
                     <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#432d17] font-medium py-2">
                         التقارير <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div class="mobile-dropdown-content hidden pl-4">
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">التقرير السنوي لعام 2024</a>
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">التقرير السنوي لعام 2025</a>
+                    <div class="mobile-dropdown-content hidden pl-4 space-y-1">
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">التقرير السنوي لعام 2024</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">التقرير السنوي لعام 2025</a>
                     </div>
                 </div>
                 <div class="mobile-dropdown">
                     <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#432d17] font-medium py-2">
                         قياس الرضا <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div class="mobile-dropdown-content hidden pl-4">
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">رضا المستفيدين</a>
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">رضا أعضاء الجمعية العمومية</a>
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">رضا الموظفين</a>
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">تقارير قياس الرضا</a>
+                    <div class="mobile-dropdown-content hidden pl-4 space-y-1">
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">رضا المستفيدين</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">رضا أعضاء الجمعية العمومية</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">رضا الموظفين</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">تقارير قياس الرضا</a>
                     </div>
                 </div>
                 <div class="mobile-dropdown">
                     <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#432d17] font-medium py-2">
                         الحوكمة <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div class="mobile-dropdown-content hidden pl-4">
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">ادلة الحوكمة</a>
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">اللوائح والسياسات</a>
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">سياسة الخصوصية</a>
+                    <div class="mobile-dropdown-content hidden pl-4 space-y-1">
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">ادلة الحوكمة</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">اللوائح والسياسات</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">سياسة الخصوصية</a>
                     </div>
                 </div>
                 <div class="mobile-dropdown">
                     <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#432d17] font-medium py-2">
                         تطوع معنا <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div class="mobile-dropdown-content hidden pl-4">
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">منصة العمل التطوعي</a>
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">الفرص التطوعية</a>
-                        <a href="#" class="block py-2 text-gray-700 hover:bg-[#432d17]/10">إنضم معنا</a>
+                    <div class="mobile-dropdown-content hidden pl-4 space-y-1">
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">منصة العمل التطوعي</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">الفرص التطوعية</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">إنضم معنا</a>
                     </div>
                 </div>
-                <a href="#media" class="block text-gray-700 hover:text-[#432d17] mobile-menu-link">الإعلام</a>
-                <a href="#contact" class="block text-gray-700 hover:text-[#432d17] mobile-menu-link">اتصل بنا</a>
+                <a href="#media" class="block text-gray-700 hover:text-[#432d17] mobile-menu-link py-3 rounded-lg">الإعلام</a>
+                <a href="#contact" class="block text-gray-700 hover:text-[#432d17] mobile-menu-link py-3 rounded-lg">اتصل بنا</a>
             </div>
         </div>
     </header>
