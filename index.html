@@ -132,6 +132,67 @@
                 background-color: rgba(0, 161, 125, 0.1);
                 transform: scale(0.98);
             }
+            
+            /* Mobile text sizing */
+            h1 { font-size: 2rem !important; }
+            h2 { font-size: 1.75rem !important; }
+            h3 { font-size: 1.25rem !important; }
+            
+            /* Mobile spacing */
+            .py-16 { padding-top: 3rem !important; padding-bottom: 3rem !important; }
+            .py-12 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+            
+            /* Mobile achievements grid */
+            .grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+            
+            /* Mobile counter sizing */
+            .counter { font-size: 2rem !important; }
+            
+            /* Mobile icons */
+            .text-4xl { font-size: 2.5rem !important; }
+            
+            /* Mobile news cards */
+            .md\\:grid-cols-3 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+            
+            /* Mobile footer */
+            .md\\:grid-cols-4 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+            
+            /* Mobile header height */
+            #hdr { height: 120px !important; }
+            
+            /* Mobile logo sizing */
+            .w-16, .w-20 { width: 3rem !important; }
+            .h-12, .h-15 { height: 2.5rem !important; }
+            
+            /* Mobile achievements background */
+            .py-16.bg-black\/30 { background-color: #00a17d !important; }
+        }
+        
+        /* Tablet optimizations */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .md\\:grid-cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .md\\:grid-cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        
+        /* Extra small mobile */
+        @media (max-width: 480px) {
+            .px-4 { padding-left: 1rem !important; padding-right: 1rem !important; }
+            
+            h2 { font-size: 1.5rem !important; }
+            .counter { font-size: 1.75rem !important; }
+            .text-4xl { font-size: 2rem !important; }
+            
+            .curved-underline::after {
+                width: 150px !important;
+                height: 3px !important;
+                border-radius: 0 0 0 20px !important;
+            }
+            
+            #hdr { height: 100px !important; }
+            
+            /* Stack footer images vertically on very small screens */
+            .footer-images { flex-direction: column !important; align-items: center !important; }
         }
         
         .lightbox {
@@ -248,6 +309,7 @@
             background-position: center;
             background-repeat: no-repeat;
             position: relative;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 4px 15px rgba(0, 0, 0, 0.4);
         }
         #hdr::before {
             content: '';
@@ -331,13 +393,8 @@
     <div class="text-white text-sm bg-black/30 backdrop-blur-sm" id="hdr">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-0 h-full">
             <div class="flex items-center space-x-6 space-x-reverse">
-                <a href="#" class="hover:text-blue-200"><i class="fab fa-facebook"></i></a>
-                <a href="#" class="hover:text-blue-200"><i class="fab fa-x"></i></a>
-                <a href="#" class="hover:text-blue-200"><i class="fab fa-instagram"></i></a>
             </div>
             <div class="flex flex-col md:flex-row items-center space-y-1 md:space-y-0 md:space-x-6 md:space-x-reverse text-xs md:text-sm">
-                <span class="flex items-center"><i class="fas fa-phone ml-2"></i>546638312 (+966)</span>
-                <span class="flex items-center"><i class="fas fa-envelope ml-2"></i>Mathani@gmail.com</span>
             </div>
         </div>
     </div>
@@ -701,8 +758,8 @@
         <div class="max-w-7xl mx-auto px-4 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- About Section -->
-                <div>
-                    <div class="flex items-center space-x-3 space-x-reverse mb-6">
+                <div class="mb-8 md:mb-0 text-center md:text-right">
+                    <div class="flex items-center space-x-3 space-x-reverse mb-6 justify-center md:justify-start">
                         <div class="w-10 h-10 bg-white/30 rounded-full flex items-center justify-center">
                             <i class="fas fa-book-quran text-white"></i>
                         </div>
@@ -712,7 +769,7 @@
                         </div>
                     </div>
                     <p class="text-white mb-6">جمعية مثاني القرآنية تهدف إلى تعليم القرآن الكريم ونشر علومه، ورعاية حلقات التحفيظ، وتنمية القيم القرآنية في المجتمع.</p>
-                    <div class="flex space-x-4 space-x-reverse">
+                    <div class="flex space-x-4 space-x-reverse justify-center md:justify-start">
                         <a href="#" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-[#efb740] hover:text-white transition-colors">
                             <i class="fab fa-facebook text-white"></i>
                         </a>
@@ -729,32 +786,32 @@
                 </div>
                 
                 <!-- Quick Links -->
-                <div>
-                   <img src="assets/unprofitableGrowth.png" alt="logo" class="w-full h-full object-contain">
+                <div class="mb-8 md:mb-0 flex justify-center footer-images">
+                   <img src="assets/unprofitableGrowth.png" alt="logo" class="w-full max-w-[200px] h-auto object-contain">
                 </div>
                 
                 <!-- Services -->
-                <div>
-                    <img src="assets/Vision-2030.png" alt="logo" class="w-full h-full object-contain">
+                <div class="mb-8 md:mb-0 flex justify-center footer-images">
+                    <img src="assets/Vision-2030.png" alt="logo" class="w-full max-w-[200px] h-auto object-contain">
                 </div>
                 
                 <!-- Contact Info -->
-                <div>
+                <div class="mb-8 md:mb-0 text-center md:text-right">
                     <h3 class="text-lg font-bold mb-6">معلومات الاتصال</h3>
                     <div class="space-y-4">
-                        <div class="flex items-center">
+                        <div class="flex items-center justify-center md:justify-start">
                             <i class="fas fa-map-marker-alt text-[#efb740] ml-3"></i>
                             <span class="text-white">المملكة العربية السعودية، جده، حي الورود</span>
                         </div>
-                        <div class="flex items-center">
+                        <div class="flex items-center justify-center md:justify-start">
                             <i class="fas fa-phone text-[#efb740] ml-3"></i>
                             <a href="tel:+966546638312" class="text-white hover:text-[#efb740] transition-colors">546638312 (+966)</a>
                         </div>
-                        <div class="flex items-center">
+                        <div class="flex items-center justify-center md:justify-start">
                             <i class="fas fa-envelope text-[#efb740] ml-3"></i>
                             <a href="mailto:mathani.quran@gmail.com" class="text-white hover:text-[#efb740] transition-colors">mathani.quran@gmail.com</a>
                         </div>
-                        <div class="flex items-center">
+                        <div class="flex items-center justify-center md:justify-start">
                             <i class="fas fa-clock text-[#efb740] ml-3"></i>
                             <span class="text-white">الأحد - الخميس: 8:00 ص - 4:00 م</span>
                         </div>
@@ -766,11 +823,11 @@
         <!-- Bottom Footer -->
         <div class="border-t border-white/20">
             <div class="max-w-7xl mx-auto px-4 py-6">
-                <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-right">
                     <p class="text-white text-sm mb-4 md:mb-0">
                         &copy; 2025 جمعية مثاني القرآنية. جميع الحقوق محفوظة.
                     </p>
-                    <div class="flex items-center space-x-6 space-x-reverse">
+                    <div class="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 md:space-x-reverse">
                         <a href="#" class="text-white hover:text-[#efb740] text-sm transition-colors">سياسة الخصوصية</a>
                         <a href="#" class="text-white hover:text-[#efb740] text-sm transition-colors">شروط الاستخدام</a>
                         <a href="#" class="text-white hover:text-[#efb740] text-sm transition-colors">خريطة الموقع</a>
