@@ -196,9 +196,10 @@
             .text-4xl { font-size: 2rem !important; }
             
             .curved-underline::after {
-                width: 150px !important;
+                width: min(150px, 60vw) !important;
                 height: 3px !important;
                 border-radius: 0 0 0 20px !important;
+                max-width: calc(100vw - 3rem) !important;
             }
             
             #hdr { height: 100px !important; }
@@ -365,6 +366,7 @@
             position: relative;
             text-align: right;
             margin-bottom: 40px;
+            overflow: hidden;
         }
 
         .curved-underline {
@@ -373,6 +375,7 @@
             padding-bottom: 35px;
             margin-right: 0;
             margin-bottom: 0;
+            max-width: 100%;
         }
 
         .section-subtitle {
@@ -388,11 +391,12 @@
             position: absolute;
             bottom: 0;
             right: 0;
-            width: 300px;
+            width: min(300px, 80vw);
             height: 4px;
             background: #efb740;
             transform: translateY(-5px);
             border-radius: 0 0 0 35px;
+            max-width: 100%;
         }
 
         .curved-underline.green::after {
@@ -414,9 +418,15 @@
         /* Mobile responsive */
         @media (max-width: 768px) {
             .curved-underline::after {
-                width: 200px;
+                width: min(200px, 70vw);
                 height: 3px;
                 border-radius: 0 0 0 25px;
+                max-width: calc(100vw - 2rem);
+            }
+            
+            .section-header-container {
+                padding: 0 1rem;
+                box-sizing: border-box;
             }
         }
 
