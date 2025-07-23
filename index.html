@@ -152,6 +152,18 @@
             .text-4xl { font-size: 2.5rem !important; }
             
             /* Mobile news cards */
+            /* Mobile hero carousel enhanced */
+            .hero-carousel { 
+                height: 50vh !important; 
+                min-height: 300px !important; 
+            }
+            .hero-slide { 
+                background-size: cover !important;
+                background-position: center !important;
+                background-attachment: scroll !important;
+            }
+            
+            /* Mobile news cards */
             .md\\:grid-cols-3 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
             
             /* Mobile footer */
@@ -190,6 +202,12 @@
             }
             
             #hdr { height: 100px !important; }
+            
+            /* Extra small mobile hero */
+            .hero-carousel { 
+                height: 40vh !important; 
+                min-height: 250px !important; 
+            }
             
             /* Stack footer images vertically on very small screens */
             .footer-images { flex-direction: column !important; align-items: center !important; }
@@ -245,7 +263,16 @@
         /* Mobile responsive hero */
         @media (max-width: 768px) {
             .hero-carousel {
-                height: 35vh;
+                height: 50vh;
+                min-height: 300px;
+            }
+        }
+        
+        /* Extra small mobile */
+        @media (max-width: 480px) {
+            .hero-carousel {
+                height: 40vh;
+                min-height: 250px;
             }
         }
         
@@ -259,6 +286,7 @@
             transition: opacity 1s ease-in-out;
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
         }
         
         /* Mobile responsive background positioning */
@@ -266,6 +294,16 @@
             .hero-slide {
                 background-size: cover;
                 background-position: center center;
+                background-attachment: scroll;
+            }
+        }
+        
+        /* Extra small mobile responsive */
+        @media (max-width: 480px) {
+            .hero-slide {
+                background-size: cover;
+                background-position: center;
+                background-attachment: scroll;
             }
         }
         
