@@ -6,7 +6,6 @@
     <title>جمعية مثاني</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
         @font-face {
             font-family: 'IBMPlexSansArabic';
@@ -32,6 +31,11 @@
             font-family: 'IBMPlexSansArabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             font-weight: 500;
             direction: rtl;
+            background-image: url('assets/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
         
         /* Use medium weight for most UI elements */
@@ -111,7 +115,7 @@
             }
             
             .mobile-dropdown button:active {
-                background-color: rgba(139, 69, 19, 0.1);
+                background-color: rgba(0, 161, 125, 0.1);
                 transform: scale(0.98);
             }
             
@@ -125,7 +129,7 @@
             }
             
             .mobile-dropdown-content a:active, .mobile-menu-link:active {
-                background-color: rgba(139, 69, 19, 0.1);
+                background-color: rgba(0, 161, 125, 0.1);
                 transform: scale(0.98);
             }
         }
@@ -236,19 +240,96 @@
             direction: rtl;
         }
         #hdr{
-            background-color: #432d17;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            background-image: url('assets/hdr-background2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        #hdr::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+        }
+        #hdr > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Curved underline design */
+        .section-header-container {
+            position: relative;
+            text-align: right;
+            margin-bottom: 40px;
+        }
+
+        .curved-underline {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 35px;
+            margin-right: 0;
+            margin-bottom: 0;
+        }
+
+        .section-subtitle {
+            text-align: right;
+            margin-top: 15px;
+            margin-bottom: 20px;
+            padding-right: 0;
+            position: relative;
+        }
+
+        .curved-underline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 300px;
+            height: 4px;
+            background: #efb740;
+            transform: translateY(-5px);
+            border-radius: 0 0 0 35px;
+        }
+
+        .curved-underline.green::after {
+            background: #00a17d;
+        }
+
+        .curved-underline.brown::after {
+            background: #00a17d;
+        }
+
+        .curved-underline.white::after {
+            background: #ffffff;
+        }
+
+        .curved-underline.gold::after {
+            background: #efb740;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .curved-underline::after {
+                width: 200px;
+                height: 3px;
+                border-radius: 0 0 0 25px;
+            }
         }
 
     </style>
     <style>
-        .hover-brown:hover {
-          color: #432d17;
+        .hover-green:hover {
+          color: #00a17d;
         }
       </style>
 </head>
 <body class="bg-gray-50">
-    <div class="text-white py-2 text-sm " id="hdr">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-0">
+    <div class="text-white text-sm bg-black/30 backdrop-blur-sm" id="hdr">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-0 h-full">
             <div class="flex items-center space-x-6 space-x-reverse">
                 <a href="#" class="hover:text-blue-200"><i class="fab fa-facebook"></i></a>
                 <a href="#" class="hover:text-blue-200"><i class="fab fa-x"></i></a>
@@ -261,83 +342,83 @@
         </div>
     </div>
 
-    <header class="bg-white shadow-lg sticky top-0 z-50" role="navigation" aria-label="التنقل الرئيسي">
+    <header class="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50" role="navigation" aria-label="التنقل الرئيسي">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex justify-between items-center py-4">
                 <nav class="hidden md:flex items-center space-x-8 space-x-reverse">
-                    <a href="#home" class="text-gray-700 hover:text-[#432d17] font-medium">الرئيسية</a>
+                    <a href="#home" class="text-gray-700 hover:text-[#00a17d] font-medium">الرئيسية</a>
                     
                     <!-- عن الجمعية -->
                     <div class="relative dropdown">
-                        <button class="text-gray-700 hover:text-[#432d17] font-medium flex items-center" aria-expanded="false">
+                        <button class="text-gray-700 hover:text-[#00a17d] font-medium flex items-center" aria-expanded="false">
                             عن الجمعية <i class="fas fa-chevron-down mr-1 text-xs"></i>
                         </button>
                         <div class="dropdown-content">
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">من نحن</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">شهاده الترخيص</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">السجل التجاري</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10"> الخريطه الإستراتيجيه</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">الجمعية العمومية</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">مجلس الإداره</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">الإدارة التنفيذية</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">الهيكل التنظيمي</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">فريق العمل</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">من نحن</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">شهاده الترخيص</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">السجل التجاري</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"> الخريطه الإستراتيجيه</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">الجمعية العمومية</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">مجلس الإداره</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">الإدارة التنفيذية</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">الهيكل التنظيمي</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">فريق العمل</a>
                         </div>
                     </div>
                     
                     <div class="relative dropdown">
-                        <button class="text-gray-700 hover:text-[#432d17] font-medium flex items-center" aria-expanded="false">
+                        <button class="text-gray-700 hover:text-[#00a17d] font-medium flex items-center" aria-expanded="false">
                             التقارير <i class="fas fa-chevron-down mr-1 text-xs"></i>
                         </button>
                         <div class="dropdown-content">
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">التقرير السنوي لعام 2024</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">التقرير السنوي لعام 2025</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">التقرير السنوي لعام 2024</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">التقرير السنوي لعام 2025</a>
                         </div>
                     </div>
                     
                     <!-- قياس الرضا -->
                     <div class="relative dropdown">
-                        <button class="text-gray-700 hover:text-[#432d17] font-medium flex items-center" aria-expanded="false">
+                        <button class="text-gray-700 hover:text-[#00a17d] font-medium flex items-center" aria-expanded="false">
                             قياس الرضا <i class="fas fa-chevron-down mr-1 text-xs"></i>
                         </button>
                         <div class="dropdown-content">
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10"> رضا المستفيدين</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10"> رضا أعضاء الجمعية العمومية</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">رضا الموظفين </a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">تقارير قياس الرضا</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"> رضا المستفيدين</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"> رضا أعضاء الجمعية العمومية</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">رضا الموظفين </a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">تقارير قياس الرضا</a>
                         </div>
                     </div>
                     
                     <div class="relative dropdown">
-                        <button class="text-gray-700 hover:text-[#432d17] font-medium flex items-center" aria-expanded="false">
+                        <button class="text-gray-700 hover:text-[#00a17d] font-medium flex items-center" aria-expanded="false">
                             الحوكمة <i class="fas fa-chevron-down mr-1 text-xs"></i>
                         </button>
                         <div class="dropdown-content">
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">ادلة الحوكمة</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">اللوائح والسياسات</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">سياسة الخصوصية</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">ادلة الحوكمة</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">اللوائح والسياسات</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">سياسة الخصوصية</a>
                         </div>
                     </div>
                     
                     <!-- تطوع معنا -->
                     <div class="relative dropdown">
-                        <button class="text-gray-700 hover:text-[#432d17] font-medium flex items-center" aria-expanded="false">
+                        <button class="text-gray-700 hover:text-[#00a17d] font-medium flex items-center" aria-expanded="false">
                             تطوع معنا  <i class="fas fa-chevron-down mr-1 text-xs"></i>
                         </button>
                         <div class="dropdown-content">
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">منصة العمل التطوعي</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">الفرص التطوعية</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#432d17]/10">إنضم معنا</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">منصة العمل التطوعي</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">الفرص التطوعية</a>
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10">إنضم معنا</a>
                         </div>
                     </div>
                     
-                    <a href="#contact" class="text-gray-700 hover:text-[#432d17] font-medium">اتصل بنا</a>
+
                 </nav>
                 
                 <!-- Logo (Right side in RTL) -->
                 <div class="flex items-center space-x-3 space-x-reverse">
                     <div class="w-16 h-12 md:w-20 md:h-15 flex items-center justify-center overflow-hidden">
-                        <img src="assets/logo.jpg" alt="" class="w-full h-full object-contain">
+                        
                     </div>
                 </div>
                 
@@ -349,65 +430,65 @@
         </div>
         
         <!-- Mobile Menu -->
-        <div class="md:hidden bg-white border-t hidden" id="mobile-menu">
+        <div class="md:hidden bg-white/90 backdrop-blur-md border-t hidden" id="mobile-menu">
             <div class="px-4 py-6 space-y-2">
                 <div class="mobile-dropdown">
-                    <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#432d17] font-medium py-2">
+                    <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
                         عن الجمعية <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4 space-y-1">
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">من نحن</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">شهاده الترخيص</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">السجل التجاري</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">الخريطه الإستراتيجيه</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">الجمعية العمومية</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">مجلس الإداره</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">الإدارة التنفيذية</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">الهيكل التنظيمي</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">فريق العمل</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">من نحن</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">شهاده الترخيص</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">السجل التجاري</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">الخريطه الإستراتيجيه</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">الجمعية العمومية</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">مجلس الإداره</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">الإدارة التنفيذية</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">الهيكل التنظيمي</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">فريق العمل</a>
                     </div>
                 </div>
                 <div class="mobile-dropdown">
-                    <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#432d17] font-medium py-2">
+                    <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
                         التقارير <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4 space-y-1">
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">التقرير السنوي لعام 2024</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">التقرير السنوي لعام 2025</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">التقرير السنوي لعام 2024</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">التقرير السنوي لعام 2025</a>
                     </div>
                 </div>
                 <div class="mobile-dropdown">
-                    <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#432d17] font-medium py-2">
+                    <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
                         قياس الرضا <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4 space-y-1">
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">رضا المستفيدين</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">رضا أعضاء الجمعية العمومية</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">رضا الموظفين</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">تقارير قياس الرضا</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">رضا المستفيدين</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">رضا أعضاء الجمعية العمومية</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">رضا الموظفين</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">تقارير قياس الرضا</a>
                     </div>
                 </div>
                 <div class="mobile-dropdown">
-                    <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#432d17] font-medium py-2">
+                    <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
                         الحوكمة <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4 space-y-1">
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">ادلة الحوكمة</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">اللوائح والسياسات</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">سياسة الخصوصية</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">ادلة الحوكمة</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">اللوائح والسياسات</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">سياسة الخصوصية</a>
                     </div>
                 </div>
                 <div class="mobile-dropdown">
-                    <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#432d17] font-medium py-2">
+                    <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
                         تطوع معنا <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4 space-y-1">
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">منصة العمل التطوعي</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">الفرص التطوعية</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#432d17]/10 rounded-lg">إنضم معنا</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">منصة العمل التطوعي</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">الفرص التطوعية</a>
+                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg">إنضم معنا</a>
                     </div>
                 </div>
-                <a href="#contact" class="block text-gray-700 hover:text-[#432d17] mobile-menu-link py-3 rounded-lg">اتصل بنا</a>
+
             </div>
         </div>
     </header>
@@ -418,16 +499,16 @@
             <!-- Hero Carousel -->
             <div class="hero-carousel">
                 <!-- Slide 1 - Replace with your image path -->
-                <div class="hero-slide active" style="background-image: url('assets/guess1.jpg');">
+                <div class="hero-slide active" style="background-image: url('assets/hdr-background.jpg');">
                 </div>
                 <!-- Slide 2 - Replace with your image path -->
-                <div class="hero-slide" style="background-image: url('assets/guess2.jpg');">
+                <div class="hero-slide" style="background-image: url('assets/hdr-background.jpg');">
                 </div>
                 <!-- Slide 3 - Replace with your image path -->
-                <div class="hero-slide" style="background-image: url('assets/mthani3.jpg');">
+                <div class="hero-slide" style="background-image: url('assets/hdr-background.jpg');">
                 </div>
                 <!-- Slide 4 - Replace with your image path -->
-                <div class="hero-slide" style="background-image: url('assets/guess3.jpg');">
+                <div class="hero-slide" style="background-image: url('assets/hdr-background.jpg');">
                 </div>
                 
             
@@ -439,7 +520,7 @@
         </section>
 
         <!-- News Ticker -->
-        <section class="bg-[#432d17] text-white py-3" id="news" aria-live="polite">
+        <section class="bg-[#00a17d] text-white py-3" id="news" aria-live="polite">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="flex items-center">
                     <div class="flex-1 overflow-hidden">
@@ -454,12 +535,12 @@
         <!-- Media Center -->
         <section class="py-16 bg-white">
             <div class="max-w-7xl mx-auto px-4">
-                <div class="flex flex-col md:flex-row items-center gap-10">
+                <div class="flex flex-col md:flex-row-reverse items-center gap-10">
                     <div class="w-full md:w-1/2 flex justify-center mb-8 md:mb-0">
                         <img src="assets/guess100.jpg" alt="مثاني القرآنية" class="rounded-tr-[80px] rounded-bl-[80px] shadow-2xl object-cover w-full max-w-md h-80">
                     </div>
                     <div class="w-full md:w-1/2 text-center md:text-right">
-                        <h2 class="text-4xl font-bold text-[#432d17] mb-6">مثاني القرآنية</h2>
+                        <h2 class="text-4xl font-bold text-[#efb740] mb-6 curved-underline gold">مثاني القرآنية</h2>
                         <p class="text-xl text-gray-700 mb-4">جمعية مثاني القرآنية تهدف إلى تعليم القرآن الكريم ونشر علومه، ورعاية حلقات التحفيظ، وتنمية القيم القرآنية في المجتمع من خلال برامج نوعية وأنشطة هادفة.</p>
                         <p class="text-lg text-gray-500">انضم إلينا في مسيرة العطاء القرآني وكن جزءًا من بناء جيل قرآني واعٍ ومتميز.</p>
                     </div>
@@ -468,27 +549,41 @@
         </section>
 
         <!-- Achievements Counter -->
-        <section class="py-16 bg-[#432d17] text-white">
+        <section class="py-16 bg-black/30 text-white">
             <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-12 fade-in">
-                    <h2 class="text-4xl font-bold text-white mb-4">إنجازاتنا</h2>
-                    <p class="text-xl text-white">نعمل معاً لبناء مجتمع أفضل</p>
+                <div class="fade-in">
+                    <div class="section-header-container">
+                        <h2 class="text-4xl font-bold text-[#fffff] curved-underline gold">إنجازاتنا</h2>
+                        <p class="text-xl text-white section-subtitle">نعمل معاً لبناء مجتمع أفضل</p>
+                    </div>
                 </div>
                 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                     <div class="fade-in">
+                        <div class="mb-4">
+                            <i class="fas fa-hands-helping text-[#efb740] text-4xl mb-2"></i>
+                        </div>
                         <div class="counter" data-target="152">0</div>
                         <p class="text-white font-medium">مشروع تطوعي</p>
                     </div>
                     <div class="fade-in">
+                        <div class="mb-4">
+                            <i class="fas fa-users text-[#efb740] text-4xl mb-2"></i>
+                        </div>
                         <div class="counter " data-target="25000">0</div>
                         <p class="text-white font-medium">مستفيد</p>
                     </div>
                     <div class="fade-in">
+                        <div class="mb-4">
+                            <i class="fas fa-calendar-alt text-[#efb740] text-4xl mb-2"></i>
+                        </div>
                         <div class="counter" data-target="48">0</div>
                         <p class="text-white font-medium">برنامج مجتمعي</p>
                     </div>
                     <div class="fade-in">
+                        <div class="mb-4">
+                            <i class="fas fa-star text-[#efb740] text-4xl mb-2"></i>
+                        </div>
                         <div class="counter" data-target="95">0</div>
                         <p class="text-white font-medium">% معدل الرضا</p>
                     </div>
@@ -496,15 +591,79 @@
             </div>
         </section>
 
-       <!-- Partners Carousel -->
-        <section class="py-16 bg-white border-t">
+
+
+        <!-- Recent News -->
+        <section class="py-16 bg-[#00a17d]">
             <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-12 fade-in">
-                    <h2 class="text-4xl font-bold text-gray-800 mb-4">شركاؤنا</h2>
-                    <p class="text-xl text-gray-600">نعمل مع أفضل الشركات والمؤسسات لخدمة مجتمعنا</p>
+                <div class="fade-in">
+                    <div class="section-header-container">
+                        <h2 class="text-4xl font-bold text-[#ffffff] curved-underline gold">آخر الأخبار</h2>
+                        <p class="text-xl text-white section-subtitle">ابق على اطلاع بآخر أخبار وأنشطة جمعية مثاني القرآنية</p>
+                    </div>
                 </div>
                 
-                                <div class="overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow fade-in">
+                        <img src="assets/hdr-background.jpg" alt="خبر 1" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <i class="fas fa-calendar ml-2"></i>
+                                <span>15 يوليو 2025</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">إطلاق برنامج جديد لتحفيظ القرآن الكريم</h3>
+                            <p class="text-gray-600 mb-4">تعلن جمعية مثاني القرآنية عن إطلاق برنامج جديد لتحفيظ القرآن الكريم يستهدف جميع الفئات العمرية بأساليب تعليمية حديثة ومتطورة...</p>
+                            <a href="#" class="text-[#00a17d] font-medium hover:text-[#00a17d]/80">اقرأ المزيد &larr;</a>
+                        </div>
+                    </article>
+                    
+                    <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow fade-in">
+                        <img src="assets/guess2.jpg" alt="خبر 2" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <i class="fas fa-calendar ml-2"></i>
+                                <span>12 يوليو 2025</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">دورة تدريبية في علوم التجويد والقراءات</h3>
+                            <p class="text-gray-600 mb-4">نظمت الجمعية دورة تدريبية متخصصة في علوم التجويد والقراءات القرآنية بمشاركة نخبة من المتخصصين والحفاظ...</p>
+                            <a href="#" class="text-[#00a17d] font-medium hover:text-[#00a17d]/80">اقرأ المزيد &larr;</a>
+                        </div>
+                    </article>
+                    
+                    <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow fade-in">
+                        <img src="assets/guess3.jpg" alt="خبر 3" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <div class="flex items-center text-sm text-gray-500 mb-2">
+                                <i class="fas fa-calendar ml-2"></i>
+                                <span>10 يوليو 2025</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">مسابقة حفظ القرآن الكريم السنوية</h3>
+                            <p class="text-gray-600 mb-4">أعلنت جمعية مثاني القرآنية عن إقامة مسابقة حفظ القرآن الكريم السنوية بجوائز قيمة وفئات متعددة للمشاركين من جميع الأعمار...</p>
+                            <a href="#" class="text-[#00a17d] font-medium hover:text-[#00a17d]/80">اقرأ المزيد &larr;</a>
+                        </div>
+                    </article>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <a href="#" class="bg-[#efb740] text-[#ffffff] px-8 py-3 rounded-lg font-bold hover:bg-[#00a17d] hover:text-[#efb740] transition-colors inline-flex items-center">
+                        عرض جميع الأخبار
+                        <i class="fas fa-arrow-left mr-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Partners Carousel -->
+        <section class="py-16 bg-white border-t">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="fade-in">
+                    <div class="section-header-container">
+                        <h2 class="text-4xl font-bold text-[#efb740] curved-underline gold">شركاؤنا</h2>
+                        <p class="text-xl text-gray-600 section-subtitle">نعمل مع أفضل الشركات والمؤسسات لخدمة مجتمعنا</p>
+                    </div>
+                </div>
+                
+                <div class="overflow-hidden">
                     <div class="flex items-center justify-center space-x-8 space-x-reverse partner-scroll">
                         <div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
                             <img src="assets/fc25.png" alt="شريك 1" class="max-w-full max-h-full object-contain">
@@ -533,181 +692,37 @@
                         </div>
                     </div>
                 </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Recent News -->
-        <section class="py-16 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-12 fade-in">
-                    <h2 class="text-4xl font-bold text-gray-800 mb-4">آخر الأخبار</h2>
-                    <p class="text-xl text-gray-600">ابق على اطلاع بآخر أخبار وأنشطة جمعية مثاني القرآنية</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow fade-in">
-                        <img src="assets/guess1.jpg" alt="خبر 1" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <div class="flex items-center text-sm text-gray-500 mb-2">
-                                <i class="fas fa-calendar ml-2"></i>
-                                <span>15 يوليو 2025</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">إطلاق برنامج جديد لتحفيظ القرآن الكريم</h3>
-                            <p class="text-gray-600 mb-4">تعلن جمعية مثاني القرآنية عن إطلاق برنامج جديد لتحفيظ القرآن الكريم يستهدف جميع الفئات العمرية بأساليب تعليمية حديثة ومتطورة...</p>
-                            <a href="#" class="text-[#432d17] font-medium hover:text-[#432d17]/80">اقرأ المزيد &larr;</a>
-                        </div>
-                    </article>
-                    
-                    <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow fade-in">
-                        <img src="assets/guess2.jpg" alt="خبر 2" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <div class="flex items-center text-sm text-gray-500 mb-2">
-                                <i class="fas fa-calendar ml-2"></i>
-                                <span>12 يوليو 2025</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">دورة تدريبية في علوم التجويد والقراءات</h3>
-                            <p class="text-gray-600 mb-4">نظمت الجمعية دورة تدريبية متخصصة في علوم التجويد والقراءات القرآنية بمشاركة نخبة من المتخصصين والحفاظ...</p>
-                            <a href="#" class="text-[#432d17] font-medium hover:text-[#432d17]/80">اقرأ المزيد &larr;</a>
-                        </div>
-                    </article>
-                    
-                    <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow fade-in">
-                        <img src="assets/guess3.jpg" alt="خبر 3" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <div class="flex items-center text-sm text-gray-500 mb-2">
-                                <i class="fas fa-calendar ml-2"></i>
-                                <span>10 يوليو 2025</span>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">مسابقة حفظ القرآن الكريم السنوية</h3>
-                            <p class="text-gray-600 mb-4">أعلنت جمعية مثاني القرآنية عن إقامة مسابقة حفظ القرآن الكريم السنوية بجوائز قيمة وفئات متعددة للمشاركين من جميع الأعمار...</p>
-                            <a href="#" class="text-[#432d17] font-medium hover:text-[#432d17]/80">اقرأ المزيد &larr;</a>
-                        </div>
-                    </article>
-                </div>
-                
-                <div class="text-center mt-12">
-                    <a href="#" class="bg-[#432d17] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#432d17]/80 transition-colors inline-flex items-center">
-                        عرض جميع الأخبار
-                        <i class="fas fa-arrow-left mr-2"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- Contact Section -->
-        <section class="py-16 bg-gray-800 text-white" id="contact">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="text-center mb-12 fade-in">
-                    <h2 class="text-4xl font-bold mb-4">تواصل معنا</h2>
-                    <p class="text-xl text-gray-300">نحن هنا لخدمتكم في أي وقت</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <!-- Contact Form -->
-                    <div class="fade-in">
-                        <h3 class="text-2xl font-bold mb-6">أرسل رسالة</h3>
-                        <form class="space-y-6">
-                            <div>
-                                <label for="name" class="block text-sm font-medium mb-2">الاسم الكامل</label>
-                                <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 focus:border-[#432d17] focus:outline-none text-white" placeholder="أدخل اسمك الكامل">
-                            </div>
-                            <div>
-                                <label for="email" class="block text-sm font-medium mb-2">البريد الإلكتروني</label>
-                                <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 focus:border-[#432d17] focus:outline-none text-white" placeholder="أدخل بريدك الإلكتروني">
-                            </div>
-                            <div>
-                                <label for="subject" class="block text-sm font-medium mb-2">الموضوع</label>
-                                <input type="text" id="subject" name="subject" class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 focus:border-[#432d17] focus:outline-none text-white" placeholder="موضوع الرسالة">
-                            </div>
-                            <div>
-                                <label for="message" class="block text-sm font-medium mb-2">الرسالة</label>
-                                <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 rounded-lg bg-gray-700 border border-gray-600 focus:border-[#432d17] focus:outline-none text-white" placeholder="اكتب رسالتك هنا"></textarea>
-                            </div>
-                            <button type="submit" class="bg-[#432d17] text-white px-8 py-3 rounded-lg font-medium hover:bg-[#432d17]/80 transition-colors w-full">
-                                إرسال الرسالة
-                            </button>
-                        </form>
-                    </div>
-                    
-                    <!-- Contact Information -->
-                    <div class="fade-in">
-                        <h3 class="text-2xl font-bold mb-6">معلومات الاتصال</h3>
-                        <div class="space-y-6">
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 bg-[#432d17] rounded-lg flex items-center justify-center ml-4 flex-shrink-0">
-                                    <i class="fas fa-map-marker-alt text-white"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold mb-2">العنوان</h4>
-                                    <p class="text-gray-300">حي الورود شارع أحمد بن حنبل <br>المملكة العربية السعوديه, جدة 23234</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 bg-[#432d17] rounded-lg flex items-center justify-center ml-4 flex-shrink-0">
-                                    <i class="fas fa-phone text-white"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold mb-2">الهاتف</h4>
-                                    <p class="text-gray-300">(555) 123-4567<br>(555) 123-4568</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 bg-[#432d17] rounded-lg flex items-center justify-center ml-4 flex-shrink-0">
-                                    <i class="fas fa-envelope text-white"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold mb-2">البريد الإلكتروني</h4>
-                                    <p class="text-gray-300">mathani@gmail.com</p>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 bg-[#432d17] rounded-lg flex items-center justify-center ml-4 flex-shrink-0">
-                                    <i class="fas fa-clock text-white"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold mb-2">أوقات العمل</h4>
-                                    <p class="text-gray-300">الأحد - الخميس: 8:00 ص - 4:00 م<br>الجمعة والسبت: مغلق</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white">
+    <footer class="bg-[#00a17d] text-white">
         <div class="max-w-7xl mx-auto px-4 py-12">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <!-- About Section -->
                 <div>
                     <div class="flex items-center space-x-3 space-x-reverse mb-6">
-                        <div class="w-10 h-10 bg-[#432d17] rounded-full flex items-center justify-center">
+                        <div class="w-10 h-10 bg-white/30 rounded-full flex items-center justify-center">
                             <i class="fas fa-book-quran text-white"></i>
                         </div>
                         <div>
                             <h3 class="text-xl font-bold">جمعية مثاني القرآنية</h3>
-                            <p class="text-sm text-gray-400">القرآنية الخيرية</p>
+                            <p class="text-sm text-white">القرآنية الخيرية</p>
                         </div>
                     </div>
-                    <p class="text-gray-400 mb-6">جمعية مثاني القرآنية تهدف إلى تعليم القرآن الكريم ونشر علومه، ورعاية حلقات التحفيظ، وتنمية القيم القرآنية في المجتمع.</p>
+                    <p class="text-white mb-6">جمعية مثاني القرآنية تهدف إلى تعليم القرآن الكريم ونشر علومه، ورعاية حلقات التحفيظ، وتنمية القيم القرآنية في المجتمع.</p>
                     <div class="flex space-x-4 space-x-reverse">
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#432d17] transition-colors">
+                        <a href="#" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-[#efb740] hover:text-white transition-colors">
                             <i class="fab fa-facebook text-white"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#432d17] transition-colors">
+                        <a href="#" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-[#efb740] hover:text-white transition-colors">
                             <i class="fab fa-twitter text-white"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#432d17] transition-colors">
+                        <a href="#" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-[#efb740] hover:text-white transition-colors">
                             <i class="fab fa-instagram text-white"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#432d17] transition-colors">
+                        <a href="#" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-[#efb740] hover:text-white transition-colors">
                             <i class="fab fa-linkedin text-white"></i>
                         </a>
                     </div>
@@ -715,28 +730,12 @@
                 
                 <!-- Quick Links -->
                 <div>
-                    <h3 class="text-lg font-bold mb-6">روابط سريعة</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">عن الجمعية</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">التقارير</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">قياس الرضا</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">الحوكمة</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">تطوع معنا</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">اتصل بنا</a></li>
-                    </ul>
+                   <img src="assets/unprofitableGrowth.png" alt="logo" class="w-full h-full object-contain">
                 </div>
                 
                 <!-- Services -->
                 <div>
-                    <h3 class="text-lg font-bold mb-6">خدمات الجمعية</h3>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">حلقات التحفيظ</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">دورات التجويد</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">برامج الإقراء</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">رعاية الحفاظ</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">الأنشطة القرآنية</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">التطوع القرآني</a></li>
-                    </ul>
+                    <img src="assets/Vision-2030.png" alt="logo" class="w-full h-full object-contain">
                 </div>
                 
                 <!-- Contact Info -->
@@ -744,20 +743,20 @@
                     <h3 class="text-lg font-bold mb-6">معلومات الاتصال</h3>
                     <div class="space-y-4">
                         <div class="flex items-center">
-                            <i class="fas fa-map-marker-alt text-[#432d17] ml-3"></i>
-                            <span class="text-gray-400">المملكة العربية السعودية، جده، حي الورود</span>
+                            <i class="fas fa-map-marker-alt text-[#efb740] ml-3"></i>
+                            <span class="text-white">المملكة العربية السعودية، جده، حي الورود</span>
                         </div>
                         <div class="flex items-center">
-                            <i class="fas fa-phone text-[#432d17] ml-3"></i>
-                            <a href="tel:+966546638312" class="text-gray-400 hover:text-white transition-colors">546638312 (+966)</a>
+                            <i class="fas fa-phone text-[#efb740] ml-3"></i>
+                            <a href="tel:+966546638312" class="text-white hover:text-[#efb740] transition-colors">546638312 (+966)</a>
                         </div>
                         <div class="flex items-center">
-                            <i class="fas fa-envelope text-[#432d17] ml-3"></i>
-                            <a href="mailto:mathani.quran@gmail.com" class="text-gray-400 hover:text-white transition-colors">mathani.quran@gmail.com</a>
+                            <i class="fas fa-envelope text-[#efb740] ml-3"></i>
+                            <a href="mailto:mathani.quran@gmail.com" class="text-white hover:text-[#efb740] transition-colors">mathani.quran@gmail.com</a>
                         </div>
                         <div class="flex items-center">
-                            <i class="fas fa-clock text-[#432d17] ml-3"></i>
-                            <span class="text-gray-400">الأحد - الخميس: 8:00 ص - 4:00 م</span>
+                            <i class="fas fa-clock text-[#efb740] ml-3"></i>
+                            <span class="text-white">الأحد - الخميس: 8:00 ص - 4:00 م</span>
                         </div>
                     </div>
                 </div>
@@ -765,16 +764,16 @@
         </div>
         
         <!-- Bottom Footer -->
-        <div class="border-t border-gray-800">
+        <div class="border-t border-white/20">
             <div class="max-w-7xl mx-auto px-4 py-6">
                 <div class="flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    <p class="text-white text-sm mb-4 md:mb-0">
                         &copy; 2025 جمعية مثاني القرآنية. جميع الحقوق محفوظة.
                     </p>
                     <div class="flex items-center space-x-6 space-x-reverse">
-                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">سياسة الخصوصية</a>
-                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">شروط الاستخدام</a>
-                        <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">خريطة الموقع</a>
+                        <a href="#" class="text-white hover:text-[#efb740] text-sm transition-colors">سياسة الخصوصية</a>
+                        <a href="#" class="text-white hover:text-[#efb740] text-sm transition-colors">شروط الاستخدام</a>
+                        <a href="#" class="text-white hover:text-[#efb740] text-sm transition-colors">خريطة الموقع</a>
                     </div>
                 </div>
             </div>
@@ -797,8 +796,7 @@
     </div>
 
     <script>
-      // Complete JavaScript functionality for Arabic Government Website
-
+      
 // DOM Content Loaded Event
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -1055,9 +1053,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const fadeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                // Element is in view - animate in
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
-                fadeObserver.unobserve(entry.target);
+            } else {
+                // Element is out of view - reset for next animation
+                entry.target.style.opacity = '0';
+                entry.target.style.transform = 'translateY(30px)';
             }
         });
     }, {
@@ -1123,7 +1125,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ========== SCROLL TO TOP FUNCTIONALITY ==========
     const scrollToTopBtn = document.createElement('button');
-    scrollToTopBtn.className = 'fixed bottom-6 left-6 bg-[#432d17] text-white w-12 h-12 rounded-full shadow-lg hover:bg-[#432d17]/80 transition-all duration-300 z-50 scroll-to-top';
+    scrollToTopBtn.className = 'fixed bottom-6 left-6 bg-[#00a17d] text-white w-12 h-12 rounded-full shadow-lg hover:bg-[#00a17d]/80 transition-all duration-300 z-50 scroll-to-top';
     scrollToTopBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
     scrollToTopBtn.style.display = 'none';
     document.body.appendChild(scrollToTopBtn);
@@ -1290,7 +1292,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ========== INITIALIZATION COMPLETE ==========
-    console.log('موقع البلدية تم تحميله بنجاح - Government Website Loaded Successfully');
     
     // Dispatch custom event to indicate site is ready
     const siteReadyEvent = new CustomEvent('siteReady', {
