@@ -295,10 +295,77 @@
             overflow: hidden;
         }
         
-        /* Mobile responsive hero */
+        /* Progressive responsive hero breakpoints - Wider screens = Taller images */
+        
+        /* 4K and above (3840px+) - Tallest */
+        @media (min-width: 3840px) {
+            .hero-carousel { height: 80vh; }
+        }
+        
+        /* 2K monitor (2560x1440) - Very tall */
+        @media (min-width: 2560px) and (max-width: 3839px) {
+            .hero-carousel { height: 65vh; }
+        }
+        
+        /* Ultra-wide desktop (2048px-2559px) */
+        @media (min-width: 2048px) and (max-width: 2559px) {
+            .hero-carousel { height: 60vh; }
+        }
+        
+        /* Full HD+ (1920px-2047px) */
+        @media (min-width: 1920px) and (max-width: 2047px) {
+            .hero-carousel { height: 50vh; }
+        }
+        
+        /* Large desktop (1600px-1919px) */
+        @media (min-width: 1600px) and (max-width: 1919px) {
+            .hero-carousel { height: 45vh; }
+        }
+        
+        /* Medium large desktop (1440px-1599px) */
+        @media (min-width: 1440px) and (max-width: 1599px) {
+            .hero-carousel { height: 42vh; }
+        }
+        
+        /* Standard desktop (1280px-1439px) */
+        @media (min-width: 1280px) and (max-width: 1439px) {
+            .hero-carousel { height: 40vh; }
+        }
+        
+        /* Medium desktop */
+        @media (max-width: 1200px) {
+            .hero-carousel { height: 55vh; }
+        }
+        
+        /* Small desktop */
+        @media (max-width: 1100px) {
+            .hero-carousel { height: 50vh; }
+        }
+        
+        /* Large laptop */
+        @media (max-width: 1000px) {
+            .hero-carousel { height: 45vh; }
+        }
+        
+        /* Medium laptop */
+        @media (max-width: 900px) {
+            .hero-carousel { height: 40vh; }
+        }
+        
+        /* Small laptop */
+        @media (max-width: 850px) {
+            .hero-carousel { height: 35vh; }
+        }
+        
+        /* Tablet */
+        @media (max-width: 800px) {
+            .hero-carousel { height: 30vh; }
+        }
+        
+        /* Mobile */
         @media (max-width: 768px) {
             .hero-carousel {
-                height: 15vh !important;
+                height: 20vh !important;
                 min-height: 120px !important;
                 max-height: 150px !important;
             }
