@@ -433,6 +433,12 @@
                     image: uploadedImage || existingImage || 'assets/mthani1.jpg'
                 };
 
+                // Additional validation for image size in base64
+                if (uploadedImage && uploadedImage.length > 1000000) { // ~750KB base64 limit
+                    this.showErrorMessage('الصورة المرفوعة كبيرة جداً. يرجى اختيار صورة أصغر أو استخدام الصور الموجودة');
+                    return;
+                }
+
                 // Validate required fields
                 if (!newsItem.title || !newsItem.mainText || !newsItem.date) {
                     alert('يرجى ملء جميع الحقول المطلوبة');
@@ -461,7 +467,18 @@
                     this.closeModal();
                 } catch (error) {
                     console.error('Error saving news:', error);
-                    this.showErrorMessage('حدث خطأ أثناء حفظ الخبر');
+                    let errorMessage = 'حدث خطأ أثناء حفظ الخبر';
+                    
+                    // More specific error messages
+                    if (error.message.includes('payload too large') || error.message.includes('row size too large')) {
+                        errorMessage = 'حجم الصورة كبير جداً. يرجى اختيار صورة أصغر أو استخدام الصور الموجودة';
+                    } else if (error.message.includes('network') || error.message.includes('fetch')) {
+                        errorMessage = 'خطأ في الاتصال بقاعدة البيانات. يرجى المحاولة مرة أخرى';
+                    } else if (error.message.includes('duplicate') || error.message.includes('unique')) {
+                        errorMessage = 'يوجد خبر بنفس العنوان أو التاريخ. يرجى تغيير أحدهما';
+                    }
+                    
+                    this.showErrorMessage(errorMessage);
                 } finally {
                     const submitBtn = document.querySelector('#news-form button[type="submit"]');
                     submitBtn.disabled = false;
@@ -624,20 +641,58 @@
                     return;
                 }
 
-                // Validate file size (max 5MB)
-                if (file.size > 5 * 1024 * 1024) {
-                    alert('حجم الصورة كبير جداً. الحد الأقصى 5 ميجابايت');
+                // Validate file size (max 2MB for database compatibility)
+                if (file.size > 2 * 1024 * 1024) {
+                    alert('حجم الصورة كبير جداً. الحد الأقصى 2 ميجابايت');
                     return;
                 }
 
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    this.currentUploadedImage = event.target.result;
-                    this.showImagePreview(event.target.result);
+                // Compress and resize image before upload
+                this.compressImage(file, (compressedDataUrl) => {
+                    this.currentUploadedImage = compressedDataUrl;
+                    this.showImagePreview(compressedDataUrl);
                     // Clear existing image selection
                     document.getElementById('existing-images').value = '';
+                });
+            }
+
+            compressImage(file, callback) {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+
+                img.onload = function() {
+                    // Set maximum dimensions
+                    const maxWidth = 800;
+                    const maxHeight = 600;
+                    
+                    let { width, height } = img;
+                    
+                    // Calculate new dimensions
+                    if (width > height) {
+                        if (width > maxWidth) {
+                            height = (height * maxWidth) / width;
+                            width = maxWidth;
+                        }
+                    } else {
+                        if (height > maxHeight) {
+                            width = (width * maxHeight) / height;
+                            height = maxHeight;
+                        }
+                    }
+                    
+                    canvas.width = width;
+                    canvas.height = height;
+                    
+                    // Draw and compress
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    // Convert to base64 with compression (0.8 quality)
+                    const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                    callback(compressedDataUrl);
                 };
-                reader.readAsDataURL(file);
+
+                img.src = URL.createObjectURL(file);
             }
 
             showImagePreview(imageSrc) {
