@@ -251,7 +251,7 @@
                         <img id="preview-img" src="" alt="معاينة الصورة" class="w-32 h-32 object-cover rounded-lg border">
                         <button type="button" id="remove-image" class="mt-2 text-red-600 text-sm hover:underline">إزالة الصورة</button>
                     </div>
-                    <p class="text-gray-500 text-sm mt-1">أو اختر من الصور الموجودة:</p>
+                    <p class="text-gray-500 text-xs mt-1">حد أقصى: 500 كيلوبايت. للحصول على أفضل النتائج، استخدم الصور الموجودة:</p>
                     <select id="existing-images" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00a17d] mt-2">
                         <option value="">اختر صورة موجودة</option>
                         <option value="assets/mthani1.jpg">mthani1.jpg</option>
@@ -434,8 +434,8 @@
                 };
 
                 // Additional validation for image size in base64
-                if (uploadedImage && uploadedImage.length > 1000000) { // ~750KB base64 limit
-                    this.showErrorMessage('الصورة المرفوعة كبيرة جداً. يرجى اختيار صورة أصغر أو استخدام الصور الموجودة');
+                if (uploadedImage && uploadedImage.length > 200000) { // ~150KB base64 limit
+                    this.showErrorMessage('الصورة المرفوعة كبيرة جداً بعد الضغط. يرجى استخدام الصور الموجودة أو اختيار صورة أصغر');
                     return;
                 }
 
@@ -470,8 +470,11 @@
                     let errorMessage = 'حدث خطأ أثناء حفظ الخبر';
                     
                     // More specific error messages
-                    if (error.message.includes('payload too large') || error.message.includes('row size too large')) {
-                        errorMessage = 'حجم الصورة كبير جداً. يرجى اختيار صورة أصغر أو استخدام الصور الموجودة';
+                    if (error.message.includes('payload too large') || error.message.includes('row size too large') || error.message.includes('value too long')) {
+                        errorMessage = 'حجم البيانات كبير جداً للحفظ. يرجى استخدام الصور الموجودة بدلاً من رفع صورة جديدة';
+                        // Auto-fallback to default image
+                        this.currentUploadedImage = null;
+                        document.getElementById('existing-images').value = 'assets/mthani1.jpg';
                     } else if (error.message.includes('network') || error.message.includes('fetch')) {
                         errorMessage = 'خطأ في الاتصال بقاعدة البيانات. يرجى المحاولة مرة أخرى';
                     } else if (error.message.includes('duplicate') || error.message.includes('unique')) {
@@ -641,9 +644,9 @@
                     return;
                 }
 
-                // Validate file size (max 2MB for database compatibility)
-                if (file.size > 2 * 1024 * 1024) {
-                    alert('حجم الصورة كبير جداً. الحد الأقصى 2 ميجابايت');
+                // Validate file size (max 500KB for database compatibility)
+                if (file.size > 500 * 1024) {
+                    alert('حجم الصورة كبير جداً. الحد الأقصى 500 كيلوبايت');
                     return;
                 }
 
@@ -662,13 +665,13 @@
                 const img = new Image();
 
                 img.onload = function() {
-                    // Set maximum dimensions
-                    const maxWidth = 800;
-                    const maxHeight = 600;
+                    // Set smaller maximum dimensions for database compatibility
+                    const maxWidth = 400;
+                    const maxHeight = 300;
                     
                     let { width, height } = img;
                     
-                    // Calculate new dimensions
+                    // Calculate new dimensions (always resize to smaller size)
                     if (width > height) {
                         if (width > maxWidth) {
                             height = (height * maxWidth) / width;
@@ -684,12 +687,19 @@
                     canvas.width = width;
                     canvas.height = height;
                     
-                    // Draw and compress
+                    // Draw and compress aggressively
                     ctx.drawImage(img, 0, 0, width, height);
                     
-                    // Convert to base64 with compression (0.8 quality)
-                    const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
-                    callback(compressedDataUrl);
+                    // Convert to base64 with high compression (0.5 quality)
+                    const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.5);
+                    
+                    // Check final size and compress more if needed
+                    if (compressedDataUrl.length > 200000) { // ~150KB base64 limit
+                        const ultraCompressed = canvas.toDataURL('image/jpeg', 0.3);
+                        callback(ultraCompressed);
+                    } else {
+                        callback(compressedDataUrl);
+                    }
                 };
 
                 img.src = URL.createObjectURL(file);
