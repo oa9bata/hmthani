@@ -6,6 +6,9 @@
     <title>لوحة التحكم - جمعية مثاني القرآنية</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Database Configuration and Service -->
+    <script src="db-config.js"></script>
+    <script src="database-service.js"></script>
     <style>
         @font-face {
             font-family: 'IBMPlexSansArabic';
@@ -204,15 +207,6 @@
                             </button>
                             <p class="text-sm text-red-600 mt-2">سيتم حذف جميع الأخبار نهائياً ولا يمكن التراجع عن هذا الإجراء</p>
                         </div>
-                        
-                        <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
-                            <h4 class="text-lg font-medium text-orange-800 mb-3">إدارة الموقع</h4>
-                            <button id="close-site-btn" class="bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition-colors w-full">
-                                <i class="fas fa-power-off ml-2"></i>
-                                إغلاق الموقع مؤقتاً
-                            </button>
-                            <p class="text-sm text-orange-600 mt-2">سيتم عرض صفحة "انتظرونا قريباً" للزوار</p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -311,14 +305,24 @@
         // Dashboard functionality
         class NewsDashboard {
             constructor() {
-                this.news = JSON.parse(localStorage.getItem('mthani-news') || '[]');
+                this.news = [];
                 this.currentUploadedImage = null;
                 this.init();
             }
 
-            init() {
+            async init() {
                 this.setupEventListeners();
-                this.loadNews();
+                
+                // Test database connection first
+                try {
+                    await databaseService.testConnection();
+                    console.log('Database connected successfully');
+                } catch (error) {
+                    console.error('Database connection failed:', error);
+                    this.showErrorMessage('فشل الاتصال بقاعدة البيانات');
+                }
+                
+                await this.loadNews();
                 this.setDefaultDate();
             }
 
@@ -341,7 +345,6 @@
                 
                 // Settings
                 document.getElementById('clear-all-news').addEventListener('click', () => this.clearAllNews());
-                document.getElementById('close-site-btn').addEventListener('click', () => this.toggleSiteClosure());
                 
                 // Mobile menu functionality
                 this.setupMobileMenu();
@@ -417,19 +420,17 @@
                 document.getElementById('news-date').value = today;
             }
 
-            handleSubmit(e) {
+            async handleSubmit(e) {
                 e.preventDefault();
                 
                 const existingImage = document.getElementById('existing-images').value;
                 const uploadedImage = this.currentUploadedImage;
                 
                 const newsItem = {
-                    id: document.getElementById('news-id').value || Date.now().toString(),
                     title: document.getElementById('news-title').value.trim(),
                     mainText: document.getElementById('news-main-text').value.trim(),
                     date: document.getElementById('news-date').value,
-                    image: uploadedImage || existingImage || 'assets/mthani1.jpg',
-                    category: 'latest'
+                    image: uploadedImage || existingImage || 'assets/mthani1.jpg'
                 };
 
                 // Validate required fields
@@ -438,87 +439,114 @@
                     return;
                 }
 
-                if (document.getElementById('news-id').value) {
-                    // Edit existing
-                    const index = this.news.findIndex(item => item.id === newsItem.id);
-                    if (index !== -1) {
-                        this.news[index] = newsItem;
-                    }
-                } else {
-                    // Add new - check if it doesn't already exist
-                    const existsAlready = this.news.find(item => 
-                        item.title === newsItem.title && 
-                        item.date === newsItem.date
-                    );
-                    
-                    if (!existsAlready) {
-                        this.news.unshift(newsItem);
-                    }
-                }
+                try {
+                    const submitBtn = document.querySelector('#news-form button[type="submit"]');
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin ml-2"></i>جاري الحفظ...';
 
-                this.saveNews();
-                this.loadNews();
-                this.closeModal();
-                
-                // Show success message
-                const isEdit = document.getElementById('news-id').value;
-                const message = isEdit ? 'تم تحديث الخبر بنجاح' : 'تم إضافة الخبر بنجاح';
-                this.showSuccessMessage(message);
+                    const id = document.getElementById('news-id').value;
+                    let result;
+
+                    if (id) {
+                        // Edit existing
+                        result = await databaseService.updateNews(id, newsItem);
+                        this.showSuccessMessage('تم تحديث الخبر بنجاح');
+                    } else {
+                        // Add new
+                        result = await databaseService.addNews(newsItem);
+                        this.showSuccessMessage('تم إضافة الخبر بنجاح');
+                    }
+
+                    await this.loadNews();
+                    this.closeModal();
+                } catch (error) {
+                    console.error('Error saving news:', error);
+                    this.showErrorMessage('حدث خطأ أثناء حفظ الخبر');
+                } finally {
+                    const submitBtn = document.querySelector('#news-form button[type="submit"]');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-save ml-2"></i>حفظ';
+                }
             }
 
-            deleteNews(id) {
+            async deleteNews(id) {
                 if (confirm('هل أنت متأكد من حذف هذا الخبر؟')) {
-                    this.news = this.news.filter(item => item.id !== id);
-                    this.saveNews();
-                    this.loadNews();
-                    this.showSuccessMessage('تم حذف الخبر بنجاح');
+                    try {
+                        await databaseService.deleteNews(id);
+                        await this.loadNews();
+                        this.showSuccessMessage('تم حذف الخبر بنجاح');
+                    } catch (error) {
+                        console.error('Error deleting news:', error);
+                        this.showErrorMessage('حدث خطأ أثناء حذف الخبر');
+                    }
                 }
             }
 
-            saveNews() {
-                localStorage.setItem('mthani-news', JSON.stringify(this.news));
-            }
-
-            loadNews() {
+            async loadNews() {
                 const container = document.getElementById('news-list');
-                container.innerHTML = '';
-
-                if (this.news.length === 0) {
+                
+                try {
+                    // Show loading state
                     container.innerHTML = `
                         <div class="col-span-full text-center py-12">
-                            <i class="fas fa-newspaper text-gray-400 text-6xl mb-4"></i>
-                            <h3 class="text-xl text-gray-600">لا توجد أخبار بعد</h3>
-                            <p class="text-gray-500">ابدأ بإضافة أول خبر</p>
+                            <i class="fas fa-spinner fa-spin text-gray-400 text-6xl mb-4"></i>
+                            <h3 class="text-xl text-gray-600">جاري تحميل الأخبار...</h3>
                         </div>
                     `;
-                    return;
-                }
 
-                this.news.forEach(newsItem => {
-                    const card = document.createElement('div');
-                    card.className = 'news-item bg-white rounded-lg shadow-lg overflow-hidden';
-                    card.innerHTML = `
-                        <img src="${newsItem.image}" alt="${newsItem.title}" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="text-lg font-bold text-gray-800 mb-2 line-clamp-2">${newsItem.title}</h3>
-                            <p class="text-gray-600 text-sm mb-3 line-clamp-3">${newsItem.mainText.length > 100 ? newsItem.mainText.substring(0, 100) + '...' : newsItem.mainText}</p>
-                            <div class="text-xs text-gray-500 mb-4">${this.formatDate(newsItem.date)}</div>
-                            <div class="flex justify-between">
-                                <button onclick="dashboard.openModal(${JSON.stringify(newsItem).replace(/"/g, '&quot;')})" 
-                                        class="text-[#00a17d] hover:text-[#00c59e] transition-colors">
-                                    <i class="fas fa-edit ml-1"></i>
-                                    تعديل
-                                </button>
-                                <button onclick="dashboard.deleteNews('${newsItem.id}')" 
-                                        class="text-red-600 hover:text-red-700 transition-colors">
-                                    <i class="fas fa-trash ml-1"></i>
-                                    حذف
-                                </button>
+                    this.news = await databaseService.getAllNews();
+                    container.innerHTML = '';
+
+                    if (this.news.length === 0) {
+                        container.innerHTML = `
+                            <div class="col-span-full text-center py-12">
+                                <i class="fas fa-newspaper text-gray-400 text-6xl mb-4"></i>
+                                <h3 class="text-xl text-gray-600">لا توجد أخبار بعد</h3>
+                                <p class="text-gray-500">ابدأ بإضافة أول خبر</p>
                             </div>
+                        `;
+                        return;
+                    }
+
+                    this.news.forEach(newsItem => {
+                        const card = document.createElement('div');
+                        card.className = 'news-item bg-white rounded-lg shadow-lg overflow-hidden';
+                        card.innerHTML = `
+                            <img src="${newsItem.image}" alt="${newsItem.title}" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h3 class="text-lg font-bold text-gray-800 mb-2 line-clamp-2">${newsItem.title}</h3>
+                                <p class="text-gray-600 text-sm mb-3 line-clamp-3">${newsItem.mainText.length > 100 ? newsItem.mainText.substring(0, 100) + '...' : newsItem.mainText}</p>
+                                <div class="text-xs text-gray-500 mb-4">${this.formatDate(newsItem.date)}</div>
+                                <div class="flex justify-between">
+                                    <button onclick="dashboard.openModal(${JSON.stringify(newsItem).replace(/"/g, '&quot;')})" 
+                                            class="text-[#00a17d] hover:text-[#00c59e] transition-colors">
+                                        <i class="fas fa-edit ml-1"></i>
+                                        تعديل
+                                    </button>
+                                    <button onclick="dashboard.deleteNews('${newsItem.id}')" 
+                                            class="text-red-600 hover:text-red-700 transition-colors">
+                                        <i class="fas fa-trash ml-1"></i>
+                                        حذف
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    });
+                } catch (error) {
+                    console.error('Error loading news:', error);
+                    container.innerHTML = `
+                        <div class="col-span-full text-center py-12">
+                            <i class="fas fa-exclamation-triangle text-red-400 text-6xl mb-4"></i>
+                            <h3 class="text-xl text-red-600">خطأ في تحميل الأخبار</h3>
+                            <p class="text-gray-500 mb-4">تعذر الاتصال بقاعدة البيانات</p>
+                            <button onclick="dashboard.loadNews()" class="bg-[#00a17d] text-white px-6 py-3 rounded-lg hover:bg-[#00c59e] transition-colors">
+                                <i class="fas fa-refresh ml-2"></i>
+                                إعادة المحاولة
+                            </button>
                         </div>
                     `;
-                    container.appendChild(card);
-                });
+                }
             }
 
             formatDate(dateString) {
@@ -527,36 +555,7 @@
                 return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
             }
 
-            toggleSiteClosure() {
-                const currentStatus = localStorage.getItem('mthani-site-closed') === 'true';
-                
-                if (currentStatus) {
-                    // Site is closed, reopen it
-                    if (confirm('هل تريد إعادة فتح الموقع للزوار؟')) {
-                        localStorage.setItem('mthani-site-closed', 'false');
-                        this.updateCloseSiteButton(false);
-                        this.showSuccessMessage('تم فتح الموقع بنجاح');
-                    }
-                } else {
-                    // Site is open, close it
-                    if (confirm('هل تريد إغلاق الموقع مؤقتاً؟ سيتم عرض صفحة انتظار للزوار.')) {
-                        localStorage.setItem('mthani-site-closed', 'true');
-                        this.updateCloseSiteButton(true);
-                        this.showSuccessMessage('تم إغلاق الموقع مؤقتاً');
-                    }
-                }
-            }
 
-            updateCloseSiteButton(isClosed) {
-                const button = document.getElementById('close-site-btn');
-                if (isClosed) {
-                    button.innerHTML = '<i class="fas fa-power-off ml-2"></i>فتح الموقع';
-                    button.className = 'bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors w-full';
-                } else {
-                    button.innerHTML = '<i class="fas fa-power-off ml-2"></i>إغلاق الموقع مؤقتاً';
-                    button.className = 'bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition-colors w-full';
-                }
-            }
             
             setupMobileMenu() {
                 const mobileMenuBtn = document.getElementById('mobile-menu-btn');
@@ -594,12 +593,16 @@
                 });
             }
 
-            clearAllNews() {
+            async clearAllNews() {
                 if (confirm('هل أنت متأكد من حذف جميع الأخبار؟ هذا الإجراء لا يمكن التراجع عنه.')) {
-                    this.news = [];
-                    this.saveNews();
-                    this.loadNews();
-                    this.showSuccessMessage('تم حذف جميع الأخبار');
+                    try {
+                        await databaseService.deleteAllNews();
+                        await this.loadNews();
+                        this.showSuccessMessage('تم حذف جميع الأخبار');
+                    } catch (error) {
+                        console.error('Error deleting all news:', error);
+                        this.showErrorMessage('حدث خطأ أثناء حذف الأخبار');
+                    }
                 }
             }
 
@@ -681,14 +684,31 @@
                     }
                 }, 3000);
             }
+
+            showErrorMessage(message) {
+                // Create temporary error message
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                errorDiv.innerHTML = `
+                    <div class="flex items-center">
+                        <i class="fas fa-exclamation-circle ml-2"></i>
+                        ${message}
+                    </div>
+                `;
+                
+                document.body.appendChild(errorDiv);
+                
+                // Remove after 5 seconds
+                setTimeout(() => {
+                    if (errorDiv.parentNode) {
+                        errorDiv.parentNode.removeChild(errorDiv);
+                    }
+                }, 5000);
+            }
         }
 
         // Initialize dashboard
         const dashboard = new NewsDashboard();
-
-        // Initialize site closure status
-        const isSiteClosed = localStorage.getItem('mthani-site-closed') === 'true';
-        dashboard.updateCloseSiteButton(isSiteClosed);
     </script>
 </body>
 </html> 

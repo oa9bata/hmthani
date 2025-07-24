@@ -6,6 +6,9 @@
     <title>جمعية مثاني القرآنية - الأخبار</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Database Configuration and Service -->
+    <script src="db-config.js"></script>
+    <script src="database-service.js"></script>
     <style>
         @font-face {
             font-family: 'IBMPlexSansArabic';
@@ -1465,13 +1468,18 @@ if (respectsReducedMotion()) {
 
 // ========== NEWS PAGE FUNCTIONALITY ==========
 
-// Load news from localStorage and return them (don't display here)
-function loadNewsFromStorage() {
-    const savedNews = JSON.parse(localStorage.getItem('mthani-news') || '[]');
-    console.log('Raw localStorage data:', localStorage.getItem('mthani-news'));
-    console.log('Parsed news data:', savedNews);
-    
-    return savedNews;
+// Load news from database and return them (don't display here)
+async function loadNewsFromDatabase() {
+    try {
+        const savedNews = await databaseService.getAllNews();
+        console.log('News fetched from database:', savedNews);
+        console.log('News count:', savedNews?.length || 0);
+        
+        return savedNews || [];
+    } catch (error) {
+        console.error('Error loading news from database:', error);
+        return [];
+    }
 }
 
 // Function to display news
@@ -1484,10 +1492,6 @@ function displayNews(news) {
                 <i class="fas fa-newspaper text-gray-400 text-6xl mb-4"></i>
                 <h3 class="text-2xl text-gray-600 mb-2">لا توجد أخبار متاحة</h3>
                 <p class="text-gray-500">سيتم عرض الأخبار هنا عند إضافتها من لوحة التحكم</p>
-                <a href="dashboard.html" class="inline-block mt-4 bg-[#00a17d] text-white px-6 py-3 rounded-lg hover:bg-[#00c59e] transition-colors">
-                    <i class="fas fa-plus ml-2"></i>
-                    إضافة أول خبر
-                </a>
             </div>
         `;
         return;
@@ -1556,26 +1560,37 @@ function shuffleArray(array) {
 // Initialize news and set up filters
 let newsData = [];
 
-function initNewsPage() {
-    newsData = loadNewsFromStorage();
-    console.log('Loaded news data:', newsData, 'Count:', newsData.length);
-    
-    // Show filter buttons
-    const filterButtons = document.querySelectorAll('.news-filter-btn');
-    filterButtons.forEach(button => {
-        button.style.display = 'inline-flex';
-    });
-    
-    // Show the filter container
-    const filterContainer = document.querySelector('.flex.justify-center.mb-8');
-    if (filterContainer) {
-        filterContainer.style.display = 'flex';
-    }
-    
-    // Set up filter button functionality
-    setupFilterButtons();
-    
-            // Set "Latest" as default and display news
+async function initNewsPage() {
+    try {
+        // Show loading state
+        const newsGrid = document.getElementById('news-grid');
+        newsGrid.innerHTML = `
+            <div class="col-span-full text-center py-16">
+                <i class="fas fa-spinner fa-spin text-gray-400 text-6xl mb-4"></i>
+                <h3 class="text-2xl text-gray-600 mb-2">جاري تحميل الأخبار...</h3>
+                <p class="text-gray-500">يرجى الانتظار</p>
+            </div>
+        `;
+
+        newsData = await loadNewsFromDatabase();
+        console.log('Loaded news data:', newsData, 'Count:', newsData.length);
+        
+        // Show filter buttons
+        const filterButtons = document.querySelectorAll('.news-filter-btn');
+        filterButtons.forEach(button => {
+            button.style.display = 'inline-flex';
+        });
+        
+        // Show the filter container
+        const filterContainer = document.querySelector('.flex.justify-center.mb-8');
+        if (filterContainer) {
+            filterContainer.style.display = 'flex';
+        }
+        
+        // Set up filter button functionality
+        setupFilterButtons();
+        
+        // Set "Latest" as default and display news
         const latestButton = document.getElementById('filter-latest');
         if (latestButton) {
             // Activate latest button by default
@@ -1595,6 +1610,21 @@ function initNewsPage() {
             // Fallback: just display all news if no button found
             displayNews(newsData);
         }
+    } catch (error) {
+        console.error('Error initializing news page:', error);
+        const newsGrid = document.getElementById('news-grid');
+        newsGrid.innerHTML = `
+            <div class="col-span-full text-center py-16">
+                <i class="fas fa-exclamation-triangle text-red-400 text-6xl mb-4"></i>
+                <h3 class="text-2xl text-red-600 mb-2">خطأ في تحميل الأخبار</h3>
+                <p class="text-gray-500 mb-4">تعذر الاتصال بقاعدة البيانات</p>
+                <button onclick="initNewsPage()" class="bg-[#00a17d] text-white px-6 py-3 rounded-lg hover:bg-[#00c59e] transition-colors">
+                    <i class="fas fa-refresh ml-2"></i>
+                    إعادة المحاولة
+                </button>
+            </div>
+        `;
+    }
 }
 
 function setupFilterButtons() {

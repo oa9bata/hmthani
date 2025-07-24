@@ -6,6 +6,9 @@
     <title>جمعية مثاني القرآنية - الرئيسية</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Database Configuration and Service -->
+    <script src="db-config.js"></script>
+    <script src="database-service.js"></script>
     <style>
         @font-face {
             font-family: 'IBMPlexSansArabic';
@@ -1564,12 +1567,21 @@ if (respectsReducedMotion()) {
     document.head.appendChild(style);
 }; 
 
-// Load 6 random news cards from localStorage for homepage ticker
-(function() {
+// Load 6 random news cards from database for homepage ticker
+(async function() {
     const ticker = document.getElementById('homepage-news-ticker');
     if (!ticker) return;
     
-    const savedNews = JSON.parse(localStorage.getItem('mthani-news') || '[]');
+    try {
+        // Show loading state
+        ticker.innerHTML = `
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center flex-shrink-0" style="min-width: 320px;">
+                <i class="fas fa-spinner fa-spin text-gray-400 text-4xl mb-2"></i>
+                <h3 class="text-lg font-bold text-gray-800 mb-2">جاري تحميل الأخبار...</h3>
+            </div>
+        `;
+        
+        const savedNews = await databaseService.getAllNews();
     
     if (savedNews.length === 0) {
         ticker.innerHTML = `
@@ -1646,6 +1658,16 @@ if (respectsReducedMotion()) {
                 </article>
             `;
         }).join('');
+    }
+    } catch (error) {
+        console.error('Error loading news for homepage:', error);
+        ticker.innerHTML = `
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center flex-shrink-0" style="min-width: 320px;">
+                <i class="fas fa-exclamation-triangle text-red-400 text-4xl mb-2"></i>
+                <h3 class="text-lg font-bold text-red-800 mb-2">خطأ في تحميل الأخبار</h3>
+                <p class="text-gray-600 text-sm">تعذر الاتصال بقاعدة البيانات</p>
+            </div>
+        `;
     }
 })();
     </script>
