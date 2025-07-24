@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - جمعية مثاني القرآنية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'IBMPlexSansArabic';
+            src: url('font/IBMPlexSansArabic-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'IBMPlexSansArabic';
+            src: url('font/IBMPlexSansArabic-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        body {
+            font-family: 'IBMPlexSansArabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+        }
+        
+        /* Use medium weight for most UI elements */
+        .font-medium, h1, h2, h3, h4, h5, h6, button {
+            font-weight: 500;
+        }
+        
+        .sidebar-active {
+            background-color: #00a17d !important;
+            color: white !important;
+        }
+        
+        .news-item {
+            transition: all 0.3s ease;
+        }
+        
+        .news-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        /* Mobile Responsive Styles */
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                z-index: 50;
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .sidebar-overlay.active {
+                display: block;
+            }
+            
+            .main-content {
+                margin-left: 0 !important;
+                width: 100% !important;
+            }
+            
+            .mobile-header {
+                display: flex !important;
+            }
+            
+            .dashboard-form {
+                padding: 1rem !important;
+            }
+            
+            .dashboard-form .grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+            
+            .dashboard-form input,
+            .dashboard-form textarea,
+            .dashboard-form select {
+                font-size: 16px; /* Prevent zoom on iOS */
+            }
+            
+            .news-item {
+                margin-bottom: 1rem;
+            }
+            
+            .news-item .flex {
+                flex-direction: column !important;
+                gap: 1rem;
+            }
+            
+            .news-item .flex > div:last-child {
+                flex-direction: row !important;
+                justify-content: space-between;
+            }
+        }
+        
+        .mobile-header {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Mobile Header -->
+    <div class="mobile-header bg-white shadow-md p-4 justify-between items-center md:hidden">
+        <div class="flex items-center">
+            <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-800 focus:outline-none mr-4">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+            <h1 class="text-lg font-bold text-gray-800">لوحة التحكم</h1>
+        </div>
+        <a href="index.html" class="text-gray-600 hover:text-gray-800">
+            <i class="fas fa-home text-xl"></i>
+        </a>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <!-- Dashboard Container -->
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar w-64 bg-white shadow-lg">
+            <div class="p-6 border-b">
+                <h2 class="text-xl font-bold text-gray-800">لوحة التحكم</h2>
+                <p class="text-gray-600 text-sm">جمعية مثاني القرآنية</p>
+            </div>
+            
+            <nav class="mt-6">
+                <a href="#" class="sidebar-link sidebar-active flex items-center px-6 py-3 text-gray-700 hover:bg-[#00a17d] hover:text-white transition-colors" data-section="news">
+                    <i class="fas fa-newspaper ml-3"></i>
+                    إدارة الأخبار
+                </a>
+                <a href="#" class="sidebar-link flex items-center px-6 py-3 text-gray-700 hover:bg-[#00a17d] hover:text-white transition-colors" data-section="settings">
+                    <i class="fas fa-cog ml-3"></i>
+                    الإعدادات
+                </a>
+            </nav>
+            
+            <div class="absolute bottom-6 left-6 right-6">
+                <a href="index.html" class="flex items-center justify-center px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors">
+                    <i class="fas fa-home ml-2"></i>
+                    العودة للموقع
+                </a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content flex-1 overflow-y-auto pt-0 md:pt-0">
+            <!-- News Management Section -->
+            <div id="news-section" class="section p-4 md:p-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-4">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800">إدارة الأخبار</h1>
+                    <button id="add-news-btn" class="bg-[#00a17d] text-white px-4 md:px-6 py-2 md:py-3 rounded-lg hover:bg-[#00c59e] transition-colors flex items-center text-sm md:text-base w-full md:w-auto justify-center">
+                        <i class="fas fa-plus ml-2"></i>
+                        إضافة خبر جديد
+                    </button>
+                </div>
+
+                <!-- News List -->
+                <div id="news-list" class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
+                    <!-- News items will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div id="settings-section" class="section hidden p-4 md:p-8">
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 md:mb-8">الإعدادات</h1>
+                
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">إعدادات النظام</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                            <h4 class="text-lg font-medium text-red-800 mb-3">إدارة البيانات</h4>
+                            <button id="clear-all-news" class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors w-full">
+                                <i class="fas fa-trash ml-2"></i>
+                                حذف جميع الأخبار
+                            </button>
+                            <p class="text-sm text-red-600 mt-2">سيتم حذف جميع الأخبار نهائياً ولا يمكن التراجع عن هذا الإجراء</p>
+                        </div>
+                        
+                        <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                            <h4 class="text-lg font-medium text-orange-800 mb-3">إدارة الموقع</h4>
+                            <button id="close-site-btn" class="bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition-colors w-full">
+                                <i class="fas fa-power-off ml-2"></i>
+                                إغلاق الموقع مؤقتاً
+                            </button>
+                            <p class="text-sm text-orange-600 mt-2">سيتم عرض صفحة "انتظرونا قريباً" للزوار</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit News Modal -->
+    <div id="news-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h2 id="modal-title" class="text-2xl font-bold text-gray-800">إضافة خبر جديد</h2>
+                <button id="close-modal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            
+            <form id="news-form" class="space-y-6">
+                <input type="hidden" id="news-id" value="">
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">عنوان الخبر *</label>
+                    <input type="text" id="news-title" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00a17d]">
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">النص الرئيسي *</label>
+                    <textarea id="news-main-text" required rows="5" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00a17d]" placeholder="اكتب النص الكامل للخبر. سيتم عرض أول 150 حرف مع زر 'اقرأ المزيد' إذا كان النص أطول."></textarea>
+                    <div class="text-sm text-gray-500 mt-1">
+                        <span id="char-count">0</span> حرف
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">تاريخ النشر *</label>
+                    <input type="date" id="news-date" required class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00a17d]">
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 font-medium mb-2">صورة الخبر</label>
+                    <input type="file" id="news-image" accept="image/*" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00a17d]">
+                    <div id="image-preview" class="mt-3 hidden">
+                        <img id="preview-img" src="" alt="معاينة الصورة" class="w-32 h-32 object-cover rounded-lg border">
+                        <button type="button" id="remove-image" class="mt-2 text-red-600 text-sm hover:underline">إزالة الصورة</button>
+                    </div>
+                    <p class="text-gray-500 text-sm mt-1">أو اختر من الصور الموجودة:</p>
+                    <select id="existing-images" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00a17d] mt-2">
+                        <option value="">اختر صورة موجودة</option>
+                        <option value="assets/mthani1.jpg">mthani1.jpg</option>
+                        <option value="assets/mthani2.jpg">mthani2.jpg</option>
+                        <option value="assets/mthani3.jpg">mthani3.jpg</option>
+                        <option value="assets/mthani4.jpg">mthani4.jpg</option>
+                        <option value="assets/mthaniLogo.jpg">mthaniLogo.jpg</option>
+                        <option value="assets/mthaniLogo2.jpg">mthaniLogo2.jpg</option>
+                        <option value="assets/mthaniLogo3.jpg">mthaniLogo3.jpg</option>
+                    </select>
+                </div>
+                
+                <div class="flex justify-end space-x-4 space-x-reverse">
+                    <button type="button" id="cancel-btn" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                        إلغاء
+                    </button>
+                    <button type="submit" class="px-6 py-3 bg-[#00a17d] text-white rounded-lg hover:bg-[#00c59e] transition-colors">
+                        <i class="fas fa-save ml-2"></i>
+                        حفظ
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ========== SITE MANAGEMENT & ERROR HANDLING ==========
+        // Global error handler (only for critical errors)
+        window.onerror = function(message, source, lineno, colno, error) {
+            console.error('Dashboard JavaScript Error:', { message, source, lineno, colno, error });
+            // Only redirect on critical errors
+            if (message.includes('Script error') || message.includes('Network Error') || message.includes('Cannot read property')) {
+                setTimeout(() => {
+                    window.location.href = 'error.html?code=dashboard&msg=' + encodeURIComponent(message);
+                }, 3000);
+            }
+            return false;
+        };
+
+        // Unhandled promise rejection handler (only for critical rejections)
+        window.addEventListener('unhandledrejection', function(event) {
+            console.error('Dashboard Promise Rejection:', event.reason);
+            // Only redirect on critical promise rejections
+            if (event.reason && (event.reason.toString().includes('Network') || event.reason.toString().includes('Failed to fetch'))) {
+                setTimeout(() => {
+                    window.location.href = 'error.html?code=dashboard-promise&msg=' + encodeURIComponent(event.reason);
+                }, 3000);
+            }
+        });
+
+        // Dashboard functionality
+        class NewsDashboard {
+            constructor() {
+                this.news = JSON.parse(localStorage.getItem('mthani-news') || '[]');
+                this.currentUploadedImage = null;
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.loadNews();
+                this.setDefaultDate();
+            }
+
+            setupEventListeners() {
+                // Sidebar navigation
+                document.querySelectorAll('.sidebar-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.switchSection(link.dataset.section);
+                    });
+                });
+
+                // Modal controls
+                document.getElementById('add-news-btn').addEventListener('click', () => this.openModal());
+                document.getElementById('close-modal').addEventListener('click', () => this.closeModal());
+                document.getElementById('cancel-btn').addEventListener('click', () => this.closeModal());
+                
+                // Form submission
+                document.getElementById('news-form').addEventListener('submit', (e) => this.handleSubmit(e));
+                
+                // Settings
+                document.getElementById('clear-all-news').addEventListener('click', () => this.clearAllNews());
+                document.getElementById('close-site-btn').addEventListener('click', () => this.toggleSiteClosure());
+                
+                // Mobile menu functionality
+                this.setupMobileMenu();
+                
+                // Character counter
+                document.getElementById('news-main-text').addEventListener('input', this.updateCharCount);
+                
+                // Image upload handling
+                document.getElementById('news-image').addEventListener('change', (e) => this.handleImageUpload(e));
+                document.getElementById('remove-image').addEventListener('click', () => this.removeImage());
+                document.getElementById('existing-images').addEventListener('change', (e) => this.handleExistingImageSelect(e));
+            }
+
+            switchSection(section) {
+                // Update sidebar
+                document.querySelectorAll('.sidebar-link').forEach(link => {
+                    link.classList.remove('sidebar-active');
+                });
+                document.querySelector(`[data-section="${section}"]`).classList.add('sidebar-active');
+
+                // Update content
+                document.querySelectorAll('.section').forEach(sec => {
+                    sec.classList.add('hidden');
+                });
+                document.getElementById(`${section}-section`).classList.remove('hidden');
+            }
+
+            openModal(newsItem = null) {
+                const modal = document.getElementById('news-modal');
+                const title = document.getElementById('modal-title');
+                
+                if (newsItem) {
+                    title.textContent = 'تعديل الخبر';
+                    this.fillForm(newsItem);
+                } else {
+                    title.textContent = 'إضافة خبر جديد';
+                    document.getElementById('news-form').reset();
+                    document.getElementById('news-id').value = '';
+                    this.setDefaultDate();
+                    this.removeImage();
+                    this.updateCharCount();
+                }
+                
+                modal.classList.remove('hidden');
+            }
+
+            closeModal() {
+                document.getElementById('news-modal').classList.add('hidden');
+                document.getElementById('news-form').reset();
+                this.removeImage();
+            }
+
+            fillForm(newsItem) {
+                document.getElementById('news-id').value = newsItem.id;
+                document.getElementById('news-title').value = newsItem.title;
+                document.getElementById('news-main-text').value = newsItem.mainText;
+                document.getElementById('news-date').value = newsItem.date;
+                
+                this.updateCharCount();
+                
+                if (newsItem.image) {
+                    if (newsItem.image.startsWith('assets/')) {
+                        document.getElementById('existing-images').value = newsItem.image;
+                    } else if (newsItem.image.startsWith('data:')) {
+                        // Show preview for uploaded image
+                        this.showImagePreview(newsItem.image);
+                    }
+                }
+            }
+
+            setDefaultDate() {
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('news-date').value = today;
+            }
+
+            handleSubmit(e) {
+                e.preventDefault();
+                
+                const existingImage = document.getElementById('existing-images').value;
+                const uploadedImage = this.currentUploadedImage;
+                
+                const newsItem = {
+                    id: document.getElementById('news-id').value || Date.now().toString(),
+                    title: document.getElementById('news-title').value.trim(),
+                    mainText: document.getElementById('news-main-text').value.trim(),
+                    date: document.getElementById('news-date').value,
+                    image: uploadedImage || existingImage || 'assets/mthani1.jpg',
+                    category: 'latest'
+                };
+
+                // Validate required fields
+                if (!newsItem.title || !newsItem.mainText || !newsItem.date) {
+                    alert('يرجى ملء جميع الحقول المطلوبة');
+                    return;
+                }
+
+                if (document.getElementById('news-id').value) {
+                    // Edit existing
+                    const index = this.news.findIndex(item => item.id === newsItem.id);
+                    if (index !== -1) {
+                        this.news[index] = newsItem;
+                    }
+                } else {
+                    // Add new - check if it doesn't already exist
+                    const existsAlready = this.news.find(item => 
+                        item.title === newsItem.title && 
+                        item.date === newsItem.date
+                    );
+                    
+                    if (!existsAlready) {
+                        this.news.unshift(newsItem);
+                    }
+                }
+
+                this.saveNews();
+                this.loadNews();
+                this.closeModal();
+                
+                // Show success message
+                const isEdit = document.getElementById('news-id').value;
+                const message = isEdit ? 'تم تحديث الخبر بنجاح' : 'تم إضافة الخبر بنجاح';
+                this.showSuccessMessage(message);
+            }
+
+            deleteNews(id) {
+                if (confirm('هل أنت متأكد من حذف هذا الخبر؟')) {
+                    this.news = this.news.filter(item => item.id !== id);
+                    this.saveNews();
+                    this.loadNews();
+                    this.showSuccessMessage('تم حذف الخبر بنجاح');
+                }
+            }
+
+            saveNews() {
+                localStorage.setItem('mthani-news', JSON.stringify(this.news));
+            }
+
+            loadNews() {
+                const container = document.getElementById('news-list');
+                container.innerHTML = '';
+
+                if (this.news.length === 0) {
+                    container.innerHTML = `
+                        <div class="col-span-full text-center py-12">
+                            <i class="fas fa-newspaper text-gray-400 text-6xl mb-4"></i>
+                            <h3 class="text-xl text-gray-600">لا توجد أخبار بعد</h3>
+                            <p class="text-gray-500">ابدأ بإضافة أول خبر</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                this.news.forEach(newsItem => {
+                    const card = document.createElement('div');
+                    card.className = 'news-item bg-white rounded-lg shadow-lg overflow-hidden';
+                    card.innerHTML = `
+                        <img src="${newsItem.image}" alt="${newsItem.title}" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="text-lg font-bold text-gray-800 mb-2 line-clamp-2">${newsItem.title}</h3>
+                            <p class="text-gray-600 text-sm mb-3 line-clamp-3">${newsItem.mainText.length > 100 ? newsItem.mainText.substring(0, 100) + '...' : newsItem.mainText}</p>
+                            <div class="text-xs text-gray-500 mb-4">${this.formatDate(newsItem.date)}</div>
+                            <div class="flex justify-between">
+                                <button onclick="dashboard.openModal(${JSON.stringify(newsItem).replace(/"/g, '&quot;')})" 
+                                        class="text-[#00a17d] hover:text-[#00c59e] transition-colors">
+                                    <i class="fas fa-edit ml-1"></i>
+                                    تعديل
+                                </button>
+                                <button onclick="dashboard.deleteNews('${newsItem.id}')" 
+                                        class="text-red-600 hover:text-red-700 transition-colors">
+                                    <i class="fas fa-trash ml-1"></i>
+                                    حذف
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+
+            formatDate(dateString) {
+                const date = new Date(dateString);
+                const months = ['يناير','فبراير','مارس','ابريل','مايو','يونيو','يوليو','اغسطس','سبتمبر','اكتوبر','نوفمبر','ديسمبر'];
+                return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+            }
+
+            toggleSiteClosure() {
+                const currentStatus = localStorage.getItem('mthani-site-closed') === 'true';
+                
+                if (currentStatus) {
+                    // Site is closed, reopen it
+                    if (confirm('هل تريد إعادة فتح الموقع للزوار؟')) {
+                        localStorage.setItem('mthani-site-closed', 'false');
+                        this.updateCloseSiteButton(false);
+                        this.showSuccessMessage('تم فتح الموقع بنجاح');
+                    }
+                } else {
+                    // Site is open, close it
+                    if (confirm('هل تريد إغلاق الموقع مؤقتاً؟ سيتم عرض صفحة انتظار للزوار.')) {
+                        localStorage.setItem('mthani-site-closed', 'true');
+                        this.updateCloseSiteButton(true);
+                        this.showSuccessMessage('تم إغلاق الموقع مؤقتاً');
+                    }
+                }
+            }
+
+            updateCloseSiteButton(isClosed) {
+                const button = document.getElementById('close-site-btn');
+                if (isClosed) {
+                    button.innerHTML = '<i class="fas fa-power-off ml-2"></i>فتح الموقع';
+                    button.className = 'bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors w-full';
+                } else {
+                    button.innerHTML = '<i class="fas fa-power-off ml-2"></i>إغلاق الموقع مؤقتاً';
+                    button.className = 'bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition-colors w-full';
+                }
+            }
+            
+            setupMobileMenu() {
+                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebar-overlay');
+                
+                // Toggle sidebar
+                mobileMenuBtn?.addEventListener('click', () => {
+                    sidebar.classList.toggle('open');
+                    overlay.classList.toggle('active');
+                });
+                
+                // Close sidebar when clicking overlay
+                overlay?.addEventListener('click', () => {
+                    sidebar.classList.remove('open');
+                    overlay.classList.remove('active');
+                });
+                
+                // Close sidebar when clicking sidebar links on mobile
+                document.querySelectorAll('.sidebar-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (window.innerWidth <= 768) {
+                            sidebar.classList.remove('open');
+                            overlay.classList.remove('active');
+                        }
+                    });
+                });
+                
+                // Close sidebar on window resize if larger than mobile
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth > 768) {
+                        sidebar.classList.remove('open');
+                        overlay.classList.remove('active');
+                    }
+                });
+            }
+
+            clearAllNews() {
+                if (confirm('هل أنت متأكد من حذف جميع الأخبار؟ هذا الإجراء لا يمكن التراجع عنه.')) {
+                    this.news = [];
+                    this.saveNews();
+                    this.loadNews();
+                    this.showSuccessMessage('تم حذف جميع الأخبار');
+                }
+            }
+
+            updateCharCount() {
+                const textarea = document.getElementById('news-main-text');
+                const charCount = document.getElementById('char-count');
+                if (textarea && charCount) {
+                    charCount.textContent = textarea.value.length;
+                }
+            }
+
+            handleImageUpload(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                // Validate file type
+                if (!file.type.startsWith('image/')) {
+                    alert('يرجى اختيار ملف صورة صحيح');
+                    return;
+                }
+
+                // Validate file size (max 5MB)
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('حجم الصورة كبير جداً. الحد الأقصى 5 ميجابايت');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    this.currentUploadedImage = event.target.result;
+                    this.showImagePreview(event.target.result);
+                    // Clear existing image selection
+                    document.getElementById('existing-images').value = '';
+                };
+                reader.readAsDataURL(file);
+            }
+
+            showImagePreview(imageSrc) {
+                const preview = document.getElementById('image-preview');
+                const previewImg = document.getElementById('preview-img');
+                
+                previewImg.src = imageSrc;
+                preview.classList.remove('hidden');
+            }
+
+            removeImage() {
+                this.currentUploadedImage = null;
+                document.getElementById('news-image').value = '';
+                document.getElementById('image-preview').classList.add('hidden');
+                document.getElementById('existing-images').value = '';
+            }
+
+            handleExistingImageSelect(e) {
+                if (e.target.value) {
+                    // Clear uploaded image when selecting existing
+                    this.currentUploadedImage = null;
+                    document.getElementById('news-image').value = '';
+                    document.getElementById('image-preview').classList.add('hidden');
+                }
+            }
+
+            showSuccessMessage(message) {
+                // Create temporary success message
+                const successDiv = document.createElement('div');
+                successDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+                successDiv.innerHTML = `
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle ml-2"></i>
+                        ${message}
+                    </div>
+                `;
+                
+                document.body.appendChild(successDiv);
+                
+                // Remove after 3 seconds
+                setTimeout(() => {
+                    if (successDiv.parentNode) {
+                        successDiv.parentNode.removeChild(successDiv);
+                    }
+                }, 3000);
+            }
+        }
+
+        // Initialize dashboard
+        const dashboard = new NewsDashboard();
+
+        // Initialize site closure status
+        const isSiteClosed = localStorage.getItem('mthani-site-closed') === 'true';
+        dashboard.updateCloseSiteButton(isSiteClosed);
+    </script>
+</body>
+</html> 

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خطأ - جمعية مثاني القرآنية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @font-face {
+            font-family: 'IBMPlexSansArabic';
+            src: url('font/IBMPlexSansArabic-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'IBMPlexSansArabic';
+            src: url('font/IBMPlexSansArabic-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        body {
+            font-family: 'IBMPlexSansArabic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500;
+            direction: rtl;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .error-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse-slow {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="max-w-2xl mx-auto text-center px-6">
+        <!-- Error Icon -->
+        <div class="error-animation mb-8">
+            <div class="inline-flex items-center justify-center w-32 h-32 bg-white rounded-full shadow-2xl">
+                <i class="fas fa-exclamation-triangle text-6xl text-red-500 pulse-slow"></i>
+            </div>
+        </div>
+        
+        <!-- Error Content -->
+        <div class="bg-white rounded-2xl shadow-2xl p-8 mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">عذراً، حدث خطأ!</h1>
+            <p class="text-xl text-gray-600 mb-6">نعتذر عن هذا الإزعاج. حدث خطأ غير متوقع.</p>
+            
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+                <div class="flex items-center">
+                    <i class="fas fa-info-circle text-red-500 ml-3"></i>
+                    <div class="text-right">
+                        <h3 class="text-lg font-medium text-red-800 mb-2">ماذا يمكنك فعله؟</h3>
+                        <ul class="text-red-700 space-y-1">
+                            <li>• تأكد من اتصالك بالإنترنت</li>
+                            <li>• حاول تحديث الصفحة</li>
+                            <li>• تواصل معنا إذا استمر الخطأ</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="window.location.reload()" class="bg-[#00a17d] text-white px-6 py-3 rounded-lg hover:bg-[#00c59e] transition-colors flex items-center justify-center">
+                    <i class="fas fa-redo ml-2"></i>
+                    إعادة تحميل الصفحة
+                </button>
+                
+                <a href="index.html" class="bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 transition-colors flex items-center justify-center">
+                    <i class="fas fa-home ml-2"></i>
+                    العودة للرئيسية
+                </a>
+            </div>
+        </div>
+        
+        <!-- Contact Information -->
+        <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6 text-white">
+            <h3 class="text-lg font-medium mb-3">تحتاج مساعدة؟</h3>
+            <p class="mb-4">تواصل مع فريق الدعم الفني</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="mailto:support@mthani.org" class="flex items-center justify-center">
+                    <i class="fas fa-envelope ml-2"></i>
+                    support@mthani.org
+                </a>
+                
+                <a href="tel:+966123456789" class="flex items-center justify-center">
+                    <i class="fas fa-phone ml-2"></i>
+                    966-12-3456789+
+                </a>
+            </div>
+        </div>
+        
+        <!-- Error Details (Hidden by default) -->
+        <div class="mt-6">
+            <button onclick="toggleErrorDetails()" class="text-white/70 hover:text-white text-sm">
+                <i class="fas fa-chevron-down ml-1"></i>
+                تفاصيل تقنية
+            </button>
+            
+            <div id="error-details" class="hidden mt-4 bg-gray-900 text-green-400 p-4 rounded-lg text-left font-mono text-sm">
+                <div>Error Code: <span id="error-code">500</span></div>
+                <div>Timestamp: <span id="error-timestamp"></span></div>
+                <div>User Agent: <span id="error-useragent"></span></div>
+                <div>URL: <span id="error-url"></span></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set error details
+        document.getElementById('error-timestamp').textContent = new Date().toISOString();
+        document.getElementById('error-useragent').textContent = navigator.userAgent;
+        document.getElementById('error-url').textContent = window.location.href;
+        
+        // Get error code from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const errorCode = urlParams.get('code') || '500';
+        document.getElementById('error-code').textContent = errorCode;
+        
+        function toggleErrorDetails() {
+            const details = document.getElementById('error-details');
+            details.classList.toggle('hidden');
+        }
+        
+        // Auto-redirect to home after 30 seconds (optional)
+        setTimeout(() => {
+            if (confirm('هل تريد العودة إلى الصفحة الرئيسية؟')) {
+                window.location.href = 'index.html';
+            }
+        }, 30000);
+        
+        // Log error for debugging
+        console.error('Page Error:', {
+            code: errorCode,
+            timestamp: new Date().toISOString(),
+            url: window.location.href,
+            referrer: document.referrer
+        });
+    </script>
+</body>
+</html> 

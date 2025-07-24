@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>جمعية مثاني</title>
+    <title>جمعية مثاني القرآنية - الرئيسية</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -142,8 +142,8 @@
             .py-16 { padding-top: 3rem !important; padding-bottom: 3rem !important; }
             .py-12 { padding-top: 2rem !important; padding-bottom: 2rem !important; }
             
-            /* Mobile achievements grid */
-            .grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+            /* Mobile achievements grid - keep 2 columns */
+            .achievements-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
             
             /* Mobile counter sizing */
             .counter { font-size: 2rem !important; }
@@ -524,6 +524,88 @@
             }
         }
 
+        .news-scroll {
+            animation: newsScroll-rtl 20s linear infinite;
+        }
+        
+        @keyframes newsScroll-rtl {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50%); }
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .news-scroll {
+                animation: newsScroll-rtl 12s linear infinite;
+            }
+        }
+
+        /* News ticker cards - consistent height */
+        #homepage-news-ticker .bg-white {
+            height: 400px !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+        
+        #homepage-news-ticker .bg-white img {
+            height: 180px !important;
+            object-fit: cover !important;
+            flex-shrink: 0 !important;
+        }
+        
+        #homepage-news-ticker .bg-white .p-6 {
+            flex: 1 !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+        }
+        
+        #homepage-news-ticker .bg-white .p-6 h3 {
+            line-height: 1.4 !important;
+            margin-bottom: 0.75rem !important;
+            height: auto !important;
+            min-height: 2.8rem !important;
+        }
+        
+        #homepage-news-ticker .bg-white .p-6 p {
+            line-height: 1.5 !important;
+            margin-bottom: auto !important;
+        }
+        
+        #homepage-news-ticker .bg-white .p-6 .flex {
+            margin-top: auto !important;
+            flex-shrink: 0 !important;
+        }
+
+        /* Mobile news ticker adjustments */
+        @media (max-width: 768px) {
+            #homepage-news-ticker .bg-white {
+                height: 350px !important;
+            }
+            
+            #homepage-news-ticker .bg-white img {
+                height: 150px !important;
+            }
+        }
+
+        /* News and Achievements Section Backgrounds */
+        .news-bg {
+          background-image: url('assets/achivements-bg.jpg');
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+
+        @media (max-width: 768px) {
+          .news-bg,
+          .achievements-bg {
+            background-image: url('assets/achivements-bg.jpg') !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+          }
+        }
+
     </style>
     <style>
         .hover-green:hover {
@@ -693,26 +775,17 @@
         </div>
     </header>
 
-    <!-- Hero Section with Carousel -->
+    
     <main>
         <section class="relative" id="home">
             <!-- Hero Carousel -->
             <div class="hero-carousel">
-                <!-- Slide 1 - Replace with your image path -->
                 <div class="hero-slide active" style="background-image: url('assets/hdr-background.jpg');">
                 </div>
-                <!-- Slide 2 - Replace with your image path -->
-                <div class="hero-slide" style="background-image: url('assets/hdr-background.jpg');">
-                </div>
-                <!-- Slide 3 - Replace with your image path -->
-                <div class="hero-slide" style="background-image: url('assets/hdr-background.jpg');">
-                </div>
-                <!-- Slide 4 - Replace with your image path -->
-                <div class="hero-slide" style="background-image: url('assets/hdr-background.jpg');">
-                </div>
+<!--TO ADD LATER-->>
                 
             
-            <!-- Hero Content -->
+
             <div class="absolute inset-0 flex items-center justify-center hero-content">
                 <div class="max-w-7xl mx-auto px-4 text-center text-white">
                 </div>
@@ -720,7 +793,7 @@
         </section>
 
         <!-- News Ticker -->
-        <section class="bg-[#00a17d] text-white py-3" id="news" aria-live="polite">
+        <section class="bg-[#00a17d] text-white py-3 news-bg" id="news" aria-live="polite">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="flex items-center">
                     <div class="flex-1 overflow-hidden">
@@ -749,7 +822,7 @@
         </section>
 
         <!-- Achievements Counter -->
-        <section class="py-16 bg-black/30 text-white">
+        <section class="py-16 bg-black/30 text-white achievements-bg">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="fade-in">
                     <div class="section-header-container">
@@ -758,7 +831,7 @@
                     </div>
                 </div>
                 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center achievements-grid">
                     <div class="fade-in">
                         <div class="mb-4">
                             <i class="fas fa-hands-helping text-[#efb740] text-4xl mb-2"></i>
@@ -794,7 +867,7 @@
 
 
         <!-- Recent News -->
-        <section class="py-16 bg-[#00a17d]">
+        <section class="py-16 bg-[#00a17d] news-bg">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="fade-in">
                     <div class="section-header-container">
@@ -803,7 +876,9 @@
                     </div>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="homepage-news-cards">
+                <div class="overflow-hidden">
+                  <div id="homepage-news-ticker" class="flex items-center justify-center space-x-8 space-x-reverse news-scroll">
+                  </div>
                 </div>
                 
                 <div class="text-center mt-12">
@@ -890,12 +965,11 @@
                     </div>
                 </div>
                 
-                <!-- Quick Links -->
+
                 <div class="mb-8 md:mb-0 flex justify-center footer-images">
                    <img src="assets/unprofitableGrowth.png" alt="logo" class="w-full max-w-[200px] h-auto object-contain">
                 </div>
-                
-                <!-- Services -->
+
                 <div class="mb-8 md:mb-0 flex justify-center footer-images">
                     <img src="assets/Vision-2030.png" alt="logo" class="w-full max-w-[200px] h-auto object-contain">
                 </div>
@@ -925,7 +999,7 @@
             </div>
         </div>
         
-        <!-- Bottom Footer -->
+
         <div class="border-t border-white/20">
             <div class="max-w-7xl mx-auto px-4 py-6">
                 <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-right">
@@ -973,8 +1047,44 @@ console.log('%cللمطورين المُخولين فقط - تحت المراق�
 console.log('%cAuthorized developers only - Under security surveillance', 'color: #ff0000; font-size: 14px; font-weight: bold;');
 console.log('%c' + '='.repeat(80), 'color: #ff0000; font-weight: bold;');
 
+// ========== SITE MANAGEMENT & ERROR HANDLING ==========
+// Site closure check
+function checkSiteClosure() {
+    const isClosed = localStorage.getItem('mthani-site-closed') === 'true';
+    if (isClosed && !window.location.pathname.includes('dashboard.html') && !window.location.pathname.includes('wait-for-us.html')) {
+        window.location.href = 'wait-for-us.html';
+        return false;
+    }
+    return true;
+}
+
+// Global error handler (only for critical errors)
+window.onerror = function(message, source, lineno, colno, error) {
+    console.error('JavaScript Error:', { message, source, lineno, colno, error });
+    // Only redirect on critical errors, not minor ones
+    if (message.includes('Script error') || message.includes('Network Error') || message.includes('Cannot read property')) {
+        setTimeout(() => {
+            window.location.href = 'error.html?code=js&msg=' + encodeURIComponent(message);
+        }, 3000); // Increased delay to avoid false positives
+    }
+    return false;
+};
+
+// Unhandled promise rejection handler (only for critical rejections)
+window.addEventListener('unhandledrejection', function(event) {
+    console.error('Unhandled Promise Rejection:', event.reason);
+    // Only redirect on critical promise rejections
+    if (event.reason && (event.reason.toString().includes('Network') || event.reason.toString().includes('Failed to fetch'))) {
+        setTimeout(() => {
+            window.location.href = 'error.html?code=promise&msg=' + encodeURIComponent(event.reason);
+        }, 3000);
+    }
+});
+
 // DOM Content Loaded Event
 document.addEventListener('DOMContentLoaded', function() {
+    // Check site closure first
+    if (!checkSiteClosure()) return;
     
     // ========== DROPDOWN MENU FUNCTIONALITY ==========
     const dropdowns = document.querySelectorAll('.dropdown');
@@ -1154,16 +1264,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // ========== COUNTER ANIMATION ==========
+    //  COUNTER ANIMATION 
     const counters = document.querySelectorAll('.counter');
     const counterObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const counter = entry.target;
                 const target = parseInt(counter.dataset.target);
-                // Make duration proportional to the target value (e.g., 10ms per unit, capped for very large numbers)
-                let duration = Math.min(4000, Math.max(1200, target * 10)); // 10ms per unit, min 1.2s, max 4s
-                if (target > 10000) duration = Math.min(6000, target * 0.2); // For very large numbers, slow down a bit more
+                let duration = Math.min(4000, Math.max(1200, target * 10)); 
+                if (target > 10000) duration = Math.min(6000, target * 0.2); 
                 const step = target / (duration / 16); // 60fps
                 let current = 0;
 
@@ -1179,7 +1288,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (current < target) {
                         current += step;
                         counter.textContent = Math.floor(current).toLocaleString('en-US');
-                        // Add a bounce effect every 20% progress
                         if (target > 0 && Math.abs(current % (target / 5)) < step) {
                             counter.style.transform = 'scale(1.15)';
                             setTimeout(() => {
@@ -1206,7 +1314,7 @@ document.addEventListener('DOMContentLoaded', function() {
         counterObserver.observe(counter);
     });
 
-    // ========== PARTNERS CAROUSEL ==========
+    // PARTNERS CAROUSEL
     const partnerScroll = document.querySelector('.partner-scroll');
     if (partnerScroll) {
         let scrollPosition = 0;
@@ -1224,7 +1332,7 @@ document.addEventListener('DOMContentLoaded', function() {
         animatePartners();
     }
 
-    // ========== FADE IN ANIMATION ==========
+    // FADE IN ANIMATION
     const fadeElements = document.querySelectorAll('.fade-in');
     const fadeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -1249,57 +1357,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fadeObserver.observe(element);
     });
 
-    // ========== CONTACT FORM FUNCTIONALITY ==========
-    const contactForm = document.querySelector('#contact form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                subject: formData.get('subject'),
-                message: formData.get('message')
-            };
-
-            // Simple validation
-            if (!data.name || !data.email || !data.message) {
-                alert('يرجى ملء جميع الحقول المطلوبة');
-                return;
-            }
-
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(data.email)) {
-                alert('يرجى إدخال بريد إلكتروني صحيح');
-                return;
-            }
-
-            // Simulate form submission
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'جاري الإرسال...';
-            submitBtn.disabled = true;
-
-            setTimeout(() => {
-                submitBtn.textContent = 'تم الإرسال !';
-                submitBtn.classList.add('bg-green-600');
-                submitBtn.classList.remove('bg-[#432d17]');
-                this.reset();
-                
-                // Reset button after 3 seconds
-                setTimeout(() => {
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                    submitBtn.classList.remove('bg-green-600');
-                    submitBtn.classList.add('bg-[#432d17]');
-                }, 3000);
-            }, 2000);
-        });
-    }
-
-    // ========== SCROLL TO TOP FUNCTIONALITY ==========
+    // SCROLL TO TOP FUNCTIONALITY 
     const scrollToTopBtn = document.createElement('button');
     scrollToTopBtn.className = 'fixed bottom-6 left-6 bg-[#00a17d] text-white w-12 h-12 rounded-full shadow-lg hover:bg-[#00a17d]/80 transition-all duration-300 z-50 scroll-to-top';
     scrollToTopBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
@@ -1412,17 +1470,14 @@ document.addEventListener('DOMContentLoaded', function() {
             content.classList.toggle('hidden');
         });
         
-        // Handle clicks on dropdown links (close mobile menu)
         const dropdownLinks = content.querySelectorAll('a');
         dropdownLinks.forEach(link => {
             link.addEventListener('click', function(e) {
-                // Close mobile menu when a dropdown link is clicked
                 mobileMenu.classList.add('hidden');
                 const icon = mobileMenuBtn.querySelector('i');
                 icon.classList.add('fa-bars');
                 icon.classList.remove('fa-times');
                 
-                // Hide all dropdowns
                 mobileDropdowns.forEach(dropdown => {
                     dropdown.querySelector('.mobile-dropdown-content').classList.add('hidden');
                 });
@@ -1509,42 +1564,89 @@ if (respectsReducedMotion()) {
     document.head.appendChild(style);
 }; 
 
-// Inject 3 random news cards from news.html into the homepage
+// Load 6 random news cards from localStorage for homepage ticker
 (function() {
-    const container = document.getElementById('homepage-news-cards');
-    if (!container) return;
-    fetch('news.html')
-        .then(res => res.text())
-        .then(html => {
-            // Parse the HTML and extract news cards
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const cards = Array.from(doc.querySelectorAll('.news-card'));
-            if (cards.length === 0) return;
-            // Shuffle and pick 3
-            for (let i = cards.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [cards[i], cards[j]] = [cards[j], cards[i]];
-            }
-            const selected = cards.slice(0, 3);
-            selected.forEach(card => {
-                // Remove any JS-specific classes/attributes
-                card.classList.remove('news-card');
-                card.classList.remove('fade-in');
-                // Remove read more button if present
-                const btn = card.querySelector('.read-more-btn');
-                if (btn) btn.remove();
-                // Remove .news-full if present
-                const full = card.querySelector('.news-full');
-                if (full) full.remove();
-                // Make the whole card link to news.html
-                const link = document.createElement('a');
-                link.href = 'news.html';
-                link.style.display = 'block';
-                link.appendChild(card);
-                container.appendChild(link);
-            });
-        });
+    const ticker = document.getElementById('homepage-news-ticker');
+    if (!ticker) return;
+    
+    const savedNews = JSON.parse(localStorage.getItem('mthani-news') || '[]');
+    
+    if (savedNews.length === 0) {
+        ticker.innerHTML = `
+            <div class="bg-white rounded-lg shadow-lg p-6 text-center flex-shrink-0" style="min-width: 320px;">
+                <i class="fas fa-newspaper text-gray-400 text-4xl mb-2"></i>
+                <h3 class="text-lg font-bold text-gray-800 mb-2">لا توجد أخبار</h3>
+                <p class="text-gray-600 text-sm">سيتم عرض الأخبار هنا عند إضافتها من لوحة التحكم</p>
+            </div>
+        `;
+        return;
+    }
+    
+    // Shuffle and pick 6
+    const shuffled = [...savedNews];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    const selected = shuffled.slice(0, 6);
+    
+    // Format date function
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const months = ['يناير','فبراير','مارس','ابريل','مايو','يونيو','يوليو','اغسطس','سبتمبر','اكتوبر','نوفمبر','ديسمبر'];
+        return `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+    }
+    
+    // Check if we should animate (more than 3 cards)
+    const shouldAnimate = selected.length > 3;
+    
+    // Remove animation class if not needed
+    const tickerContainer = ticker.parentElement;
+    if (shouldAnimate) {
+        ticker.classList.add('news-scroll');
+        // Duplicate cards for smooth infinite scroll like partners
+        const allCards = [...selected, ...selected];
+        
+        // Generate cards HTML
+        ticker.innerHTML = allCards.map(newsItem => {
+            const TEXT_LIMIT = 100; // Shorter limit for homepage cards
+            const mainText = newsItem.mainText || '';
+            const excerptText = mainText.length > TEXT_LIMIT ? mainText.substring(0, TEXT_LIMIT) + '...' : mainText;
+            
+            return `
+                <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 flex-shrink-0" style="min-width: 320px; max-width: 340px;">
+                    <img src="${newsItem.image}" alt="${newsItem.title}" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2 line-clamp-2">${newsItem.title}</h3>
+                        <p class="text-gray-600 text-sm mb-3 line-clamp-3">${excerptText}</p>
+                        <div class="text-xs text-gray-500">${formatDate(newsItem.date)}</div>
+                    </div>
+                </article>
+            `;
+        }).join('');
+    } else {
+        ticker.classList.remove('news-scroll');
+        ticker.style.justifyContent = 'center';
+        ticker.style.gap = '2rem';
+        
+        // Generate cards HTML without duplication
+        ticker.innerHTML = selected.map(newsItem => {
+            const TEXT_LIMIT = 100; // Shorter limit for homepage cards
+            const mainText = newsItem.mainText || '';
+            const excerptText = mainText.length > TEXT_LIMIT ? mainText.substring(0, TEXT_LIMIT) + '...' : mainText;
+            
+            return `
+                <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 flex-shrink-0" style="min-width: 320px; max-width: 340px;">
+                    <img src="${newsItem.image}" alt="${newsItem.title}" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold text-gray-800 mb-2 line-clamp-2">${newsItem.title}</h3>
+                        <p class="text-gray-600 text-sm mb-3 line-clamp-3">${excerptText}</p>
+                        <div class="text-xs text-gray-500">${formatDate(newsItem.date)}</div>
+                    </div>
+                </article>
+            `;
+        }).join('');
+    }
 })();
     </script>
 </body>
