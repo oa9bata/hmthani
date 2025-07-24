@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>جمعية مثاني</title>
+    <title>جمعية مثاني - الأخبار</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -693,170 +693,249 @@
         </div>
     </header>
 
-    <!-- Hero Section with Carousel -->
-    <main>
-        <section class="relative" id="home">
-            <!-- Hero Carousel -->
-            <div class="hero-carousel">
-                <!-- Slide 1 - Replace with your image path -->
-                <div class="hero-slide active" style="background-image: url('assets/hdr-background.jpg');">
-                </div>
-                <!-- Slide 2 - Replace with your image path -->
-                <div class="hero-slide" style="background-image: url('assets/hdr-background.jpg');">
-                </div>
-                <!-- Slide 3 - Replace with your image path -->
-                <div class="hero-slide" style="background-image: url('assets/hdr-background.jpg');">
-                </div>
-                <!-- Slide 4 - Replace with your image path -->
-                <div class="hero-slide" style="background-image: url('assets/hdr-background.jpg');">
-                </div>
+    <!-- News Hero Section -->
+    <section class="bg-gradient-to-r from-[#00a17d] to-[#00c59e] text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 curved-underline [#efb740]">الأخبار</h1>
+            <p class="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">آخر الأخبار والفعاليات من جمعية مثاني القرآنية</p>
+        </div>
+    </section>
+
+    <!-- News Filter Section -->
+    <section class="py-8 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-center space-x-4 space-x-reverse">
+                <button id="filter-latest" class="news-filter-btn active px-6 py-3 rounded-lg font-medium transition-all duration-300 bg-[#00a17d] text-white shadow-lg">
+                    <i class="fas fa-clock ml-2"></i>الأحدث
+                </button>
+                <button id="filter-chosen" class="news-filter-btn px-6 py-3 rounded-lg font-medium transition-all duration-300 bg-gray-200 text-gray-700 hover:bg-gray-300">
+                    <i class="fas fa-star ml-2"></i>المختار لك
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Grid Section -->
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="news-grid">
                 
-            
-            <!-- Hero Content -->
-            <div class="absolute inset-0 flex items-center justify-center hero-content">
-                <div class="max-w-7xl mx-auto px-4 text-center text-white">
-                </div>
-            </div>
-        </section>
-
-        <!-- News Ticker -->
-        <section class="bg-[#00a17d] text-white py-3" id="news" aria-live="polite">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="flex items-center">
-                    <div class="flex-1 overflow-hidden">
-                        <div class="ticker" id="news-ticker">
-                            تسعى جمعية مثاني القرآنية إلى تعليم القرآن الكريم ونشر علومه، ورعاية حلقات التحفيظ، وتنمية القيم القرآنية في المجتمع من خلال برامج نوعية وأنشطة هادفة.
+                <!-- News Card 1 -->
+                <article class="news-card latest bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 fade-in">
+                    <img src="assets/mthani1.jpg" alt="برنامج تحفيظ القرآن" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">إطلاق برنامج تحفيظ القرآن الكريم الجديد</h3>
+                        <p class="text-gray-600 mb-4 news-excerpt">أعلنت جمعية مثاني القرآنية عن إطلاق برنامج جديد ومتطور لتحفيظ القرآن الكريم يستهدف جميع الفئات العمرية.</p>
+                        <p class="text-gray-600 mb-4 news-full hidden">أعلنت جمعية مثاني القرآنية عن إطلاق برنامج جديد ومتطور لتحفيظ القرآن الكريم يستهدف جميع الفئات العمرية. يتضمن البرنامج منهجية حديثة ومبتكرة في التحفيظ، بالإضافة إلى استخدام التقنيات الحديثة لتسهيل عملية التعلم. كما يشمل البرنامج ورش عمل تدريبية للمعلمين وأولياء الأمور لضمان تحقيق أفضل النتائج في رحلة تحفيظ القرآن الكريم.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">15 يناير 2025</span>
+                            <button class="read-more-btn bg-[#00a17d] text-white px-4 py-2 rounded-lg hover:bg-[#00a17d]/80 transition-colors">
+                                <i class="fas fa-plus ml-1"></i>اقرأ المزيد
+                            </button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
+                </article>
 
-        <!-- Media Center -->
-        <section class="py-16 bg-white">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="flex flex-col md:flex-row-reverse items-center gap-10">
-                    <div class="w-full md:w-1/2 flex justify-center mb-8 md:mb-0">
-                        <img src="assets/guess100.jpg" alt="مثاني القرآنية" class="rounded-tr-[80px] rounded-bl-[80px] shadow-2xl object-cover w-full max-w-md h-80">
-                    </div>
-                    <div class="w-full md:w-1/2 text-center md:text-right">
-                        <h2 class="text-4xl font-bold text-[#efb740] mb-6 curved-underline gold">مثاني القرآنية</h2>
-                        <p class="text-xl text-gray-700 mb-4">جمعية مثاني القرآنية تهدف إلى تعليم القرآن الكريم ونشر علومه، ورعاية حلقات التحفيظ، وتنمية القيم القرآنية في المجتمع من خلال برامج نوعية وأنشطة هادفة.</p>
-                        <p class="text-lg text-gray-500">انضم إلينا في مسيرة العطاء القرآني وكن جزءًا من بناء جيل قرآني واعٍ ومتميز.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Achievements Counter -->
-        <section class="py-16 bg-black/30 text-white">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="fade-in">
-                    <div class="section-header-container">
-                        <h2 class="text-4xl font-bold text-[#fffff] curved-underline gold">إنجازاتنا</h2>
-                        <p class="text-xl text-white section-subtitle">نعمل معاً لبناء مجتمع أفضل</p>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                    <div class="fade-in">
-                        <div class="mb-4">
-                            <i class="fas fa-hands-helping text-[#efb740] text-4xl mb-2"></i>
-                        </div>
-                        <div class="counter" data-target="152">0</div>
-                        <p class="text-white font-medium">مشروع تطوعي</p>
-                    </div>
-                    <div class="fade-in">
-                        <div class="mb-4">
-                            <i class="fas fa-users text-[#efb740] text-4xl mb-2"></i>
-                        </div>
-                        <div class="counter " data-target="25000">0</div>
-                        <p class="text-white font-medium">مستفيد</p>
-                    </div>
-                    <div class="fade-in">
-                        <div class="mb-4">
-                            <i class="fas fa-calendar-alt text-[#efb740] text-4xl mb-2"></i>
-                        </div>
-                        <div class="counter" data-target="48">0</div>
-                        <p class="text-white font-medium">برنامج مجتمعي</p>
-                    </div>
-                    <div class="fade-in">
-                        <div class="mb-4">
-                            <i class="fas fa-star text-[#efb740] text-4xl mb-2"></i>
-                        </div>
-                        <div class="counter" data-target="95">0</div>
-                        <p class="text-white font-medium">% معدل الرضا</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-
-        <!-- Recent News -->
-        <section class="py-16 bg-[#00a17d]">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="fade-in">
-                    <div class="section-header-container">
-                        <h2 class="text-4xl font-bold text-[#ffffff] curved-underline gold">آخر الأخبار</h2>
-                        <p class="text-xl text-white section-subtitle">ابق على اطلاع بآخر أخبار وأنشطة جمعية مثاني القرآنية</p>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="homepage-news-cards">
-                </div>
-                
-                <div class="text-center mt-12">
-                    <a href="news.html" class="bg-[#efb740] text-[#ffffff] px-8 py-3 rounded-lg font-bold hover:bg-[#00a17d] hover:text-[#efb740] transition-colors inline-flex items-center">
-                        عرض جميع الأخبار
-                        <i class="fas fa-arrow-left mr-2"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Partners Carousel -->
-        <section class="py-16 bg-white border-t">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="fade-in">
-                    <div class="section-header-container">
-                        <h2 class="text-4xl font-bold text-[#efb740] curved-underline gold">شركاؤنا</h2>
-                        <p class="text-xl text-gray-600 section-subtitle">نعمل مع أفضل الشركات والمؤسسات لخدمة مجتمعنا</p>
-                    </div>
-                </div>
-                
-                <div class="overflow-hidden">
-                    <div class="flex items-center justify-center space-x-8 space-x-reverse partner-scroll">
-                        <div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/fc25.png" alt="شريك 1" class="max-w-full max-h-full object-contain">
-                        </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/fortnite.png" alt="شريك 2" class="max-w-full max-h-full object-contain">
-                        </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/roblox.webp" alt="شريك 3" class="max-w-full max-h-full object-contain">
-                        </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/sallaapp_logo.jpg" alt="شريك 4" class="max-w-full max-h-full object-contain">
-                        </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/og-image-multi.jpg" alt="شريك 5" class="max-w-full max-h-full object-contain">
-                        </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/fc25.png" alt="شريك 6" class="max-w-full max-h-full object-contain">
-                        </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/visa.png" alt="شريك 7" class="max-w-full max-h-full object-contain">
-                        </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/fortnite.png" alt="شريك 8" class="max-w-full max-h-full object-contain">
-                        </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/roblox.webp" alt="شريك 9" class="max-w-full max-h-full object-contain">
-                        </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/sallaapp_logo.jpg" alt="شريك 10" class="max-w-full max-h-full object-contain">
-                        </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/og-image-multi.jpg" alt="شريك 11" class="max-w-full max-h-full object-contain">
-                        </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/visa.png" alt="شريك 12" class="max-w-full max-h-full object-contain">
+                <!-- News Card 2 -->
+                <article class="news-card latest bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 fade-in">
+                    <img src="assets/mthani2.jpg" alt="مسابقة القرآن" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">مسابقة القرآن الكريم السنوية 2025</h3>
+                        <p class="text-gray-600 mb-4 news-excerpt">تنظم الجمعية مسابقة سنوية لحفظة القرآن الكريم بجوائز قيمة.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">12 يناير 2025</span>
                         </div>
                     </div>
-                </div>
+                </article>
+
+                <!-- News Card 3 -->
+                <article class="news-card chosen bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 fade-in">
+                    <img src="assets/mthani3.jpg" alt="دورة تدريبية" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">دورة تدريبية لمعلمي القرآن الكريم</h3>
+                        <p class="text-gray-600 mb-4 news-excerpt">تقيم الجمعية دورة تدريبية شاملة لمعلمي القرآن الكريم لتطوير مهاراتهم التعليمية.</p>
+                        <p class="text-gray-600 mb-4 news-full hidden">تقيم الجمعية دورة تدريبية شاملة لمعلمي القرآن الكريم لتطوير مهاراتهم التعليمية. تشمل الدورة أحدث الطرق والأساليب في تعليم القرآن الكريم، وكيفية التعامل مع الطلاب من مختلف الأعمار. كما تتضمن جلسات عملية لتطبيق ما يتم تعلمه، وورش عمل تفاعلية مع خبراء في مجال التعليم القرآني.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">10 يناير 2025</span>
+                            <button class="read-more-btn bg-[#00a17d] text-white px-4 py-2 rounded-lg hover:bg-[#00a17d]/80 transition-colors">
+                                <i class="fas fa-plus ml-1"></i>اقرأ المزيد
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 4 -->
+                <article class="news-card latest bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 fade-in">
+                    <img src="assets/mthani4.jpg" alt="مشروع خيري" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">إطلاق مشروع كسوة الشتاء للأسر المحتاجة</h3>
+                        <p class="text-gray-600 mb-4 news-excerpt">بالتعاون مع الجهات الخيرية، تطلق الجمعية مشروع كسوة الشتاء.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">8 يناير 2025</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 5 -->
+                <article class="news-card chosen bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 fade-in">
+                    <img src="assets/guess1.jpg" alt="ملتقى القرآن" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">ملتقى مثاني للعلوم القرآنية الأول</h3>
+                        <p class="text-gray-600 mb-4 news-excerpt">تستضيف الجمعية الملتقى الأول للعلوم القرآنية بمشاركة علماء مرموقين من المملكة.</p>
+                        <p class="text-gray-600 mb-4 news-full hidden">تستضيف الجمعية الملتقى الأول للعلوم القرآنية بمشاركة علماء مرموقين من المملكة العربية السعودية والعالم الإسلامي. يهدف الملتقى إلى تبادل الخبرات والمعرفة في مجال العلوم القرآنية، ويتضمن محاضرات وورش عمل متخصصة في التفسير وعلوم القرآن والقراءات. سيكون الملتقى منصة مهمة لتطوير المنهجيات الحديثة في تعليم القرآن الكريم.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">5 يناير 2025</span>
+                            <button class="read-more-btn bg-[#00a17d] text-white px-4 py-2 rounded-lg hover:bg-[#00a17d]/80 transition-colors">
+                                <i class="fas fa-plus ml-1"></i>اقرأ المزيد
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 6 -->
+                <article class="news-card latest bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 fade-in">
+                    <img src="assets/guess2.jpg" alt="برنامج تطوعي" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">برنامج المتطوعين الشباب في خدمة القرآن</h3>
+                        <p class="text-gray-600 mb-4 news-excerpt">فتح باب التطوع للشباب المهتمين بخدمة القرآن الكريم ونشر تعاليمه.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">3 يناير 2025</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 7 -->
+                <article class="news-card chosen bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 fade-in">
+                    <img src="assets/guess3.jpg" alt="تكريم الحفظة" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">حفل تكريم حفظة القرآن الكريم المتميزين</h3>
+                        <p class="text-gray-600 mb-4 news-excerpt">تكرم الجمعية الطلاب المتميزين في حفظ القرآن الكريم في احتفالية كبرى بحضور أولياء الأمور.</p>
+                        <p class="text-gray-600 mb-4 news-full hidden">تكرم الجمعية الطلاب المتميزين في حفظ القرآن الكريم في احتفالية كبرى بحضور أولياء الأمور والمعلمين. يتضمن الحفل توزيع الجوائز والشهادات التقديرية، بالإضافة إلى عروض قرآنية من الطلاب المتميزين. كما يشمل البرنامج كلمات توجيهية من علماء ومختصين في التعليم القرآني، وفقرات ثقافية هادفة.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">1 يناير 2025</span>
+                            <button class="read-more-btn bg-[#00a17d] text-white px-4 py-2 rounded-lg hover:bg-[#00a17d]/80 transition-colors">
+                                <i class="fas fa-plus ml-1"></i>اقرأ المزيد
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 8 -->
+                <article class="news-card latest bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 fade-in">
+                    <img src="assets/guess99.jpg" alt="ورشة عمل" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">ورشة عمل: فن التلاوة والتجويد</h3>
+                        <p class="text-gray-600 mb-4 news-excerpt">تقيم الجمعية ورشة متخصصة في فن التلاوة وأحكام التجويد.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">28 ديسمبر 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 9 -->
+                <article class="news-card chosen bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 fade-in">
+                    <img src="assets/guess100.jpg" alt="مبادرة تعليمية" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">مبادرة "قرآني رفيقي" للتعليم عن بُعد</h3>
+                        <p class="text-gray-600 mb-4 news-excerpt">إطلاق منصة إلكترونية لتعليم القرآن الكريم عن بُعد تخدم المسلمين في جميع أنحاء العالم.</p>
+                        <p class="text-gray-600 mb-4 news-full hidden">إطلاق منصة إلكترونية لتعليم القرآن الكريم عن بُعد تخدم المسلمين في جميع أنحاء العالم. تتضمن المنصة دروساً تفاعلية، واختبارات دورية، ومتابعة فردية من قبل معلمين مختصين. كما توفر المنصة أدوات متقدمة للتعلم بما في ذلك التسجيلات الصوتية النموذجية، والتقييم الآلي للتلاوة، وبرامج تحفيزية للطلاب.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">25 ديسمبر 2024</span>
+                            <button class="read-more-btn bg-[#00a17d] text-white px-4 py-2 rounded-lg hover:bg-[#00a17d]/80 transition-colors">
+                                <i class="fas fa-plus ml-1"></i>اقرأ المزيد
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 10 -->
+                <article class="news-card latest bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 fade-in">
+                    <img src="assets/background.jpg" alt="شراكة جديدة" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">شراكة استراتيجية مع دار التربية الإسلامية</h3>
+                        <p class="text-gray-600 mb-4 news-excerpt">توقيع اتفاقية شراكة لتطوير المناهج القرآنية.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">22 ديسمبر 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 11 -->
+                <article class="news-card chosen bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 fade-in">
+                    <img src="assets/hdr-background.jpg" alt="مؤتمر علمي" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">المؤتمر العلمي: القرآن الكريم ومواجهة تحديات العصر</h3>
+                        <p class="text-gray-600 mb-4 news-excerpt">مؤتمر علمي متخصص يناقش دور القرآن الكريم في مواجهة تحديات العصر الحديث.</p>
+                        <p class="text-gray-600 mb-4 news-full hidden">مؤتمر علمي متخصص يناقش دور القرآن الكريم في مواجهة تحديات العصر الحديث، بمشاركة نخبة من العلماء والباحثين من مختلف أنحاء العالم الإسلامي. يتضمن المؤتمر جلسات بحثية متخصصة، وأوراق عمل علمية، ومناقشات تفاعلية حول أحدث الدراسات القرآنية وتطبيقاتها المعاصرة.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">20 ديسمبر 2024</span>
+                            <button class="read-more-btn bg-[#00a17d] text-white px-4 py-2 rounded-lg hover:bg-[#00a17d]/80 transition-colors">
+                                <i class="fas fa-plus ml-1"></i>اقرأ المزيد
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 12 -->
+                <article class="news-card latest bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 fade-in">
+                    <img src="assets/hdr-background2.jpg" alt="برنامج نسائي" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">برنامج الأخوات في حفظ القرآن الكريم</h3>
+                        <p class="text-gray-600 mb-4 news-excerpt">برنامج مخصص للسيدات لحفظ القرآن الكريم مع تدبر معانيه.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">18 ديسمبر 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 13 -->
+                <article class="news-card chosen bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 fade-in">
+                    <img src="assets/hdr-bg.jpg" alt="مشروع إفطار" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">مشروع إفطار الصائم في رمضان القادم</h3>
+                        <p class="text-gray-600 mb-4 news-excerpt">الاستعداد المبكر لمشروع إفطار الصائم بتوزيع وجبات إفطار مجانية على المحتاجين.</p>
+                        <p class="text-gray-600 mb-4 news-full hidden">الاستعداد المبكر لمشروع إفطار الصائم بتوزيع وجبات إفطار مجانية على المحتاجين والعمال والطلاب. يشمل المشروع تأمين وجبات صحية ومتوازنة، وتنظيم نقاط توزيع في مختلف أحياء المدينة، بالإضافة إلى تنظيم موائد رحمن جماعية في المساجد والمراكز المجتمعية.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">15 ديسمبر 2024</span>
+                            <button class="read-more-btn bg-[#00a17d] text-white px-4 py-2 rounded-lg hover:bg-[#00a17d]/80 transition-colors">
+                                <i class="fas fa-plus ml-1"></i>اقرأ المزيد
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 14 -->
+                <article class="news-card latest bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 fade-in">
+                    <img src="assets/logo.jpg" alt="تطبيق ذكي" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">إطلاق تطبيق "مثاني" الذكي لحفظ القرآن</h3>
+                        <p class="text-gray-600 mb-4 news-excerpt">تطبيق ذكي مجاني لحفظ القرآن الكريم بتقنيات الذكاء الاصطناعي.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">12 ديسمبر 2024</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- News Card 15 -->
+                <article class="news-card chosen bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 fade-in">
+                    <img src="assets/mthaniLogo.jpg" alt="زيارة ميدانية" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-3">زيارة وفد من وزارة الشؤون الإسلامية</h3>
+                        <p class="text-gray-600 mb-4 news-excerpt">استقبلت الجمعية وفداً رفيع المستوى من وزارة الشؤون الإسلامية للاطلاع على برامجها وأنشطتها.</p>
+                        <p class="text-gray-600 mb-4 news-full hidden">استقبلت الجمعية وفداً رفيع المستوى من وزارة الشؤون الإسلامية والدعوة والإرشاد للاطلاع على برامجها وأنشطتها المختلفة. تضمنت الزيارة جولة ميدانية على مرافق الجمعية، ولقاءات مع المعلمين والطلاب، والاطلاع على المناهج والطرق التعليمية المطبقة. أشاد الوفد بالجهود المبذولة وأعرب عن دعمه الكامل لأنشطة الجمعية.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">10 ديسمبر 2024</span>
+                            <button class="read-more-btn bg-[#00a17d] text-white px-4 py-2 rounded-lg hover:bg-[#00a17d]/80 transition-colors">
+                                <i class="fas fa-plus ml-1"></i>اقرأ المزيد
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
+
 
     <!-- Footer -->
     <footer class="bg-[#00a17d] text-white">
@@ -1507,45 +1586,109 @@ if (respectsReducedMotion()) {
         }
     `;
     document.head.appendChild(style);
-}; 
+}
 
-// Inject 3 random news cards from news.html into the homepage
-(function() {
-    const container = document.getElementById('homepage-news-cards');
-    if (!container) return;
-    fetch('news.html')
-        .then(res => res.text())
-        .then(html => {
-            // Parse the HTML and extract news cards
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
-            const cards = Array.from(doc.querySelectorAll('.news-card'));
-            if (cards.length === 0) return;
-            // Shuffle and pick 3
-            for (let i = cards.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [cards[i], cards[j]] = [cards[j], cards[i]];
-            }
-            const selected = cards.slice(0, 3);
-            selected.forEach(card => {
-                // Remove any JS-specific classes/attributes
-                card.classList.remove('news-card');
-                card.classList.remove('fade-in');
-                // Remove read more button if present
-                const btn = card.querySelector('.read-more-btn');
-                if (btn) btn.remove();
-                // Remove .news-full if present
-                const full = card.querySelector('.news-full');
-                if (full) full.remove();
-                // Make the whole card link to news.html
-                const link = document.createElement('a');
-                link.href = 'news.html';
-                link.style.display = 'block';
-                link.appendChild(card);
-                container.appendChild(link);
-            });
+// ========== NEWS PAGE FUNCTIONALITY ==========
+
+// News Filter Functionality
+const filterButtons = document.querySelectorAll('.news-filter-btn');
+const newsGrid = document.getElementById('news-grid');
+let newsCards = Array.from(document.querySelectorAll('.news-card'));
+
+// Helper: Get date from card
+function getCardDate(card) {
+    const dateText = card.querySelector('span.text-sm').textContent.trim();
+    // Format: '15 يناير 2025' (dd month yyyy)
+    const months = ['يناير','فبراير','مارس','ابريل','مايو','يونيو','يوليو','اغسطس','سبتمبر','اكتوبر','نوفمبر','ديسمبر'];
+    const parts = dateText.split(' ');
+    if (parts.length !== 3) return new Date(0);
+    const day = parseInt(parts[0], 10);
+    const month = months.indexOf(parts[1]);
+    const year = parseInt(parts[2], 10);
+    return new Date(year, month, day);
+}
+
+function renderCards(cards) {
+    newsGrid.innerHTML = '';
+    cards.forEach(card => {
+        newsGrid.appendChild(card);
+        card.style.display = 'block';
+        setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, 50);
+    });
+}
+
+function shuffle(array) {
+    let arr = array.slice();
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        filterButtons.forEach(btn => {
+            btn.classList.remove('active', 'bg-[#00a17d]', 'text-white');
+            btn.classList.add('bg-gray-200', 'text-gray-700');
         });
-})();
+        this.classList.add('active', 'bg-[#00a17d]', 'text-white');
+        this.classList.remove('bg-gray-200', 'text-gray-700');
+        if (this.id === 'filter-latest') {
+            // Sort by date descending
+            const sorted = newsCards.slice().sort((a, b) => getCardDate(b) - getCardDate(a));
+            renderCards(sorted);
+        } else {
+            // Shuffle
+            renderCards(shuffle(newsCards));
+        }
+    });
+});
+
+// Read More/Less Functionality
+const readMoreButtons = document.querySelectorAll('.read-more-btn');
+readMoreButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        const card = this.closest('.news-card');
+        const excerpt = card.querySelector('.news-excerpt');
+        const fullText = card.querySelector('.news-full');
+        if (!fullText) return;
+        if (fullText.classList.contains('hidden')) {
+            excerpt.classList.add('hidden');
+            fullText.classList.remove('hidden');
+            this.innerHTML = '<i class="fas fa-minus ml-1"></i>اقرأ أقل';
+            fullText.style.maxHeight = '0';
+            fullText.style.opacity = '0';
+            setTimeout(() => {
+                fullText.style.maxHeight = fullText.scrollHeight + 'px';
+                fullText.style.opacity = '1';
+            }, 10);
+        } else {
+            fullText.style.maxHeight = '0';
+            fullText.style.opacity = '0';
+            setTimeout(() => {
+                fullText.classList.add('hidden');
+                excerpt.classList.remove('hidden');
+                this.innerHTML = '<i class="fas fa-plus ml-1"></i>اقرأ المزيد';
+                fullText.style.maxHeight = '';
+                fullText.style.opacity = '';
+            }, 300);
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const latestButton = document.getElementById('filter-latest');
+    if (latestButton) latestButton.click();
+    const newsFullElements = document.querySelectorAll('.news-full');
+    newsFullElements.forEach(element => {
+        element.style.transition = 'max-height 0.3s ease, opacity 0.3s ease';
+        element.style.overflow = 'hidden';
+    });
+}); 
     </script>
 </body>
 </html>
