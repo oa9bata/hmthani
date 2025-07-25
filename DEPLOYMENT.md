@@ -1,1 +1,0 @@
-# Deployment Instructions for Mthani Quranic Association Website
