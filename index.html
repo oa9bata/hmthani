@@ -381,7 +381,8 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transition: opacity 1s ease-in-out;
+            transform: translateX(100%);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -407,6 +408,17 @@
         
         .hero-slide.active {
             opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .hero-slide.slide-out-left {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+        
+        .hero-slide.slide-out-right {
+            transform: translateX(100%);
+            opacity: 0;
         }
         
         .hero-overlay {
@@ -417,6 +429,122 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
             z-index: 1;
+        }
+        
+        /* Interactive Carousel Controls */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            z-index: 10;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .carousel-arrow:hover {
+            background: rgba(0, 161, 125, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .carousel-arrow-prev {
+            left: 20px;
+        }
+        
+        .carousel-arrow-next {
+            right: 20px;
+        }
+        
+        .carousel-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background: #00a17d;
+            border-color: #00a17d;
+        }
+        
+        .carousel-dot:hover {
+            border-color: #00a17d;
+            transform: scale(1.2);
+        }
+        
+        /* Mobile responsive controls */
+        @media (max-width: 768px) {
+            .carousel-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 14px;
+            }
+            
+            .carousel-arrow-prev {
+                left: 10px;
+            }
+            
+            .carousel-arrow-next {
+                right: 10px;
+            }
+            
+            .carousel-dots {
+                bottom: 10px;
+                gap: 8px;
+            }
+            
+            .carousel-dot {
+                width: 10px;
+                height: 10px;
+            }
+        }
+        
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            .carousel-arrow {
+                width: 35px;
+                height: 35px;
+                font-size: 12px;
+            }
+            
+            .carousel-arrow-prev {
+                left: 5px;
+            }
+            
+            .carousel-arrow-next {
+                right: 5px;
+            }
+        }
+        
+        /* Pause animation indicator */
+        .hero-carousel.paused .carousel-dots::after {
+            content: "⏸";
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
         }
         
         /* Enhanced overlay for mobile readability */
@@ -783,13 +911,32 @@
         <section class="relative" id="home">
             <!-- Hero Carousel -->
             <div class="hero-carousel">
-                <div class="hero-slide active" style="background-image: url('assets/hdr-background.jpg');">
-                </div>
-<!--TO ADD LATER-->>
+                <!-- Carousel Slides -->
+                <div class="hero-slide active" style="background-image: url('assets/hdr-background.jpg');"></div>
+                <div class="hero-slide" style="background-image: url('assets/hdr-background2.jpg');"></div>
+                <div class="hero-slide" style="background-image: url('assets/hdr-bg.jpg');"></div>
+                <div class="hero-slide" style="background-image: url('assets/mthani1.jpg');"></div>
+                <div class="hero-slide" style="background-image: url('assets/mthani2.jpg');"></div>
                 
-            
+                <!-- Navigation Arrows -->
+                <button class="carousel-arrow carousel-arrow-prev" id="prevSlide" aria-label="الشريحة السابقة">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-arrow carousel-arrow-next" id="nextSlide" aria-label="الشريحة التالية">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <!-- Dot Indicators -->
+                <div class="carousel-dots">
+                    <button class="carousel-dot active" data-slide="0" aria-label="الشريحة 1"></button>
+                    <button class="carousel-dot" data-slide="1" aria-label="الشريحة 2"></button>
+                    <button class="carousel-dot" data-slide="2" aria-label="الشريحة 3"></button>
+                    <button class="carousel-dot" data-slide="3" aria-label="الشريحة 4"></button>
+                    <button class="carousel-dot" data-slide="4" aria-label="الشريحة 5"></button>
+                </div>
+            </div>
 
-            <div class="absolute inset-0 flex items-center justify-center hero-content">
+            <div class="absolute inset-0 flex items-center justify-center hero-content pointer-events-none">
                 <div class="max-w-7xl mx-auto px-4 text-center text-white">
                 </div>
             </div>
@@ -1143,28 +1290,229 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ========== HERO CAROUSEL FUNCTIONALITY ==========
-    const heroSlides = document.querySelectorAll('.hero-slide');
-    let currentSlide = 0;
-
-    function showSlide(index) {
-        heroSlides.forEach((slide, i) => {
-            slide.classList.remove('active');
-            if (i === index) {
-                slide.classList.add('active');
+    // ========== INTERACTIVE HERO CAROUSEL FUNCTIONALITY ==========
+    class InteractiveCarousel {
+        constructor() {
+            this.slides = document.querySelectorAll('.hero-slide');
+            this.dots = document.querySelectorAll('.carousel-dot');
+            this.prevBtn = document.getElementById('prevSlide');
+            this.nextBtn = document.getElementById('nextSlide');
+            this.carousel = document.querySelector('.hero-carousel');
+            
+            this.currentSlide = 0;
+            this.autoSlideInterval = null;
+            this.autoSlideDelay = 5000; // 5 seconds
+            this.isPlaying = true;
+            this.touchStartX = 0;
+            this.touchEndX = 0;
+            
+            this.init();
+        }
+        
+        init() {
+            if (this.slides.length === 0) return;
+            
+            this.setupEventListeners();
+            this.startAutoSlide();
+            this.setupTouchEvents();
+            this.setupKeyboardNavigation();
+        }
+        
+        setupEventListeners() {
+            // Arrow button clicks - REVERSED: Left arrow goes next, Right arrow goes previous
+            this.prevBtn?.addEventListener('click', () => this.nextSlide()); // Left arrow = Next
+            this.nextBtn?.addEventListener('click', () => this.prevSlide()); // Right arrow = Previous
+            
+            // Dot clicks
+            this.dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    const direction = index > this.currentSlide ? 'next' : 'prev';
+                    this.goToSlide(index, direction);
+                });
+            });
+            
+            // Pause on hover, resume on leave
+            this.carousel?.addEventListener('mouseenter', () => this.pauseAutoSlide());
+            this.carousel?.addEventListener('mouseleave', () => this.resumeAutoSlide());
+            
+            // Pause when page is hidden, resume when visible
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    this.pauseAutoSlide();
+                } else {
+                    this.resumeAutoSlide();
+                }
+            });
+        }
+        
+        setupTouchEvents() {
+            if (!this.carousel) return;
+            
+            // Touch events for swipe navigation
+            this.carousel.addEventListener('touchstart', (e) => {
+                this.touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            this.carousel.addEventListener('touchend', (e) => {
+                this.touchEndX = e.changedTouches[0].screenX;
+                this.handleSwipe();
+            }, { passive: true });
+            
+            // Mouse events for desktop drag (optional)
+            let isDragging = false;
+            this.carousel.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                this.touchStartX = e.clientX;
+                e.preventDefault();
+            });
+            
+            this.carousel.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+            });
+            
+            this.carousel.addEventListener('mouseup', (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                this.touchEndX = e.clientX;
+                this.handleSwipe();
+            });
+            
+            this.carousel.addEventListener('mouseleave', () => {
+                isDragging = false;
+            });
+        }
+        
+        setupKeyboardNavigation() {
+            document.addEventListener('keydown', (e) => {
+                if (document.activeElement && document.activeElement.closest('.hero-carousel')) {
+                    switch(e.key) {
+                        case 'ArrowLeft':
+                            e.preventDefault();
+                            this.nextSlide(); // Left arrow goes to next (reversed)
+                            break;
+                        case 'ArrowRight':
+                            e.preventDefault();
+                            this.prevSlide(); // Right arrow goes to previous (reversed)
+                            break;
+                        case ' ':
+                            e.preventDefault();
+                            this.toggleAutoSlide();
+                            break;
+                    }
+                }
+            });
+        }
+        
+        handleSwipe() {
+            const swipeThreshold = 50; // Minimum distance for swipe
+            const diff = this.touchStartX - this.touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swiped left - go to next slide
+                    this.nextSlide();
+                } else {
+                    // Swiped right - go to previous slide
+                    this.prevSlide();
+                }
             }
-        });
+        }
+        
+        showSlide(index, direction = 'next') {
+            if (index === this.currentSlide) return;
+            
+            const currentSlideElement = this.slides[this.currentSlide];
+            const nextSlideElement = this.slides[index];
+            
+            // Remove all transition classes first
+            this.slides.forEach(slide => {
+                slide.classList.remove('active', 'slide-out-left', 'slide-out-right');
+            });
+            
+            // Set the animation direction
+            if (direction === 'next') {
+                // Current slide moves out to left, next slide comes from right
+                currentSlideElement?.classList.add('slide-out-left');
+                nextSlideElement?.classList.remove('slide-out-right');
+                nextSlideElement?.classList.add('active');
+            } else {
+                // Current slide moves out to right, next slide comes from left  
+                currentSlideElement?.classList.add('slide-out-right');
+                nextSlideElement?.classList.remove('slide-out-left');
+                nextSlideElement?.classList.add('active');
+            }
+            
+            // Update dots
+            this.dots.forEach((dot, i) => {
+                dot.classList.remove('active');
+                if (i === index) {
+                    dot.classList.add('active');
+                }
+            });
+            
+            this.currentSlide = index;
+        }
+        
+        nextSlide() {
+            const next = (this.currentSlide + 1) % this.slides.length;
+            this.goToSlide(next, 'next');
+        }
+        
+        prevSlide() {
+            const prev = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+            this.goToSlide(prev, 'prev');
+        }
+        
+        goToSlide(index, direction = 'next') {
+            if (index >= 0 && index < this.slides.length) {
+                this.showSlide(index, direction);
+                this.restartAutoSlide(); // Restart timer when manually navigated
+            }
+        }
+        
+        startAutoSlide() {
+            if (this.slides.length <= 1) return;
+            
+            this.autoSlideInterval = setInterval(() => {
+                this.nextSlide();
+            }, this.autoSlideDelay);
+            
+            this.isPlaying = true;
+            this.carousel?.classList.remove('paused');
+        }
+        
+        pauseAutoSlide() {
+            if (this.autoSlideInterval) {
+                clearInterval(this.autoSlideInterval);
+                this.autoSlideInterval = null;
+            }
+            this.isPlaying = false;
+            this.carousel?.classList.add('paused');
+        }
+        
+        resumeAutoSlide() {
+            if (!this.isPlaying && this.slides.length > 1) {
+                this.startAutoSlide();
+            }
+        }
+        
+        restartAutoSlide() {
+            this.pauseAutoSlide();
+            this.startAutoSlide();
+        }
+        
+        toggleAutoSlide() {
+            if (this.isPlaying) {
+                this.pauseAutoSlide();
+            } else {
+                this.resumeAutoSlide();
+            }
+        }
     }
-
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % heroSlides.length;
-        showSlide(currentSlide);
-    }
-
-    // Auto-advance carousel every 3 seconds
-    if (heroSlides.length > 0) {
-        setInterval(nextSlide, 3000);
-    }
+    
+    // Initialize interactive carousel
+    const heroCarousel = new InteractiveCarousel();
 
     // ========== NEWS TICKER FUNCTIONALITY ==========
     const newsTicker = document.getElementById('news-ticker');
