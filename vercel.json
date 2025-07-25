@@ -1,0 +1,22 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/main",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/news",
+      "destination": "/news.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/about-us.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/dashboard2025adminpwd.html"
+    }
+  ]
+} 
