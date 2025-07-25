@@ -32,7 +32,7 @@ class DatabaseService {
             }
             
             this.isInitialized = true;
-            console.log('Database connection established successfully');
+            // Database connection established
         } catch (error) {
             console.error('Database initialization failed:', error);
             throw new Error('Failed to connect to database');
@@ -65,7 +65,7 @@ class DatabaseService {
 
             if (error) throw error;
             
-            console.log('News fetched successfully:', data?.length || 0, 'items');
+            // console.log('News fetched successfully:', data?.length || 0, 'items');
             return data || [];
         } catch (error) {
             console.error('Error fetching news:', error);
@@ -92,7 +92,7 @@ class DatabaseService {
 
             if (error) throw error;
             
-            console.log('News added successfully:', data?.[0]);
+            // console.log('News added successfully:', data?.[0]);
             return data?.[0];
         } catch (error) {
             console.error('Error adding news:', error);
@@ -119,7 +119,7 @@ class DatabaseService {
 
             if (error) throw error;
             
-            console.log('News updated successfully:', data?.[0]);
+            // console.log('News updated successfully:', data?.[0]);
             return data?.[0];
         } catch (error) {
             console.error('Error updating news:', error);
@@ -138,7 +138,7 @@ class DatabaseService {
 
             if (error) throw error;
             
-            console.log('News deleted successfully, ID:', id);
+            // console.log('News deleted successfully, ID:', id);
             return true;
         } catch (error) {
             console.error('Error deleting news:', error);
@@ -157,7 +157,7 @@ class DatabaseService {
 
             if (error) throw error;
             
-            console.log('All news deleted successfully');
+            // console.log('All news deleted successfully');
             return true;
         } catch (error) {
             console.error('Error deleting all news:', error);
@@ -177,7 +177,7 @@ class DatabaseService {
 
             if (error) throw error;
             
-            console.log('Carousel images fetched successfully:', data?.length || 0, 'items');
+            // console.log('Carousel images fetched successfully:', data?.length || 0, 'items');
             return data || [];
         } catch (error) {
             console.error('Error fetching carousel images:', error);
@@ -203,7 +203,7 @@ class DatabaseService {
 
             if (error) throw error;
             
-            console.log('Carousel image added successfully:', data?.[0]);
+            // console.log('Carousel image added successfully:', data?.[0]);
             return data?.[0];
         } catch (error) {
             console.error('Error adding carousel image:', error);
@@ -233,7 +233,7 @@ class DatabaseService {
 
             if (error) throw error;
             
-            console.log('Carousel image updated successfully:', data?.[0]);
+            // console.log('Carousel image updated successfully:', data?.[0]);
             return data?.[0];
         } catch (error) {
             console.error('Error updating carousel image:', error);
@@ -252,7 +252,7 @@ class DatabaseService {
 
             if (error) throw error;
             
-            console.log('Carousel image deleted successfully, ID:', id);
+            // console.log('Carousel image deleted successfully, ID:', id);
             return true;
         } catch (error) {
             console.error('Error deleting carousel image:', error);
@@ -270,7 +270,7 @@ class DatabaseService {
 
             if (error) throw error;
             
-            console.log('Database connection test successful');
+            // console.log('Database connection test successful');
             return true;
         } catch (error) {
             console.error('Database connection test failed:', error);

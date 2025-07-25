@@ -849,14 +849,16 @@ console.log('%c' + '='.repeat(80), 'color: #ff0000; font-weight: bold;');
 
 // ========== SITE MANAGEMENT & ERROR HANDLING ==========
 // Site closure check
-function checkSiteClosure() {
-    const isClosed = localStorage.getItem('mthani-site-closed') === 'true';
-    if (isClosed && !window.location.pathname.includes('dashboard.html') && !window.location.pathname.includes('wait-for-us.html')) {
-        window.location.href = 'wait-for-us.html';
-        return false;
+    function checkSiteClosure() {
+        const isClosed = localStorage.getItem('mthani-site-closed') === 'true';
+        if (isClosed && !window.location.pathname.includes('dashboard.html')) {
+            // Site is closed for maintenance - could redirect to a maintenance page
+            // For now, just return false to prevent normal operation
+            console.warn('Site is in maintenance mode');
+            return false;
+        }
+        return true;
     }
-    return true;
-}
 
 // Global error handler (only for critical errors)
 window.onerror = function(message, source, lineno, colno, error) {

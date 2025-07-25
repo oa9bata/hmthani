@@ -6,6 +6,8 @@
     <title>جمعية مثاني القرآنية - الرئيسية</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- Database Configuration and Service -->
     <script src="db-config.js"></script>
     <script src="database-service.js"></script>
@@ -330,6 +332,7 @@
             opacity: 0;
             transform: translateX(100%);
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            visibility: hidden;
         }
         
         .hero-slide.active {
@@ -337,6 +340,7 @@
             opacity: 1;
             transform: translateX(0);
             z-index: 1;
+            visibility: visible;
         }
         
         .carousel-image {
@@ -392,11 +396,13 @@
         .hero-slide.slide-out-left {
             transform: translateX(-100%);
             opacity: 0;
+            visibility: hidden;
         }
         
         .hero-slide.slide-out-right {
             transform: translateX(100%);
             opacity: 0;
+            visibility: hidden;
         }
         
         .hero-overlay {
@@ -918,6 +924,18 @@
           }
         }
 
+        @media (max-width: 768px) {
+            .news-bg {
+                background: #fff !important;
+            }
+            .news-bg h2,
+            .news-bg .section-subtitle {
+                color: #efb740 !important;
+            }
+            .news-bg .curved-underline.gold::after {
+                background: #efb740 !important;
+            }
+        }
     </style>
     <style>
         .hover-green:hover {
@@ -1383,31 +1401,35 @@
     </div>
 
     <script>
-// ========== SECURITY WARNING ==========
-console.log('%c⚠️ تحذير أمني شديد | SEVERE SECURITY WARNING ⚠️', 'color: #ff0000; font-size: 24px; font-weight: bold; background: #ffeeee; padding: 10px; border: 3px solid #ff0000;');
-console.log('%cتحذير: هذا الموقع محمي قانونياً!', 'color: #ff0000; font-size: 18px; font-weight: bold;');
-console.log('%cWARNING: This website is legally protected!', 'color: #ff0000; font-size: 18px; font-weight: bold;');
-console.log('%c🚨 تحذير للمطورين المخوّلين فقط | DEVELOPERS ONLY WARNING 🚨', 'color: #ff0000; font-size: 20px; font-weight: bold; text-decoration: underline;');
-console.log('%cإذا لم تكن مطوراً مُخولاً، فأنت تنتهك القانون!', 'color: #ff0000; font-size: 16px; font-weight: bold;');
-console.log('%cIf you are not an authorized developer, you are violating the law!', 'color: #ff0000; font-size: 16px; font-weight: bold;');
-console.log('%c🔒 عنوان IP الخاص بك مُسجل ومُراقب: ' + window.location.hostname, 'color: #ff0000; font-size: 16px; font-weight: bold; background: #ffe6e6;');
-console.log('%c🔒 Your IP address is logged and monitored: ' + window.location.hostname, 'color: #ff0000; font-size: 16px; font-weight: bold; background: #ffe6e6;');
-console.log('%c⚖️ جمعية مثاني القرآنية - محمية بموجب القانون السعودي', 'color: #ff0000; font-size: 16px; font-weight: bold;');
-console.log('%c⚖️ Mathani Quranic Association - Protected under Saudi Law', 'color: #ff0000; font-size: 16px; font-weight: bold;');
-console.log('%cللمطورين المُخولين فقط - تحت المراقبة الأمنية', 'color: #ff0000; font-size: 14px; font-weight: bold;');
-console.log('%cAuthorized developers only - Under security surveillance', 'color: #ff0000; font-size: 14px; font-weight: bold;');
-console.log('%c' + '='.repeat(80), 'color: #ff0000; font-weight: bold;');
+// ========== SECURITY WARNING ========== 
+// Removed console warnings for production
+
+// ========== SECURITY UTILITIES ==========
+function sanitizeHTML(str) {
+    if (!str) return '';
+    return str.replace(/[&<>"']/g, function(match) {
+        return {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+        }[match];
+    });
+}
 
 // ========== SITE MANAGEMENT & ERROR HANDLING ==========
 // Site closure check
-function checkSiteClosure() {
-    const isClosed = localStorage.getItem('mthani-site-closed') === 'true';
-    if (isClosed && !window.location.pathname.includes('dashboard.html') && !window.location.pathname.includes('wait-for-us.html')) {
-        window.location.href = 'wait-for-us.html';
-        return false;
+    function checkSiteClosure() {
+        const isClosed = localStorage.getItem('mthani-site-closed') === 'true';
+        if (isClosed && !window.location.pathname.includes('dashboard.html')) {
+            // Site is closed for maintenance - could redirect to a maintenance page
+            // For now, just return false to prevent normal operation
+            console.warn('Site is in maintenance mode');
+            return false;
+        }
+        return true;
     }
-    return true;
-}
 
 // Global error handler (only for critical errors)
 window.onerror = function(message, source, lineno, colno, error) {
@@ -1491,247 +1513,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ========== INTERACTIVE HERO CAROUSEL FUNCTIONALITY ==========
-    class InteractiveCarousel {
-        constructor() {
-            this.slides = document.querySelectorAll('.hero-slide');
-            this.dots = document.querySelectorAll('.carousel-dot');
-            this.prevBtn = document.getElementById('prevSlide');
-            this.nextBtn = document.getElementById('nextSlide');
-            this.carousel = document.querySelector('.hero-carousel');
-            
-            this.currentSlide = 0;
-            this.autoSlideInterval = null;
-            this.autoSlideDelay = 5000; // 5 seconds
-            this.isPlaying = true;
-            this.touchStartX = 0;
-            this.touchEndX = 0;
-            
-            this.init();
-        }
-        
-        init() {
-            if (this.slides.length === 0) return;
-            
-            this.setupEventListeners();
-            this.startAutoSlide();
-            this.setupTouchEvents();
-            this.setupKeyboardNavigation();
-        }
-        
-        // Method to refresh carousel after dynamic content is loaded
-        refresh() {
-            // Stop any existing auto-slide
-            this.pauseAutoSlide();
-            
-            // Re-query for slides and dots
-            this.slides = document.querySelectorAll('.hero-slide');
-            this.dots = document.querySelectorAll('.carousel-dot');
-            this.currentSlide = 0;
-            
-            // Reinitialize if we have slides
-            if (this.slides.length > 0) {
-                this.init();
-                console.log('Carousel refreshed with', this.slides.length, 'slides');
-            } else {
-                console.log('No slides found during carousel refresh');
-            }
-        }
-        
-}
-        
-        setupEventListeners() {
-            // Arrow button clicks - REVERSED: Left arrow goes next, Right arrow goes previous
-            this.prevBtn?.addEventListener('click', () => this.nextSlide()); // Left arrow = Next
-            this.nextBtn?.addEventListener('click', () => this.prevSlide()); // Right arrow = Previous
-            
-            // Dot clicks
-            this.dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    const direction = index > this.currentSlide ? 'next' : 'prev';
-                    this.goToSlide(index, direction);
-                });
-            });
-            
-            // Pause on hover, resume on leave
-            this.carousel?.addEventListener('mouseenter', () => this.pauseAutoSlide());
-            this.carousel?.addEventListener('mouseleave', () => this.resumeAutoSlide());
-            
-            // Pause when page is hidden, resume when visible
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) {
-                    this.pauseAutoSlide();
-                } else {
-                    this.resumeAutoSlide();
-                }
-            });
-        }
-        
-        setupTouchEvents() {
-            if (!this.carousel) return;
-            
-            // Touch events for swipe navigation
-            this.carousel.addEventListener('touchstart', (e) => {
-                this.touchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-            
-            this.carousel.addEventListener('touchend', (e) => {
-                this.touchEndX = e.changedTouches[0].screenX;
-                this.handleSwipe();
-            }, { passive: true });
-            
-            // Mouse events for desktop drag (optional)
-            let isDragging = false;
-            this.carousel.addEventListener('mousedown', (e) => {
-                isDragging = true;
-                this.touchStartX = e.clientX;
-                e.preventDefault();
-            });
-            
-            this.carousel.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                e.preventDefault();
-            });
-            
-            this.carousel.addEventListener('mouseup', (e) => {
-                if (!isDragging) return;
-                isDragging = false;
-                this.touchEndX = e.clientX;
-                this.handleSwipe();
-            });
-            
-            this.carousel.addEventListener('mouseleave', () => {
-                isDragging = false;
-            });
-        }
-        
-        setupKeyboardNavigation() {
-            document.addEventListener('keydown', (e) => {
-                if (document.activeElement && document.activeElement.closest('.hero-carousel')) {
-                    switch(e.key) {
-                        case 'ArrowLeft':
-                            e.preventDefault();
-                            this.nextSlide(); // Left arrow goes to next (reversed)
-                            break;
-                        case 'ArrowRight':
-                            e.preventDefault();
-                            this.prevSlide(); // Right arrow goes to previous (reversed)
-                            break;
-                        case ' ':
-                            e.preventDefault();
-                            this.toggleAutoSlide();
-                            break;
-                    }
-                }
-            });
-        }
-        
-        handleSwipe() {
-            const swipeThreshold = 50; // Minimum distance for swipe
-            const diff = this.touchStartX - this.touchEndX;
-            
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0) {
-                    // Swiped left - go to next slide
-                    this.nextSlide();
-                } else {
-                    // Swiped right - go to previous slide
-                    this.prevSlide();
-                }
-            }
-        }
-        
-        showSlide(index, direction = 'next') {
-            if (index === this.currentSlide) return;
-            
-            const currentSlideElement = this.slides[this.currentSlide];
-            const nextSlideElement = this.slides[index];
-            
-            // Remove all transition classes first
-            this.slides.forEach(slide => {
-                slide.classList.remove('active', 'slide-out-left', 'slide-out-right');
-            });
-            
-            // Set the animation direction
-            if (direction === 'next') {
-                // Current slide moves out to left, next slide comes from right
-                currentSlideElement?.classList.add('slide-out-left');
-                nextSlideElement?.classList.remove('slide-out-right');
-                nextSlideElement?.classList.add('active');
-            } else {
-                // Current slide moves out to right, next slide comes from left  
-                currentSlideElement?.classList.add('slide-out-right');
-                nextSlideElement?.classList.remove('slide-out-left');
-                nextSlideElement?.classList.add('active');
-            }
-            
-            // Update dots
-            this.dots.forEach((dot, i) => {
-                dot.classList.remove('active');
-                if (i === index) {
-                    dot.classList.add('active');
-                }
-            });
-            
-            this.currentSlide = index;
-        }
-        
-        nextSlide() {
-            const next = (this.currentSlide + 1) % this.slides.length;
-            this.goToSlide(next, 'next');
-        }
-        
-        prevSlide() {
-            const prev = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
-            this.goToSlide(prev, 'prev');
-        }
-        
-        goToSlide(index, direction = 'next') {
-            if (index >= 0 && index < this.slides.length) {
-                this.showSlide(index, direction);
-                this.restartAutoSlide(); // Restart timer when manually navigated
-            }
-        }
-        
-        startAutoSlide() {
-            if (this.slides.length <= 1) return;
-            
-            this.autoSlideInterval = setInterval(() => {
-                this.nextSlide();
-            }, this.autoSlideDelay);
-            
-            this.isPlaying = true;
-            this.carousel?.classList.remove('paused');
-        }
-        
-        pauseAutoSlide() {
-            if (this.autoSlideInterval) {
-                clearInterval(this.autoSlideInterval);
-                this.autoSlideInterval = null;
-            }
-            this.isPlaying = false;
-            this.carousel?.classList.add('paused');
-        }
-        
-        resumeAutoSlide() {
-            if (!this.isPlaying && this.slides.length > 1) {
-                this.startAutoSlide();
-            }
-        }
-        
-        restartAutoSlide() {
-            this.pauseAutoSlide();
-            this.startAutoSlide();
-        }
-        
-        toggleAutoSlide() {
-            if (this.isPlaying) {
-                this.pauseAutoSlide();
-            } else {
-                this.resumeAutoSlide();
-            }
-        }
-    }
+    // ========== ANIMATED HERO CAROUSEL WITH AUTO-SLIDE ==========
+    // Carousel with smooth animations, auto-slide, and manual navigation
+            // Carousel initialized
+
     
 
     // ========== NEWS TICKER FUNCTIONALITY ==========
@@ -2239,111 +2024,364 @@ if (respectsReducedMotion()) {
     }
 })();
 
-    // ========== DYNAMIC CAROUSEL LOADING FROM DATABASE ==========
+    // ========== SIMPLE CAROUSEL WITH DATABASE IMAGES (NO MOVEMENT) ==========
     async function loadCarouselFromDatabase() {
         try {
-            console.log('Loading carousel images from database...');
-            const images = await databaseService.getAllCarouselImages();
-            const activeImages = images.filter(img => img.is_active);
-            
-            console.log('Found', activeImages.length, 'active carousel images');
+            const dbService = new DatabaseService();
+            const images = await dbService.getAllCarouselImages();
+            const activeImages = images.filter(img => img.is_active).sort((a, b) => a.sort_order - b.sort_order);
             
             const carousel = document.querySelector('.hero-carousel');
+            const slidesContainer = carousel.querySelector('.hero-slide')?.parentNode || carousel;
             const dotsContainer = document.querySelector('.carousel-dots');
             
-            if (!carousel || !dotsContainer) {
-                console.error('Carousel containers not found');
-                return false;
-            }
-            
-            // Clear existing slides (if any)
+            // Clear existing slides and dots
             const existingSlides = carousel.querySelectorAll('.hero-slide');
+            const existingDots = dotsContainer.querySelectorAll('.carousel-dot');
             existingSlides.forEach(slide => slide.remove());
+            existingDots.forEach(dot => dot.remove());
             
-            // Clear existing dots
-            dotsContainer.innerHTML = '';
-            
-            if (activeImages.length === 0) {
-                console.log('No active images found, using fallback');
-                // Fallback to default image if no database images
-                const fallbackSlide = document.createElement('div');
-                fallbackSlide.className = 'hero-slide active';
-                fallbackSlide.innerHTML = '<img src="assets/hdr-background.jpg" alt="صورة افتراضية" class="carousel-image">';
+            if (activeImages.length > 0) {
+                // Create slides from database images
+                activeImages.forEach((image, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
+                    slide.innerHTML = `<img src="${sanitizeHTML(image.image_url)}" alt="${sanitizeHTML(image.alt_text || 'صورة البطل')}" class="carousel-image">`;
+                    carousel.insertBefore(slide, carousel.querySelector('.carousel-arrow'));
+                    
+                    const dot = document.createElement('button');
+                    dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
+                    dot.setAttribute('data-slide', index);
+                    dot.setAttribute('aria-label', `Slide ${index + 1}`);
+                    dotsContainer.appendChild(dot);
+                });
+                // Images loaded successfully
+            } else {
+                // Fallback to default image if no active images in database
+                const slide = document.createElement('div');
+                slide.className = 'hero-slide active';
+                slide.innerHTML = '<img src="assets/hdr-background.jpg" alt="صورة افتراضية" class="carousel-image">';
+                carousel.insertBefore(slide, carousel.querySelector('.carousel-arrow'));
                 
-                // Insert before navigation arrows
-                const prevBtn = carousel.querySelector('#prevSlide');
-                carousel.insertBefore(fallbackSlide, prevBtn);
-                
-                // Add single dot
                 const dot = document.createElement('button');
                 dot.className = 'carousel-dot active';
                 dot.setAttribute('data-slide', '0');
-                dot.setAttribute('aria-label', 'الشريحة 1');
+                dot.setAttribute('aria-label', 'Slide 1');
                 dotsContainer.appendChild(dot);
-                
-                return true;
+                // Using default image
             }
             
-            // Add database images as slides
-            activeImages.forEach((image, index) => {
-                // Create slide
-                const slide = document.createElement('div');
-                slide.className = `hero-slide ${index === 0 ? 'active' : ''}`;
-                slide.innerHTML = `<img src="${image.image_url}" alt="${image.alt_text || 'صورة البطل'}" class="carousel-image">`;
-                
-                // Insert before navigation arrows
-                const prevBtn = carousel.querySelector('#prevSlide');
-                carousel.insertBefore(slide, prevBtn);
-                
-                // Create dot
-                const dot = document.createElement('button');
-                dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
-                dot.setAttribute('data-slide', index.toString());
-                dot.setAttribute('aria-label', `الشريحة ${index + 1}`);
-                dotsContainer.appendChild(dot);
-            });
-            
-            console.log('Carousel images loaded successfully');
-            return true;
+            // Setup navigation after images are loaded
+            setTimeout(() => {
+                setupCarouselNavigation();
+            }, 100); // Small delay to ensure DOM is updated
             
         } catch (error) {
-            console.error('Error loading carousel from database:', error);
-            // Fallback to default image on error
-            const carousel = document.querySelector('.hero-carousel');
-            const dotsContainer = document.querySelector('.carousel-dots');
-            
-            if (carousel && dotsContainer) {
-                const fallbackSlide = document.createElement('div');
-                fallbackSlide.className = 'hero-slide active';
-                fallbackSlide.innerHTML = '<img src="assets/hdr-background.jpg" alt="صورة افتراضية" class="carousel-image">';
-                
-                const prevBtn = carousel.querySelector('#prevSlide');
-                carousel.insertBefore(fallbackSlide, prevBtn);
-                
-                const dot = document.createElement('button');
-                dot.className = 'carousel-dot active';
-                dot.setAttribute('data-slide', '0');
-                dot.setAttribute('aria-label', 'الشريحة 1');
-                dotsContainer.appendChild(dot);
-            }
-            return false;
+            console.error('Error loading carousel images:', error);
+            // Fallback: keep existing hardcoded images
         }
     }
-    
-    // Load carousel images and then initialize carousel
-    (async function initializeCarousel() {
-        // Initialize carousel first (it will be empty initially)
-        const heroCarousel = new InteractiveCarousel();
-        // Make it globally accessible
-        window.heroCarousel = heroCarousel;
-        
-        // Load images from database
-        await loadCarouselFromDatabase();
-        
-        // Refresh carousel with loaded images
-        heroCarousel.refresh();
-    })();
 
-    </script>
+    // Load images on page load
+    loadCarouselFromDatabase();
+    
+    // ========== CAROUSEL NAVIGATION FUNCTIONS ==========
+    let currentSlide = 0;
+    let totalSlides = 0;
+    let autoSlideInterval = null;
+    let isAutoSliding = true;
+
+    function showSlide(index, direction = 'next') {
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+        
+        if (slides.length === 0 || index === currentSlide) return;
+        
+        totalSlides = slides.length;
+        const currentSlideElement = slides[currentSlide];
+        const nextSlideElement = slides[index];
+        
+        // Force browser reflow to ensure consistent timing
+        currentSlideElement?.offsetHeight;
+        nextSlideElement?.offsetHeight;
+        
+        // Remove all transition classes and reset positions
+        slides.forEach(slide => {
+            slide.classList.remove('active', 'slide-out-left', 'slide-out-right');
+        });
+        
+        // Set initial positions before transition
+        if (direction === 'next') {
+            // Next slide starts from the right
+            nextSlideElement?.classList.add('slide-out-right');
+        } else {
+            // Next slide starts from the left  
+            nextSlideElement?.classList.add('slide-out-left');
+        }
+        
+        // Force reflow to ensure initial position is set
+        nextSlideElement?.offsetHeight;
+        
+        // Small delay to ensure consistent transition timing
+        setTimeout(() => {
+            // Apply transitions based on direction
+            if (direction === 'next') {
+                currentSlideElement?.classList.add('slide-out-left');
+                nextSlideElement?.classList.remove('slide-out-right');
+                nextSlideElement?.classList.add('active');
+            } else {
+                currentSlideElement?.classList.add('slide-out-right');
+                nextSlideElement?.classList.remove('slide-out-left');
+                nextSlideElement?.classList.add('active');
+            }
+        }, 10); // Small delay for consistent timing
+        
+        // Update dots
+        dots.forEach((dot, i) => {
+            dot.classList.remove('active');
+            if (i === index) {
+                dot.classList.add('active');
+            }
+        });
+        
+        currentSlide = index;
+    }
+
+    function nextSlide() {
+        const slides = document.querySelectorAll('.hero-slide');
+        if (slides.length === 0) return;
+        
+        const next = (currentSlide + 1) % slides.length;
+        showSlide(next, 'next');
+    }
+
+    function prevSlide() {
+        const slides = document.querySelectorAll('.hero-slide');
+        if (slides.length === 0) return;
+        
+        const prev = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prev, 'prev');
+    }
+
+    // ========== AUTO-SLIDE FUNCTIONALITY ==========
+    function startAutoSlide() {
+        const slides = document.querySelectorAll('.hero-slide');
+        if (slides.length <= 1) return;
+        
+        // Always clear existing interval first to prevent multiple timers
+        if (autoSlideInterval) {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = null;
+        }
+        
+        autoSlideInterval = setInterval(() => {
+            if (isAutoSliding) {
+                nextSlide();
+            }
+        }, 5000); // 5 seconds
+        
+        // Auto-slide active
+    }
+
+    function pauseAutoSlide() {
+        isAutoSliding = false;
+        if (autoSlideInterval) {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = null;
+        }
+    }
+
+    function resumeAutoSlide() {
+        if (!isAutoSliding) {
+            isAutoSliding = true;
+            startAutoSlide();
+        }
+    }
+
+    function restartAutoSlide() {
+        // Clear any existing timer first
+        if (autoSlideInterval) {
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = null;
+        }
+        // Reset state and start fresh
+        isAutoSliding = true;
+        startAutoSlide();
+    }
+
+    // ========== ARROW CLICK HANDLERS ==========
+    function setupArrowHandlers() {
+        const prevBtn = document.getElementById('prevSlide');
+        const nextBtn = document.getElementById('nextSlide');
+        
+        // Left arrow goes to next slide (swipe right)
+        prevBtn?.addEventListener('click', () => {
+            nextSlide();
+            restartAutoSlide(); // Reset timer on manual navigation
+        });
+        
+        // Right arrow goes to previous slide (swipe left)  
+        nextBtn?.addEventListener('click', () => {
+            prevSlide();
+            restartAutoSlide(); // Reset timer on manual navigation
+        });
+        
+        // Arrow handlers active
+    }
+
+    // ========== DOT CLICK HANDLERS ==========
+    function setupDotHandlers() {
+        const dots = document.querySelectorAll('.carousel-dot');
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                const direction = index > currentSlide ? 'next' : 'prev';
+                showSlide(index, direction);
+                restartAutoSlide(); // Reset timer on manual navigation
+            });
+        });
+        
+        // Dot handlers active
+    }
+
+    // ========== HOVER HANDLERS ==========
+    function setupHoverHandlers() {
+        const carousel = document.querySelector('.hero-carousel');
+        
+        carousel?.addEventListener('mouseenter', () => {
+            pauseAutoSlide();
+        });
+        
+        carousel?.addEventListener('mouseleave', () => {
+            resumeAutoSlide();
+        });
+        
+        // Hover handlers active
+    }
+
+    // ========== TOUCH/SWIPE HANDLERS ==========
+    function setupSwipeHandlers() {
+        const carousel = document.querySelector('.hero-carousel');
+        if (!carousel) return;
+        
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let isDragging = false;
+        let startTime = 0;
+        let lastSwipeTime = 0; // Debounce rapid swipes
+        
+        // Touch events for mobile
+        carousel.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            startTime = Date.now();
+            isDragging = true;
+            pauseAutoSlide(); // Pause auto-slide during touch
+        }, { passive: true });
+        
+        carousel.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            // Prevent default scrolling during swipe
+            e.preventDefault();
+        }, { passive: false });
+        
+        carousel.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            isDragging = false;
+            resumeAutoSlide(); // Resume auto-slide after touch
+        }, { passive: true });
+        
+        // Mouse events for desktop drag
+        carousel.addEventListener('mousedown', (e) => {
+            touchStartX = e.clientX;
+            startTime = Date.now();
+            isDragging = true;
+            pauseAutoSlide(); // Pause auto-slide during drag
+            e.preventDefault(); // Prevent text selection
+        });
+        
+        carousel.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+        });
+        
+        carousel.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            touchEndX = e.clientX;
+            handleSwipe();
+            isDragging = false;
+            resumeAutoSlide(); // Resume auto-slide after drag
+        });
+        
+        carousel.addEventListener('mouseleave', () => {
+            if (isDragging) {
+                isDragging = false;
+                resumeAutoSlide();
+            }
+        });
+        
+        function handleSwipe() {
+            const swipeDistance = touchEndX - touchStartX;
+            const swipeTime = Date.now() - startTime;
+            const currentTime = Date.now();
+            const minSwipeDistance = 50; // Minimum distance for swipe
+            const maxSwipeTime = 500; // Maximum time for swipe (ms)
+            const debounceTime = 300; // Minimum time between swipes (ms)
+            
+            // Debounce rapid swipes
+            if (currentTime - lastSwipeTime < debounceTime) {
+                // Swipe ignored - too rapid
+                return;
+            }
+            
+            // Check if it's a valid swipe
+            if (Math.abs(swipeDistance) >= minSwipeDistance && swipeTime <= maxSwipeTime) {
+                lastSwipeTime = currentTime;
+                
+                if (swipeDistance > 0) {
+                    // Swiped right - go to next slide
+                    nextSlide();
+                } else {
+                    // Swiped left - go to previous slide  
+                    prevSlide();
+                }
+                
+                // Delayed restart to prevent timer conflicts
+                setTimeout(() => {
+                    restartAutoSlide(); 
+                }, 50);
+            }
+        }
+        
+        // Swipe handlers active
+    }
+
+    // ========== MAIN CAROUSEL SETUP ==========
+    function setupCarouselNavigation() {
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+        
+        if (slides.length === 0) {
+            // No slides found
+            return;
+        }
+        
+        // Set initial state
+        currentSlide = 0;
+        totalSlides = slides.length;
+        
+        // Setup all handlers
+        setupArrowHandlers();
+        setupDotHandlers();
+        setupHoverHandlers();
+        setupSwipeHandlers();
+        
+        // Start auto-slide
+        startAutoSlide();
+        
+        // Carousel navigation ready
+    }
+</script>
 </body>
 </html>
