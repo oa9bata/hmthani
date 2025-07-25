@@ -165,6 +165,101 @@ class DatabaseService {
         }
     }
 
+    // ========== CAROUSEL IMAGE MANAGEMENT METHODS ==========
+    async getAllCarouselImages() {
+        await this.initialize();
+        
+        try {
+            const { data, error } = await this.client
+                .from('carousel_images')
+                .select('*')
+                .order('sort_order', { ascending: true });
+
+            if (error) throw error;
+            
+            console.log('Carousel images fetched successfully:', data?.length || 0, 'items');
+            return data || [];
+        } catch (error) {
+            console.error('Error fetching carousel images:', error);
+            throw new Error('Failed to fetch carousel images from database');
+        }
+    }
+
+    async addCarouselImage(imageData) {
+        await this.initialize();
+        
+        try {
+            const dbData = {
+                image_url: imageData.image_url,
+                alt_text: imageData.alt_text || '',
+                sort_order: imageData.sort_order || 0,
+                is_active: imageData.is_active !== false
+            };
+
+            const { data, error } = await this.client
+                .from('carousel_images')
+                .insert([dbData])
+                .select();
+
+            if (error) throw error;
+            
+            console.log('Carousel image added successfully:', data?.[0]);
+            return data?.[0];
+        } catch (error) {
+            console.error('Error adding carousel image:', error);
+            throw new Error('Failed to add carousel image to database');
+        }
+    }
+
+    async updateCarouselImage(id, imageData) {
+        await this.initialize();
+        
+        try {
+            const dbData = {
+                alt_text: imageData.alt_text || '',
+                sort_order: imageData.sort_order || 0,
+                is_active: imageData.is_active !== false
+            };
+
+            if (imageData.image_url) {
+                dbData.image_url = imageData.image_url;
+            }
+
+            const { data, error } = await this.client
+                .from('carousel_images')
+                .update(dbData)
+                .eq('id', id)
+                .select();
+
+            if (error) throw error;
+            
+            console.log('Carousel image updated successfully:', data?.[0]);
+            return data?.[0];
+        } catch (error) {
+            console.error('Error updating carousel image:', error);
+            throw new Error('Failed to update carousel image in database');
+        }
+    }
+
+    async deleteCarouselImage(id) {
+        await this.initialize();
+        
+        try {
+            const { error } = await this.client
+                .from('carousel_images')
+                .delete()
+                .eq('id', id);
+
+            if (error) throw error;
+            
+            console.log('Carousel image deleted successfully, ID:', id);
+            return true;
+        } catch (error) {
+            console.error('Error deleting carousel image:', error);
+            throw new Error('Failed to delete carousel image from database');
+        }
+    }
+
     async testConnection() {
         await this.initialize();
         
