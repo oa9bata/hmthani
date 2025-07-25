@@ -1519,6 +1519,27 @@ document.addEventListener('DOMContentLoaded', function() {
             this.setupKeyboardNavigation();
         }
         
+        // Method to refresh carousel after dynamic content is loaded
+        refresh() {
+            // Stop any existing auto-slide
+            this.pauseAutoSlide();
+            
+            // Re-query for slides and dots
+            this.slides = document.querySelectorAll('.hero-slide');
+            this.dots = document.querySelectorAll('.carousel-dot');
+            this.currentSlide = 0;
+            
+            // Reinitialize if we have slides
+            if (this.slides.length > 0) {
+                this.init();
+                console.log('Carousel refreshed with', this.slides.length, 'slides');
+            } else {
+                console.log('No slides found during carousel refresh');
+            }
+        }
+        
+}
+        
         setupEventListeners() {
             // Arrow button clicks - REVERSED: Left arrow goes next, Right arrow goes previous
             this.prevBtn?.addEventListener('click', () => this.nextSlide()); // Left arrow = Next
@@ -1712,8 +1733,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Initialize interactive carousel
-    const heroCarousel = new InteractiveCarousel();
 
     // ========== NEWS TICKER FUNCTIONALITY ==========
     const newsTicker = document.getElementById('news-ticker');
@@ -2313,15 +2332,18 @@ if (respectsReducedMotion()) {
     
     // Load carousel images and then initialize carousel
     (async function initializeCarousel() {
-        await loadCarouselFromDatabase();
-        // Initialize interactive carousel after images are loaded
+        // Initialize carousel first (it will be empty initially)
         const heroCarousel = new InteractiveCarousel();
-        // Make it globally accessible for debugging
+        // Make it globally accessible
         window.heroCarousel = heroCarousel;
+        
+        // Load images from database
+        await loadCarouselFromDatabase();
+        
+        // Refresh carousel with loaded images
+        heroCarousel.refresh();
     })();
 
-    // Initialize interactive carousel
-    const heroCarousel = new InteractiveCarousel();
     </script>
 </body>
 </html>
