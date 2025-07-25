@@ -1,27 +1,8 @@
-// Database Configuration - Secure Environment Variables
+// Database Configuration - Hardcoded for static hosting
 const DB_CONFIG = {
-    // For production: set these in your hosting platform environment variables
-    // For development: create a .env file with these values
-    
-    url: (typeof process !== 'undefined' && process?.env?.VITE_DATABASE_URL) ||
-         // Production requires environment variables - no fallback for security
-         (() => {
-             console.error('VITE_DATABASE_URL environment variable not found. Please set it in your .env file or hosting platform.');
-             return null;
-         })(),
-         
-    key: (typeof process !== 'undefined' && process?.env?.VITE_DATABASE_ANON_KEY) ||
-         // Production requires environment variables - no fallback for security  
-         (() => {
-             console.error('VITE_DATABASE_ANON_KEY environment variable not found. Please set it in your .env file or hosting platform.');
-             return null;
-         })()
+    url: 'https://hzqvcosfhrzkygovtyyk.supabase.co',
+    key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh6cXZjb3NmaHJ6a3lnb3Z0eXlrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzNjYwMDgsImV4cCI6MjA2ODk0MjAwOH0.cqwjd-fA9JxE1cgiB1jO9MKBePiS0sjr_pVTuSBvceQ'
 };
-
-// Validation - ensure we have valid configuration
-if (!DB_CONFIG.url || !DB_CONFIG.key) {
-    console.error('⚠️ Database configuration missing! Please check your environment variables.');
-}
 
 // Database table name - using your custom table name
 const TABLE_NAME = 'webNews';
