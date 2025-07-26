@@ -79,198 +79,202 @@
             z-index: 1;
         }
     </style>
+      <style> 
+        #logo {
+           cursor: pointer; }
+     </style>
 </head>
 <body class="bg-gray-50">
 
 
-    <header class="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50" role="navigation" aria-label="التنقل الرئيسي">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center py-3 md:py-8">
-                <!-- Logo and Contact Section (Left side in RTL) -->
-                <div class="flex items-center space-x-6 space-x-reverse mr-2 lg:mr-12">
-                    <!-- Logo -->
-                    <div class="w-16 h-12 sm:w-20 sm:h-16 md:w-32 md:h-28 lg:w-36 lg:h-32 flex items-center justify-center overflow-hidden" id="logo">
-                        <img src="assets/logoTransparent.png" alt="مثاني القرآنية" class="w-full h-full object-contain rounded-lg shadow-md">
-                    </div>
-                    
-                    <!-- Contact Buttons -->
-                    <div class="hidden lg:flex flex-col space-y-2">
-                        <!-- Phone Contact -->
-                        <div class="flex items-center space-x-2 space-x-reverse bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-[#00a17d]/5 hover:border-[#00a17d]/20 transition-colors phone-contact-card">
-                            <i class="fas fa-phone text-[#00a17d] text-sm"></i>
-                            <div class="flex flex-col text-right">
-                                <span class="text-xs font-medium text-[#00a17d]">اتصل بنا</span>
-                                <a href="tel:+966112345678" class="text-xs text-gray-600 hover:text-[#00a17d] transition-colors">011 234 5678</a>
-                            </div>
-                        </div>
-                        
-                        <!-- Email Contact -->
-                        <div class="flex items-center space-x-2 space-x-reverse bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-[#00a17d]/5 hover:border-[#00a17d]/20 transition-colors phone-contact-card">
-                            <i class="fas fa-envelope text-[#00a17d] text-sm"></i>
-                            <div class="flex flex-col text-right">
-                                <span class="text-xs font-medium text-[#00a17d]">راسلنا</span>
-                                <a href="mailto:info@mthani.org" class="text-xs text-gray-600 hover:text-[#00a17d] transition-colors">info@mthani.org</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+   <header class="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50" role="navigation" aria-label="التنقل الرئيسي">
+       <div class="max-w-7xl mx-auto px-4">
+           <div class="flex justify-between items-center py-3 md:py-8">
+               <!-- Logo and Contact Section (Left side in RTL) -->
+               <div class="flex items-center space-x-6 space-x-reverse mr-2 lg:mr-12">
+                   <!-- Logo -->
+                   <a href="index.html" class="w-16 h-12 sm:w-20 sm:h-16 md:w-32 md:h-28 lg:w-36 lg:h-32 flex items-center justify-center overflow-hidden cursor-pointer hover:opacity-90 transition-opacity" id="logo">
+                       <img src="assets/logoTransparent.png" alt="مثاني القرآنية" class="w-full h-full object-contain rounded-lg shadow-md">
+                   </a>
+                   
+                   <!-- Contact Buttons -->
+                   <div class="hidden lg:flex flex-col space-y-2">
+                       <!-- Phone Contact -->
+                       <div class="flex items-center space-x-2 space-x-reverse bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-[#00a17d]/5 hover:border-[#00a17d]/20 transition-colors phone-contact-card">
+                           <i class="fas fa-phone text-[#00a17d] text-sm"></i>
+                           <div class="flex flex-col text-right">
+                               <span class="text-xs font-medium text-[#00a17d]">اتصل بنا</span>
+                               <a href="tel:+966112345678" class="text-xs text-gray-600 hover:text-[#00a17d] transition-colors">011 234 5678</a>
+                           </div>
+                       </div>
+                       
+                       <!-- Email Contact -->
+                       <div class="flex items-center space-x-2 space-x-reverse bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-[#00a17d]/5 hover:border-[#00a17d]/20 transition-colors phone-contact-card">
+                           <i class="fas fa-envelope text-[#00a17d] text-sm"></i>
+                           <div class="flex flex-col text-right">
+                               <span class="text-xs font-medium text-[#00a17d]">راسلنا</span>
+                               <a href="mailto:info@mthani.org" class="text-xs text-gray-600 hover:text-[#00a17d] transition-colors">info@mthani.org</a>
+                           </div>
+                       </div>
+                   </div>
+               </div>
 
-                            <nav class="hidden lg:flex items-center space-x-8 space-x-reverse ml-2 lg:ml-12">
-                <a href="index.html" class="text-gray-700 hover:text-[#00a17d] font-medium">الرئيسية</a>
-                    
-                    <!-- عن الجمعية -->
-                    <div class="relative dropdown">
-                        <button class="text-gray-700 hover:text-[#00a17d] font-medium flex items-center" aria-expanded="false">
-                            عن الجمعية <i class="fas fa-chevron-down mr-1 text-xs"></i>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="about-us.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-info-circle ml-2 text-[#00a17d]"></i>من نحن</a>
-                            <a href="license-certificate.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-certificate ml-2 text-[#00a17d]"></i>شهاده الترخيص</a>
-                            <a href="commercial-registry.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-file-contract ml-2 text-[#00a17d]"></i>السجل التجاري</a>
-                            <a href="strategic-map.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-map ml-2 text-[#00a17d]"></i> الخريطه الإستراتيجيه</a>
-                            <a href="general-assembly.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-users ml-2 text-[#00a17d]"></i>الجمعية العمومية</a>
-                            <a href="board-of-directors.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-user-tie ml-2 text-[#00a17d]"></i>مجلس الإداره</a>
-                            <a href="executive-management.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-briefcase ml-2 text-[#00a17d]"></i>الإدارة التنفيذية</a>
-                            <a href="organizational-structure.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-sitemap ml-2 text-[#00a17d]"></i>الهيكل التنظيمي</a>
-                            <a href="work-team.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-user-friends ml-2 text-[#00a17d]"></i>فريق العمل</a>
-                        </div>
-                    </div>
-                    
-                    <div class="relative dropdown">
-                        <button class="text-gray-700 hover:text-[#00a17d] font-medium flex items-center" aria-expanded="false">
-                            التقارير <i class="fas fa-chevron-down mr-1 text-xs"></i>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="annual-report-2024.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-file-alt ml-2 text-[#00a17d]"></i>التقرير السنوي لعام 2024</a>
-                            <a href="annual-report-2025.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-file-alt ml-2 text-[#00a17d]"></i>التقرير السنوي لعام 2025</a>
-                        </div>
-                    </div>
-                    
-                    <!-- قياس الرضا -->
-                    <div class="relative dropdown">
-                        <button class="text-gray-700 hover:text-[#00a17d] font-medium flex items-center" aria-expanded="false">
-                            قياس الرضا <i class="fas fa-chevron-down mr-1 text-xs"></i>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-smile ml-2 text-[#00a17d]"></i> رضا المستفيدين</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-user-check ml-2 text-[#00a17d]"></i> رضا أعضاء الجمعية العمومية</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-id-badge ml-2 text-[#00a17d]"></i>رضا الموظفين </a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-chart-line ml-2 text-[#00a17d]"></i>تقارير قياس الرضا</a>
-                        </div>
-                    </div>
-                    
-                    <div class="relative dropdown">
-                        <button class="text-gray-700 hover:text-[#00a17d] font-medium flex items-center" aria-expanded="false">
-                            الحوكمة <i class="fas fa-chevron-down mr-1 text-xs"></i>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="governance-guides.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-book ml-2 text-[#00a17d]"></i>ادلة الحوكمة</a>
-                            <a href="regulations-policies.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-gavel ml-2 text-[#00a17d]"></i>اللوائح والسياسات</a>
-                            <a href="privacy-policy.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-shield-alt ml-2 text-[#00a17d]"></i>سياسة الخصوصية</a>
-                        </div>
-                    </div>
-                    
-                    <!-- تطوع معنا -->
-                    <div class="relative dropdown">
-                        <button class="text-gray-700 hover:text-[#00a17d] font-medium flex items-center" aria-expanded="false">
-                            تطوع معنا  <i class="fas fa-chevron-down mr-1 text-xs"></i>
-                        </button>
-                        <div class="dropdown-content">
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-hands-helping ml-2 text-[#00a17d]"></i>منصة العمل التطوعي</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-heart ml-2 text-[#00a17d]"></i>الفرص التطوعية</a>
-                            <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-user-plus ml-2 text-[#00a17d]"></i>إنضم معنا</a>
-                        </div>
-                    </div>
-                    
+                           <nav class="hidden lg:flex items-center space-x-8 space-x-reverse ml-2 lg:ml-12">
+               <a href="index.html" class="text-gray-700 hover:text-[#00a17d] font-medium">الرئيسية</a>
+                   
+                   <!-- عن الجمعية -->
+                   <div class="relative dropdown">
+                       <button class="text-gray-700 hover:text-[#00a17d] font-medium flex items-center" aria-expanded="false">
+                           عن الجمعية <i class="fas fa-chevron-down mr-1 text-xs"></i>
+                       </button>
+                       <div class="dropdown-content">
+                           <a href="about-us.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-info-circle ml-2 text-[#00a17d]"></i>من نحن</a>
+                           <a href="license-certificate.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-certificate ml-2 text-[#00a17d]"></i>شهاده الترخيص</a>
+                           <a href="commercial-registry.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-file-contract ml-2 text-[#00a17d]"></i>السجل التجاري</a>
+                           <a href="strategic-map.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-map ml-2 text-[#00a17d]"></i> الخريطه الإستراتيجيه</a>
+                           <a href="general-assembly.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-users ml-2 text-[#00a17d]"></i>الجمعية العمومية</a>
+                           <a href="board-of-directors.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-user-tie ml-2 text-[#00a17d]"></i>مجلس الإداره</a>
+                           <a href="executive-management.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-briefcase ml-2 text-[#00a17d]"></i>الإدارة التنفيذية</a>
+                           <a href="organizational-structure.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-sitemap ml-2 text-[#00a17d]"></i>الهيكل التنظيمي</a>
+                           <a href="work-team.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-user-friends ml-2 text-[#00a17d]"></i>فريق العمل</a>
+                       </div>
+                   </div>
+                   
+                   <div class="relative dropdown">
+                       <button class="text-gray-700 hover:text-[#00a17d] font-medium flex items-center" aria-expanded="false">
+                           التقارير <i class="fas fa-chevron-down mr-1 text-xs"></i>
+                       </button>
+                       <div class="dropdown-content">
+                           <a href="annual-report-2024.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-file-alt ml-2 text-[#00a17d]"></i>التقرير السنوي لعام 2024</a>
+                           <a href="annual-report-2025.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-file-alt ml-2 text-[#00a17d]"></i>التقرير السنوي لعام 2025</a>
+                       </div>
+                   </div>
+                   
+                   <!-- قياس الرضا -->
+                   <div class="relative dropdown">
+                       <button class="text-gray-700 hover:text-[#00a17d] font-medium flex items-center" aria-expanded="false">
+                           قياس الرضا <i class="fas fa-chevron-down mr-1 text-xs"></i>
+                       </button>
+                       <div class="dropdown-content">
+                           <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-smile ml-2 text-[#00a17d]"></i> رضا المستفيدين</a>
+                           <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-user-check ml-2 text-[#00a17d]"></i> رضا أعضاء الجمعية العمومية</a>
+                           <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-id-badge ml-2 text-[#00a17d]"></i>رضا الموظفين </a>
+                           <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-chart-line ml-2 text-[#00a17d]"></i>تقارير قياس الرضا</a>
+                       </div>
+                   </div>
+                   
+                   <div class="relative dropdown">
+                       <button class="text-gray-700 hover:text-[#00a17d] font-medium flex items-center" aria-expanded="false">
+                           الحوكمة <i class="fas fa-chevron-down mr-1 text-xs"></i>
+                       </button>
+                       <div class="dropdown-content">
+                           <a href="governance-guides.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-book ml-2 text-[#00a17d]"></i>ادلة الحوكمة</a>
+                           <a href="regulations-policies.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-gavel ml-2 text-[#00a17d]"></i>اللوائح والسياسات</a>
+                           <a href="privacy-policy.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-shield-alt ml-2 text-[#00a17d]"></i>سياسة الخصوصية</a>
+                       </div>
+                   </div>
+                   
+                   <!-- تطوع معنا -->
+                   <div class="relative dropdown">
+                       <button class="text-gray-700 hover:text-[#00a17d] font-medium flex items-center" aria-expanded="false">
+                           تطوع معنا  <i class="fas fa-chevron-down mr-1 text-xs"></i>
+                       </button>
+                       <div class="dropdown-content">
+                           <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-hands-helping ml-2 text-[#00a17d]"></i>منصة العمل التطوعي</a>
+                           <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-heart ml-2 text-[#00a17d]"></i>الفرص التطوعية</a>
+                           <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-user-plus ml-2 text-[#00a17d]"></i>إنضم معنا</a>
+                       </div>
+                   </div>
+                   
 
-                </nav>
-                
-                <!-- Mobile Contact & Menu -->
-                <div class="lg:hidden flex items-center space-x-2 space-x-reverse">
-                    <!-- Mobile Phone Contact -->
-                    <a href="tel:+966112345678" class="flex items-center space-x-1 space-x-reverse text-[#00a17d] hover:text-[#00c59e] transition-colors mobile-phone-contact">
-                        <i class="fas fa-phone text-sm"></i>
-                        <span class="text-xs font-medium">اتصل</span>
-                    </a>
-                    
-                    <!-- Mobile Email Contact -->
-                    <a href="mailto:info@mthani.org" class="flex items-center space-x-1 space-x-reverse text-[#00a17d] hover:text-[#00c59e] transition-colors mobile-phone-contact">
-                        <i class="fas fa-envelope text-sm"></i>
-                        <span class="text-xs font-medium">راسل</span>
-                    </a>
-                    
-                    <!-- Mobile Menu Button -->
-                    <button class="text-gray-700" id="mobile-menu-btn">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div class="md:hidden bg-white/90 backdrop-blur-md border-t hidden" id="mobile-menu">
-                    <div class="px-4 py-6 space-y-2">
-            <a href="index.html" class="block py-3 text-gray-700 hover:text-[#00a17d] font-medium mobile-menu-link"><i class="fas fa-home ml-2 text-[#00a17d]"></i>الرئيسية</a>
-                <div class="mobile-dropdown">
-                    <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
-                        عن الجمعية <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="mobile-dropdown-content hidden pl-4 space-y-1">
-                        <a href="about-us.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-info-circle ml-2 text-[#00a17d]"></i>من نحن</a>
-                        <a href="license-certificate.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-certificate ml-2 text-[#00a17d]"></i>شهاده الترخيص</a>
-                        <a href="commercial-registry.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-file-contract ml-2 text-[#00a17d]"></i>السجل التجاري</a>
-                        <a href="strategic-map.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-map ml-2 text-[#00a17d]"></i>الخريطه الإستراتيجيه</a>
-                        <a href="general-assembly.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-users ml-2 text-[#00a17d]"></i>الجمعية العمومية</a>
-                        <a href="board-of-directors.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-user-tie ml-2 text-[#00a17d]"></i>مجلس الإداره</a>
-                        <a href="executive-management.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-briefcase ml-2 text-[#00a17d]"></i>الإدارة التنفيذية</a>
-                        <a href="organizational-structure.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-sitemap ml-2 text-[#00a17d]"></i>الهيكل التنظيمي</a>
-                        <a href="work-team.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-user-friends ml-2 text-[#00a17d]"></i>فريق العمل</a>
-                    </div>
-                </div>
-                <div class="mobile-dropdown">
-                    <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
-                        التقارير <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="mobile-dropdown-content hidden pl-4 space-y-1">
-                        <a href="annual-report-2024.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-file-alt ml-2 text-[#00a17d]"></i>التقرير السنوي لعام 2024</a>
-                        <a href="annual-report-2025.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-file-alt ml-2 text-[#00a17d]"></i>التقرير السنوي لعام 2025</a>
-                    </div>
-                </div>
-                <div class="mobile-dropdown">
-                    <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
-                        قياس الرضا <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="mobile-dropdown-content hidden pl-4 space-y-1">
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-smile ml-2 text-[#00a17d]"></i>رضا المستفيدين</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-user-check ml-2 text-[#00a17d]"></i>رضا أعضاء الجمعية العمومية</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-id-badge ml-2 text-[#00a17d]"></i>رضا الموظفين</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-chart-line ml-2 text-[#00a17d]"></i>تقارير قياس الرضا</a>
-                    </div>
-                </div>
-                <div class="mobile-dropdown">
-                    <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
-                        الحوكمة <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="mobile-dropdown-content hidden pl-4 space-y-1">
-                        <a href="governance-guides.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-book ml-2 text-[#00a17d]"></i>ادلة الحوكمة</a>
-                        <a href="regulations-policies.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-gavel ml-2 text-[#00a17d]"></i>اللوائح والسياسات</a>
-                        <a href="privacy-policy.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-shield-alt ml-2 text-[#00a17d]"></i>سياسة الخصوصية</a>
-                    </div>
-                </div>
-                <div class="mobile-dropdown">
-                    <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
-                        تطوع معنا <i class="fas fa-chevron-down"></i>
-                    </button>
-                    <div class="mobile-dropdown-content hidden pl-4 space-y-1">
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-hands-helping ml-2 text-[#00a17d]"></i>منصة العمل التطوعي</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-heart ml-2 text-[#00a17d]"></i>الفرص التطوعية</a>
-                        <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-user-plus ml-2 text-[#00a17d]"></i>إنضم معنا</a>
-                    </div>
-                </div>
+               </nav>
+               
+               <!-- Mobile Contact & Menu -->
+               <div class="lg:hidden flex items-center space-x-2 space-x-reverse">
+                   <!-- Mobile Phone Contact -->
+                   <a href="tel:+966112345678" class="flex items-center space-x-1 space-x-reverse text-[#00a17d] hover:text-[#00c59e] transition-colors mobile-phone-contact">
+                       <i class="fas fa-phone text-sm"></i>
+                       <span class="text-xs font-medium">اتصل</span>
+                   </a>
+                   
+                   <!-- Mobile Email Contact -->
+                   <a href="mailto:info@mthani.org" class="flex items-center space-x-1 space-x-reverse text-[#00a17d] hover:text-[#00c59e] transition-colors mobile-phone-contact">
+                       <i class="fas fa-envelope text-sm"></i>
+                       <span class="text-xs font-medium">راسل</span>
+                   </a>
+                   
+                   <!-- Mobile Menu Button -->
+                   <button class="text-gray-700" id="mobile-menu-btn">
+                       <i class="fas fa-bars text-xl"></i>
+                   </button>
+               </div>
+           </div>
+       </div>
+       
+       <!-- Mobile Menu -->
+       <div class="md:hidden bg-white/90 backdrop-blur-md border-t hidden" id="mobile-menu">
+                   <div class="px-4 py-6 space-y-2">
+           <a href="index.html" class="block py-3 text-gray-700 hover:text-[#00a17d] font-medium mobile-menu-link"><i class="fas fa-home ml-2 text-[#00a17d]"></i>الرئيسية</a>
+               <div class="mobile-dropdown">
+                   <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
+                       عن الجمعية <i class="fas fa-chevron-down"></i>
+                   </button>
+                   <div class="mobile-dropdown-content hidden pl-4 space-y-1">
+                       <a href="about-us.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-info-circle ml-2 text-[#00a17d]"></i>من نحن</a>
+                       <a href="license-certificate.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-certificate ml-2 text-[#00a17d]"></i>شهاده الترخيص</a>
+                       <a href="commercial-registry.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-file-contract ml-2 text-[#00a17d]"></i>السجل التجاري</a>
+                       <a href="strategic-map.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-map ml-2 text-[#00a17d]"></i>الخريطه الإستراتيجيه</a>
+                       <a href="general-assembly.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-users ml-2 text-[#00a17d]"></i>الجمعية العمومية</a>
+                       <a href="board-of-directors.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-user-tie ml-2 text-[#00a17d]"></i>مجلس الإداره</a>
+                       <a href="executive-management.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-briefcase ml-2 text-[#00a17d]"></i>الإدارة التنفيذية</a>
+                       <a href="organizational-structure.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-sitemap ml-2 text-[#00a17d]"></i>الهيكل التنظيمي</a>
+                       <a href="work-team.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-user-friends ml-2 text-[#00a17d]"></i>فريق العمل</a>
+                   </div>
+               </div>
+               <div class="mobile-dropdown">
+                   <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
+                       التقارير <i class="fas fa-chevron-down"></i>
+                   </button>
+                   <div class="mobile-dropdown-content hidden pl-4 space-y-1">
+                       <a href="annual-report-2024.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-file-alt ml-2 text-[#00a17d]"></i>التقرير السنوي لعام 2024</a>
+                       <a href="annual-report-2025.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-file-alt ml-2 text-[#00a17d]"></i>التقرير السنوي لعام 2025</a>
+                   </div>
+               </div>
+               <div class="mobile-dropdown">
+                   <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
+                       قياس الرضا <i class="fas fa-chevron-down"></i>
+                   </button>
+                   <div class="mobile-dropdown-content hidden pl-4 space-y-1">
+                       <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-smile ml-2 text-[#00a17d]"></i>رضا المستفيدين</a>
+                       <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-user-check ml-2 text-[#00a17d]"></i>رضا أعضاء الجمعية العمومية</a>
+                       <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-id-badge ml-2 text-[#00a17d]"></i>رضا الموظفين</a>
+                       <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-chart-line ml-2 text-[#00a17d]"></i>تقارير قياس الرضا</a>
+                   </div>
+               </div>
+               <div class="mobile-dropdown">
+                   <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
+                       الحوكمة <i class="fas fa-chevron-down"></i>
+                   </button>
+                   <div class="mobile-dropdown-content hidden pl-4 space-y-1">
+                       <a href="governance-guides.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-book ml-2 text-[#00a17d]"></i>ادلة الحوكمة</a>
+                       <a href="regulations-policies.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-gavel ml-2 text-[#00a17d]"></i>اللوائح والسياسات</a>
+                       <a href="privacy-policy.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-shield-alt ml-2 text-[#00a17d]"></i>سياسة الخصوصية</a>
+                   </div>
+               </div>
+               <div class="mobile-dropdown">
+                   <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
+                       تطوع معنا <i class="fas fa-chevron-down"></i>
+                   </button>
+                   <div class="mobile-dropdown-content hidden pl-4 space-y-1">
+                       <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-hands-helping ml-2 text-[#00a17d]"></i>منصة العمل التطوعي</a>
+                       <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-heart ml-2 text-[#00a17d]"></i>الفرص التطوعية</a>
+                       <a href="#" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-user-plus ml-2 text-[#00a17d]"></i>إنضم معنا</a>
+                   </div>
+               </div>
 
-            </div>
-        </div>
-    </header>
+           </div>
+       </div>
+   </header>
     <main class="min-h-screen bg-white">
         <div class="max-w-7xl mx-auto px-4 py-16">
             <div class="text-center mb-12">
