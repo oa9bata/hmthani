@@ -776,7 +776,7 @@
         /* Curved underline design */
         .section-header-container {
             position: relative;
-            text-align: right;
+            text-align: center;
             margin-bottom: 40px;
             overflow: hidden;
         }
@@ -791,7 +791,7 @@
         }
 
         .section-subtitle {
-            text-align: right;
+            text-align: center;
             margin-top: 15px;
             margin-bottom: 20px;
             padding-right: 0;
@@ -802,11 +802,11 @@
             content: '';
             position: absolute;
             bottom: 0;
-            right: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(-5px);
             width: min(300px, 80vw);
             height: 4px;
             background: #efb740;
-            transform: translateY(-5px);
             border-radius: 0 0 0 35px;
             max-width: 100%;
         }
@@ -1189,7 +1189,7 @@
             <div class="max-w-7xl mx-auto px-4">
                 <div class="flex flex-col md:flex-row-reverse items-center gap-10">
                     <div class="w-full md:w-1/2 flex justify-center mb-8 md:mb-0">
-                        <img src="assets/heroImage.jpg" alt="مثاني القرآنية" class="rounded-tr-[80px] rounded-bl-[80px] shadow-2xl object-cover w-full max-w-md h-80">
+                        <img src="assets/heroImage.jpg" alt="مثاني القرآنية" class="rounded-tr-[40px] rounded-bl-[40px] sm:rounded-tr-[60px] sm:rounded-bl-[60px] md:rounded-tr-[80px] md:rounded-bl-[80px] shadow-2xl object-cover w-full max-w-xs sm:max-w-sm md:max-w-md h-56 sm:h-64 md:h-80">
                     </div>
                     <div class="w-full md:w-1/2 text-center md:text-right">
                         <h2 class="text-4xl font-bold text-[#efb740] mb-6 curved-underline gold">مثاني القرآنية</h2>

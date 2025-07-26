@@ -81,20 +81,42 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <div class="text-white text-sm bg-black/30 backdrop-blur-sm" id="hdr">
-        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-2 md:gap-0 h-full">
-            <div class="flex items-center space-x-6 space-x-reverse">
-            </div>
-            <div class="flex flex-col md:flex-row items-center space-y-1 md:space-y-0 md:space-x-6 md:space-x-reverse text-xs md:text-sm">
-            </div>
-        </div>
-    </div>
+
 
     <header class="bg-white/90 backdrop-blur-md shadow-lg sticky top-0 z-50" role="navigation" aria-label="التنقل الرئيسي">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <nav class="hidden md:flex items-center space-x-8 space-x-reverse">
-                    <a href="index.html" class="text-gray-700 hover:text-[#00a17d] font-medium">الرئيسية</a>
+            <div class="flex justify-between items-center py-3 md:py-8">
+                <!-- Logo and Contact Section (Left side in RTL) -->
+                <div class="flex items-center space-x-6 space-x-reverse mr-2 lg:mr-12">
+                    <!-- Logo -->
+                    <div class="w-16 h-12 sm:w-20 sm:h-16 md:w-32 md:h-28 lg:w-36 lg:h-32 flex items-center justify-center overflow-hidden" id="logo">
+                        <img src="assets/logoTransparent.png" alt="مثاني القرآنية" class="w-full h-full object-contain rounded-lg shadow-md">
+                    </div>
+                    
+                    <!-- Contact Buttons -->
+                    <div class="hidden lg:flex flex-col space-y-2">
+                        <!-- Phone Contact -->
+                        <div class="flex items-center space-x-2 space-x-reverse bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-[#00a17d]/5 hover:border-[#00a17d]/20 transition-colors phone-contact-card">
+                            <i class="fas fa-phone text-[#00a17d] text-sm"></i>
+                            <div class="flex flex-col text-right">
+                                <span class="text-xs font-medium text-[#00a17d]">اتصل بنا</span>
+                                <a href="tel:+966112345678" class="text-xs text-gray-600 hover:text-[#00a17d] transition-colors">011 234 5678</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Email Contact -->
+                        <div class="flex items-center space-x-2 space-x-reverse bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-[#00a17d]/5 hover:border-[#00a17d]/20 transition-colors phone-contact-card">
+                            <i class="fas fa-envelope text-[#00a17d] text-sm"></i>
+                            <div class="flex flex-col text-right">
+                                <span class="text-xs font-medium text-[#00a17d]">راسلنا</span>
+                                <a href="mailto:info@mthani.org" class="text-xs text-gray-600 hover:text-[#00a17d] transition-colors">info@mthani.org</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                            <nav class="hidden lg:flex items-center space-x-8 space-x-reverse ml-2 lg:ml-12">
+                <a href="index.html" class="text-gray-700 hover:text-[#00a17d] font-medium">الرئيسية</a>
                     
                     <!-- عن الجمعية -->
                     <div class="relative dropdown">
@@ -163,24 +185,32 @@
 
                 </nav>
                 
-                <!-- Logo (Right side in RTL) -->
-                <div class="flex items-center space-x-3 space-x-reverse">
-                    <div class="w-16 h-12 md:w-20 md:h-15 flex items-center justify-center overflow-hidden">
-                        
-                    </div>
+                <!-- Mobile Contact & Menu -->
+                <div class="lg:hidden flex items-center space-x-2 space-x-reverse">
+                    <!-- Mobile Phone Contact -->
+                    <a href="tel:+966112345678" class="flex items-center space-x-1 space-x-reverse text-[#00a17d] hover:text-[#00c59e] transition-colors mobile-phone-contact">
+                        <i class="fas fa-phone text-sm"></i>
+                        <span class="text-xs font-medium">اتصل</span>
+                    </a>
+                    
+                    <!-- Mobile Email Contact -->
+                    <a href="mailto:info@mthani.org" class="flex items-center space-x-1 space-x-reverse text-[#00a17d] hover:text-[#00c59e] transition-colors mobile-phone-contact">
+                        <i class="fas fa-envelope text-sm"></i>
+                        <span class="text-xs font-medium">راسل</span>
+                    </a>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button class="text-gray-700" id="mobile-menu-btn">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
                 </div>
-                
-                <!-- Mobile Menu Button -->
-                <button class="md:hidden text-gray-700" id="mobile-menu-btn">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
             </div>
         </div>
         
         <!-- Mobile Menu -->
         <div class="md:hidden bg-white/90 backdrop-blur-md border-t hidden" id="mobile-menu">
-            <div class="px-4 py-6 space-y-2">
-                <a href="index.html" class="block py-3 text-gray-700 hover:text-[#00a17d] font-medium mobile-menu-link"><i class="fas fa-home ml-2 text-[#00a17d]"></i>الرئيسية</a>
+                    <div class="px-4 py-6 space-y-2">
+            <a href="index.html" class="block py-3 text-gray-700 hover:text-[#00a17d] font-medium mobile-menu-link"><i class="fas fa-home ml-2 text-[#00a17d]"></i>الرئيسية</a>
                 <div class="mobile-dropdown">
                     <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
                         عن الجمعية <i class="fas fa-chevron-down"></i>
