@@ -944,6 +944,8 @@
                 background: #efb740 !important;
             }
         }
+        #logo {
+            cursor: pointer;
     </style>
     <style>
         .hover-green:hover {
@@ -960,8 +962,8 @@
                 <!-- Logo and Contact Section (Left side in RTL) -->
                 <div class="flex items-center space-x-6 space-x-reverse mr-2 lg:mr-12">
                     <!-- Logo -->
-                    <div class="w-16 h-12 sm:w-20 sm:h-16 md:w-32 md:h-28 lg:w-36 lg:h-32 flex items-center justify-center overflow-hidden">
-                        <img src="assets/mthaniLogo.jpg" alt="مثاني القرآنية" class="w-full h-full object-contain rounded-lg shadow-md">
+                    <div class="w-16 h-12 sm:w-20 sm:h-16 md:w-32 md:h-28 lg:w-36 lg:h-32 flex items-center justify-center overflow-hidden" id="logo">
+                        <img src="assets/logoTransparent.png" alt="مثاني القرآنية" class="w-full h-full object-contain rounded-lg shadow-md">
                     </div>
                     
                     <!-- Contact Buttons -->
@@ -987,7 +989,7 @@
                 </div>
 
                             <nav class="hidden lg:flex items-center space-x-8 space-x-reverse ml-2 lg:ml-12">
-                <a href="/" class="text-gray-700 hover:text-[#00a17d] font-medium">الرئيسية</a>
+                <a href="index.html" class="text-gray-700 hover:text-[#00a17d] font-medium">الرئيسية</a>
                     
                     <!-- عن الجمعية -->
                     <div class="relative dropdown">
@@ -995,7 +997,7 @@
                             عن الجمعية <i class="fas fa-chevron-down mr-1 text-xs"></i>
                         </button>
                         <div class="dropdown-content">
-                            <a href="/about" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-info-circle ml-2 text-[#00a17d]"></i>من نحن</a>
+                            <a href="about-us.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-info-circle ml-2 text-[#00a17d]"></i>من نحن</a>
                             <a href="license-certificate.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-certificate ml-2 text-[#00a17d]"></i>شهاده الترخيص</a>
                             <a href="commercial-registry.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-file-contract ml-2 text-[#00a17d]"></i>السجل التجاري</a>
                             <a href="strategic-map.html" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-map ml-2 text-[#00a17d]"></i> الخريطه الإستراتيجيه</a>
@@ -1081,13 +1083,13 @@
         <!-- Mobile Menu -->
         <div class="md:hidden bg-white/90 backdrop-blur-md border-t hidden" id="mobile-menu">
                     <div class="px-4 py-6 space-y-2">
-            <a href="/" class="block py-3 text-gray-700 hover:text-[#00a17d] font-medium mobile-menu-link"><i class="fas fa-home ml-2 text-[#00a17d]"></i>الرئيسية</a>
+            <a href="index.html" class="block py-3 text-gray-700 hover:text-[#00a17d] font-medium mobile-menu-link"><i class="fas fa-home ml-2 text-[#00a17d]"></i>الرئيسية</a>
                 <div class="mobile-dropdown">
                     <button class="w-full flex justify-between items-center text-gray-700 hover:text-[#00a17d] font-medium py-2">
                         عن الجمعية <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="mobile-dropdown-content hidden pl-4 space-y-1">
-                        <a href="/about" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-info-circle ml-2 text-[#00a17d]"></i>من نحن</a>
+                        <a href="about-us.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-info-circle ml-2 text-[#00a17d]"></i>من نحن</a>
                         <a href="license-certificate.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-certificate ml-2 text-[#00a17d]"></i>شهاده الترخيص</a>
                         <a href="commercial-registry.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-file-contract ml-2 text-[#00a17d]"></i>السجل التجاري</a>
                         <a href="strategic-map.html" class="block py-3 text-gray-700 hover:bg-[#00a17d]/10 rounded-lg"><i class="fas fa-map ml-2 text-[#00a17d]"></i>الخريطه الإستراتيجيه</a>
@@ -1187,7 +1189,7 @@
             <div class="max-w-7xl mx-auto px-4">
                 <div class="flex flex-col md:flex-row-reverse items-center gap-10">
                     <div class="w-full md:w-1/2 flex justify-center mb-8 md:mb-0">
-                        <img src="assets/guess100.jpg" alt="مثاني القرآنية" class="rounded-tr-[80px] rounded-bl-[80px] shadow-2xl object-cover w-full max-w-md h-80">
+                        <img src="assets/heroImage.jpg" alt="مثاني القرآنية" class="rounded-tr-[80px] rounded-bl-[80px] shadow-2xl object-cover w-full max-w-md h-80">
                     </div>
                     <div class="w-full md:w-1/2 text-center md:text-right">
                         <h2 class="text-4xl font-bold text-[#efb740] mb-6 curved-underline gold">مثاني القرآنية</h2>
@@ -1259,7 +1261,7 @@
                 </div>
                 
                 <div class="text-center mt-12">
-                    <a href="/news" class="bg-[#efb740] text-[#ffffff] px-8 py-3 rounded-lg font-bold hover:bg-[#00a17d] hover:text-[#efb740] transition-colors inline-flex items-center">
+                    <a href="news.html" class="bg-[#efb740] text-[#ffffff] px-8 py-3 rounded-lg font-bold hover:bg-[#00a17d] hover:text-[#efb740] transition-colors inline-flex items-center">
                         عرض جميع الأخبار
                         <i class="fas fa-arrow-left mr-2"></i>
                     </a>
@@ -1280,29 +1282,29 @@
                 <div class="overflow-hidden">
                     <div class="flex items-center justify-center space-x-8 space-x-reverse partner-scroll">
                         <div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/fc25.png" alt="شريك 1" class="max-w-full max-h-full object-contain">
+                            <img src="assets/logoTransparent.png" alt="شريك 1" class="max-w-full max-h-full object-contain">
                         </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/fortnite.png" alt="شريك 2" class="max-w-full max-h-full object-contain">
+                            <img src="assets/logoTransparent.png" alt="شريك 2" class="max-w-full max-h-full object-contain">
                         </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/roblox.webp" alt="شريك 3" class="max-w-full max-h-full object-contain">
+                            <img src="assets/logoTransparent.png" alt="شريك 3" class="max-w-full max-h-full object-contain">
                         </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/sallaapp_logo.jpg" alt="شريك 4" class="max-w-full max-h-full object-contain">
+                            <img src="assets/logoTransparent.png" alt="شريك 4" class="max-w-full max-h-full object-contain">
                         </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/og-image-multi.jpg" alt="شريك 5" class="max-w-full max-h-full object-contain">
+                            <img src="assets/logoTransparent.png" alt="شريك 5" class="max-w-full max-h-full object-contain">
                         </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/fc25.png" alt="شريك 6" class="max-w-full max-h-full object-contain">
+                            <img src="assets/logoTransparent.png" alt="شريك 6" class="max-w-full max-h-full object-contain">
                         </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/visa.png" alt="شريك 7" class="max-w-full max-h-full object-contain">
+                            <img src="assets/logoTransparent.png" alt="شريك 7" class="max-w-full max-h-full object-contain">
                         </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/fortnite.png" alt="شريك 8" class="max-w-full max-h-full object-contain">
+                            <img src="assets/logoTransparent.png" alt="شريك 8" class="max-w-full max-h-full object-contain">
                         </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/roblox.webp" alt="شريك 9" class="max-w-full max-h-full object-contain">
+                            <img src="assets/logoTransparent.png" alt="شريك 9" class="max-w-full max-h-full object-contain">
                         </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/sallaapp_logo.jpg" alt="شريك 10" class="max-w-full max-h-full object-contain">
+                            <img src="assets/logoTransparent.png" alt="شريك 10" class="max-w-full max-h-full object-contain">
                         </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/og-image-multi.jpg" alt="شريك 11" class="max-w-full max-h-full object-contain">
+                            <img src="assets/logoTransparent.png" alt="شريك 11" class="max-w-full max-h-full object-contain">
                         </div><div class="flex-shrink-0 w-32 h-24 flex items-center justify-center hover:scale-110 transition-transform">
-                            <img src="assets/visa.png" alt="شريك 12" class="max-w-full max-h-full object-contain">
+                            <img src="assets/logoTransparent.png" alt="شريك 12" class="max-w-full max-h-full object-contain">
                         </div>
                     </div>
                 </div>
@@ -1926,7 +1928,7 @@ if (respectsReducedMotion()) {
         }
     `;
     document.head.appendChild(style);
-}; 
+}
 
 // Load 6 random news cards from database for homepage ticker
 (async function() {
@@ -2390,6 +2392,7 @@ if (respectsReducedMotion()) {
         
         // Carousel navigation ready
     }
+
 </script>
 </body>
 </html>
