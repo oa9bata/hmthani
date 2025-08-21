@@ -727,18 +727,65 @@
        </div>
    </header>
 
-    <main class="min-h-screen bg-white">
+   <main class="min-h-screen bg-white">
         <div class="max-w-7xl mx-auto px-4 py-16">
             <div class="text-center mb-12">
-                <h1 class="text-4xl font-bold text-[#00a17d] mb-4">مجلس الإداره</h1>
-                <p class="text-xl text-gray-600">أعضاء مجلس إدارة جمعية مثاني القرآنية</p>
+                <h1 class="text-4xl font-bold text-[#00a17d] mb-4">قرار التأسيس</h1>
+                <p class="text-xl text-gray-600">قرار تأسيس جمعية مثاني القرآنية</p>
             </div>
-            <div class="bg-white rounded-lg shadow-lg p-8 min-h-[500px] flex items-center justify-center">
-                <div class="text-center text-gray-500">
-                    <i class="fas fa-user-tie text-6xl mb-4"></i>
-                    <p class="text-xl">سيتم إضافة المحتوى هنا</p>
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-[#00a17d] mb-4">قرار التأسيس لجمعية مثاني القرآنية</h2>
+                    <p class="text-gray-600">يمكنك عرض وتحميل قرار التأسيس الرسمي للجمعية</p>
                 </div>
-            </div>
+                
+                <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                    <!-- PDF Viewer -->
+                    <div class="w-full max-w-2xl ">
+                        <iframe 
+                            src="assets/org.jpg" 
+                            class="w-full h-96 md:h-[600px] border border-gray-300 rounded-lg shadow-md"
+                            title="قرار التأسيس لجمعية مثاني القرآنية">
+                        </iframe>
+                    </div>
+                    
+                    <!-- Download Section -->
+                    <div class="flex flex-col items-center space-y-4">
+                        <div class="text-center">
+                            <i class="fas fa-download text-4xl text-[#00a17d] mb-2"></i>
+                            <h3 class="text-lg font-semibold text-gray-800 mb-2">تحميل قرار التأسيس</h3>
+                            <p class="text-sm text-gray-600 mb-4">اضغط على الرابط أدناه لتحميل نسخة من قرار التأسيس</p>
+                        </div>
+                        
+                        <a href="assets/org.jpg" 
+                           download="assets/org.jpg"
+                           class="bg-[#00a17d] text-white px-6 py-3 rounded-lg hover:bg-[#00a17d]/80 transition-colors inline-flex items-center">
+                            <i class="fas fa-file-pdf ml-2"></i>
+                            تحميل PDF
+                        </a>
+                        
+                        <div class="text-xs text-gray-500 text-center">
+                            <p>حجم الملف: 757 KB</p>
+                            <p>صيغة الملف: PDF</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Information -->
+                <div class="mt-8 p-6 bg-gray-50 rounded-lg">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">معلومات قرار التأسيس</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
+                        <div>
+                            <p><strong>اسم الجمعية:</strong> جمعية مثاني القرآنية</p>
+                            <p><strong>نوع النشاط:</strong> جمعية خيرية قرآنية</p>
+                            <p><strong>الموقع:</strong> المملكة العربية السعودية</p>
+                        </div>
+                        <div>
+                            <p><strong>تاريخ التسجيل:</strong> مسجل رسمياً</p>
+                            <p><strong>الحالة:</strong> نشط</p>
+                            <p><strong>الاختصاص:</strong> تعليم القرآن الكريم</p>
+                        </div>
+                    </div>
         </div>
     </main>
     <!-- Footer -->
