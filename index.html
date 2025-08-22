@@ -1025,9 +1025,9 @@
                             قياس الرضا <i class="fas fa-chevron-down mr-1 text-xs"></i>
                         </button>
                         <div class="dropdown-content">
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdEMUd-nJ1P8FpTBqtqaJ2RsqiorwTuudXCl0ukSXAnbegMJA/viewform?pli=1" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-smile ml-2 text-[#00a17d]"></i> رضا المستفيدين</a>
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe759mGe1Rp0o0ZjpxKRqQLGcYWGm4OvfdrqYbP8uUc1Ntntw/viewform" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-user-check ml-2 text-[#00a17d]"></i> رضا أعضاء الجمعية العمومية</a>
-                            <a href="https://docs.google.com/forms/d/1QoFXDSWg-Cr2E0EUWlzKF2YQowWg3AS6kt_EeeRpiCQ/viewform?edit_requested=true" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-id-badge ml-2 text-[#00a17d]"></i>رضا الموظفين </a>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfvr9rgaWuP5Wjg4nIOAVhKOLTE1v1_bR436x3Vjlp2K976Ow/viewform?usp=dialog" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-smile ml-2 text-[#00a17d]"></i> رضا المستفيدين</a>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdEEmKmtfawyQLCqomJ0PDhkQXHUpmNBiGOp_KDuQR_1eKQiA/viewform?usp=dialog" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-user-check ml-2 text-[#00a17d]"></i> رضا أعضاء الجمعية العمومية</a>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdfPq3qmrv0BE5JPHHziVB2hiFpWKy0xe15FeEdjiCVUJJdYg/viewform?usp=dialog" class="block px-4 py-2 text-gray-700 hover:bg-[#00a17d]/10"><i class="fas fa-id-badge ml-2 text-[#00a17d]"></i>رضا الموظفين </a>
                          
                         </div>
                     </div>
@@ -1149,7 +1149,6 @@
         <section class="relative" id="home">
             <!-- Hero Carousel -->
             <div class="hero-carousel">
-                <!-- Carousel Slides - Will be loaded dynamically from database -->
                 
                 <!-- Navigation Arrows -->
                 <button class="carousel-arrow carousel-arrow-prev" id="prevSlide" aria-label="الشريحة السابقة">
@@ -1214,28 +1213,28 @@
                         <div class="mb-4">
                             <i class="fas fa-hands-helping text-[#efb740] text-4xl mb-2"></i>
                         </div>
-                        <div class="counter" data-target="152">0</div>
+                        <div class="counter" data-target="10"><span class="text-[#efb740] text-2xl ml-1">+</span>0</div>
                         <p class="text-white font-medium">مشروع تطوعي</p>
                     </div>
                     <div class="fade-in">
                         <div class="mb-4">
                             <i class="fas fa-users text-[#efb740] text-4xl mb-2"></i>
                         </div>
-                        <div class="counter " data-target="25000">0</div>
+                        <div class="counter " data-target="5000"><span class="text-[#efb740] text-2xl ml-1">+</span>0</div>
                         <p class="text-white font-medium">مستفيد</p>
                     </div>
                     <div class="fade-in">
                         <div class="mb-4">
                             <i class="fas fa-calendar-alt text-[#efb740] text-4xl mb-2"></i>
                         </div>
-                        <div class="counter" data-target="48">0</div>
+                        <div class="counter" data-target="25"><span class="text-[#efb740] text-2xl ml-1">+</span>0</div>
                         <p class="text-white font-medium">برنامج مجتمعي</p>
                     </div>
                     <div class="fade-in">
                         <div class="mb-4">
                             <i class="fas fa-star text-[#efb740] text-4xl mb-2"></i>
                         </div>
-                        <div class="counter" data-target="95">0</div>
+                        <div class="counter" data-target="95">0<span class="text-[#efb740] text-2xl mr-1">%</span></div>
                         <p class="text-white font-medium">% معدل الرضا</p>
                     </div>
                 </div>
@@ -1652,7 +1651,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 const updateCounter = () => {
                     if (current < target) {
                         current += step;
-                        counter.textContent = Math.floor(current).toLocaleString('en-US');
+                        const existingIcon = counter.querySelector('span');
+                        const iconSymbol = target === 95 ? '%' : '+';
+                        if (target === 95) {
+                            counter.innerHTML = Math.floor(current).toLocaleString('en-US') + (existingIcon ? existingIcon.outerHTML : `<span class="text-[#efb740] text-2xl mr-1">${iconSymbol}</span>`);
+                        } else {
+                            counter.innerHTML = (existingIcon ? existingIcon.outerHTML : `<span class="text-[#efb740] text-2xl ml-1">${iconSymbol}</span>`) + Math.floor(current).toLocaleString('en-US');
+                        }
                         if (target > 0 && Math.abs(current % (target / 5)) < step) {
                             counter.style.transform = 'scale(1.15)';
                             setTimeout(() => {
@@ -1661,7 +1666,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                         requestAnimationFrame(updateCounter);
                     } else {
-                        counter.textContent = target.toLocaleString('en-US');
+                        const existingIcon = counter.querySelector('span');
+                        const iconSymbol = target === 95 ? '%' : '+';
+                        if (target === 95) {
+                            counter.innerHTML = target.toLocaleString('en-US') + (existingIcon ? existingIcon.outerHTML : `<span class="text-[#efb740] text-2xl mr-1">${iconSymbol}</span>`);
+                        } else {
+                            counter.innerHTML = (existingIcon ? existingIcon.outerHTML : `<span class="text-[#efb740] text-2xl ml-1">${iconSymbol}</span>`) + target.toLocaleString('en-US');
+                        }
                         counter.style.transform = 'scale(1.1)';
                         setTimeout(() => {
                             counter.style.transform = 'scale(1)';
